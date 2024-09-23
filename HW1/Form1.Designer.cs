@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.button_mc = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.result = new System.Windows.Forms.TextBox();
             this.button_mr = new System.Windows.Forms.Button();
             this.button_m_plus = new System.Windows.Forms.Button();
             this.button_m_minus = new System.Windows.Forms.Button();
@@ -68,14 +68,14 @@
             this.button_mc.Text = "MC";
             this.button_mc.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // result
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 25);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(322, 30);
-            this.textBox1.TabIndex = 1;
+            this.result.Location = new System.Drawing.Point(12, 25);
+            this.result.Multiline = true;
+            this.result.Name = "result";
+            this.result.ReadOnly = true;
+            this.result.Size = new System.Drawing.Size(322, 30);
+            this.result.TabIndex = 1;
             // 
             // button_mr
             // 
@@ -126,6 +126,7 @@
             this.button_ce.TabIndex = 0;
             this.button_ce.Text = "CE";
             this.button_ce.UseVisualStyleBackColor = true;
+            this.button_ce.Click += new System.EventHandler(this.button_ce_Click);
             // 
             // button_c
             // 
@@ -136,6 +137,7 @@
             this.button_c.TabIndex = 0;
             this.button_c.Text = "C";
             this.button_c.UseVisualStyleBackColor = true;
+            this.button_c.Click += new System.EventHandler(this.button_c_Click);
             // 
             // button9
             // 
@@ -212,6 +214,7 @@
             this.button_add.TabIndex = 0;
             this.button_add.Text = "+";
             this.button_add.UseVisualStyleBackColor = true;
+            this.button_add.Click += new System.EventHandler(this.button_add_Click);
             // 
             // button_4
             // 
@@ -338,7 +341,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 425);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.result);
             this.Controls.Add(this.button_div);
             this.Controls.Add(this.button_equ);
             this.Controls.Add(this.button_mul);
@@ -376,7 +379,7 @@
         #endregion
 
         private System.Windows.Forms.Button button_mc;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox result;
         private System.Windows.Forms.Button button_mr;
         private System.Windows.Forms.Button button_m_plus;
         private System.Windows.Forms.Button button_m_minus;

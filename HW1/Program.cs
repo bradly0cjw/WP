@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace HW1
 {
     internal static class Program
@@ -16,7 +17,9 @@ namespace HW1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Model m = new Model();
+            Form1 form = new Form1();
+            Application.Run(form);
         }
     }
 }
