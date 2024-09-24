@@ -32,8 +32,7 @@ namespace HW1
             button_sub.Click += OperationButton_Click;
             button_mul.Click += OperationButton_Click;
             button_div.Click += OperationButton_Click;
-            button_equ.Click += OperationButton_Click;
-
+            button_equ.Click += Solve;
         }
 
         private void button_add_Click(object sender, EventArgs e)
@@ -56,9 +55,14 @@ namespace HW1
             Button button = sender as Button;
             if (button != null)
             {
-                result.Text=model.Operation(button.Text, result.Text);
+                model.SetOperation(button.Text);
                 //MessageBox.Show("Called "+ button.Text);
             }
+        }
+
+        private void Solve(object sender, EventArgs e)
+        {
+            result.Text = model.Calculate();
         }
 
         private void button_c_Click(object sender, EventArgs e)
@@ -69,6 +73,36 @@ namespace HW1
         private void button_ce_Click(object sender, EventArgs e)
         {
             result.Text = model.ClearEntry();
+        }
+
+        private void button_mr_Click(object sender, EventArgs e)
+        {
+            result.Text = model.MRecall();
+        }
+
+        private void button_ms_Click(object sender, EventArgs e)
+        {
+            model.MStore(result.Text);
+        }
+
+        private void button_mc_Click(object sender, EventArgs e)
+        {
+            model.MClear();
+        }
+
+        private void button_m_plus_Click(object sender, EventArgs e)
+        {
+            model.MPlus(result.Text);
+        }
+
+        private void button_m_minus_Click(object sender, EventArgs e)
+        {
+            model.MMinus(result.Text);
+        }
+
+        private void result_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

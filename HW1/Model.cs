@@ -8,48 +8,68 @@ namespace HW1
         private double inputNum = 0;
         private double resultNum = 0;
         private string operation = "";
+        private string equalOperation = "";
         private double memory = 0;
         private bool operationPress = false;
+        private bool equalPress = false;
+        private bool init = true;
+        
 
-        public string Operation(string execute, string first)
+        public double Calc(string op)
         {
-            operationPress = true;
-            Console.WriteLine("Operation: " + operation+"E"+execute+"F" + first);
-            switch (operation)
+            Console.WriteLine("Result: "+ resultNum +" "+op+" input: " + inputNum );
+            switch (op)
             {
                 case "+":
-                    resultNum = resultNum + inputNum;
-                    break;
+                    return resultNum + inputNum;
                 case "-":
-                    resultNum = resultNum - inputNum;
-                    break;
+                    return resultNum - inputNum;
                 case "*":
-                    resultNum = resultNum * inputNum;
-                    break;
+                    return resultNum * inputNum;
                 case "/":
-                    resultNum = resultNum / inputNum;
-                    break;
-                case "":
-                    break;
+                    return resultNum / inputNum;
                 default:
-                    return "Error";
-
+                    return resultNum;
             }
-            if (execute != "=")
-                operation = execute;
-            inputNum = Convert.ToDouble(first);
-            return resultNum.ToString();
+        }
+        public void SetOperation(string execute)
+        {
+            if (init)
+            {
+                resultNum = inputNum;
+                init = false;
+            }
+            if (equalPress)
+            {
+                operation = "";
+                equalPress = false;
+            }
+            resultNum = Calc(operation);
+            operation = execute;
+            operationPress = true;
+
         }
 
         public string SetDigit(string original, string append)
         {
+            if (original.StartsWith("0"))
+            {
+                original = original.Remove(0, 1);
+            }
+            if (operationPress)
+            {
+                original = "";
+                operationPress = false;
+            }
             if (append == "." && original.Contains("."))
             {
+                inputNum = Convert.ToDouble(original);
                 return original; // Prevent multiple dots
             }
+            inputNum = Convert.ToDouble(original + append);
             return original + append;
         }
-        
+
         public void MPlus(string number)
         {
             memory += Convert.ToDouble(number);
@@ -80,6 +100,7 @@ namespace HW1
             inputNum = 0;
             resultNum = 0;
             operation = "";
+            init = true;
             return "0";
         }
         public string ClearEntry()
@@ -90,7 +111,10 @@ namespace HW1
 
         public string Calculate()
         {
-            return Operation("=", resultNum.ToString());
+            //return Operation("=", resultNum.ToString());
+            resultNum = Calc(operation);
+            equalPress = true;
+            return resultNum.ToString();
         }
     }
 }

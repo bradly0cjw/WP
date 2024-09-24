@@ -67,15 +67,19 @@
             this.button_mc.TabIndex = 0;
             this.button_mc.Text = "MC";
             this.button_mc.UseVisualStyleBackColor = true;
+            this.button_mc.Click += new System.EventHandler(this.button_mc_Click);
             // 
             // result
             // 
-            this.result.Location = new System.Drawing.Point(12, 25);
-            this.result.Multiline = true;
+            this.result.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.result.Location = new System.Drawing.Point(12, 12);
             this.result.Name = "result";
             this.result.ReadOnly = true;
-            this.result.Size = new System.Drawing.Size(322, 30);
+            this.result.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.result.Size = new System.Drawing.Size(322, 38);
             this.result.TabIndex = 1;
+            this.result.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.result.TextChanged += new System.EventHandler(this.result_TextChanged);
             // 
             // button_mr
             // 
@@ -86,6 +90,7 @@
             this.button_mr.TabIndex = 0;
             this.button_mr.Text = "MR";
             this.button_mr.UseVisualStyleBackColor = true;
+            this.button_mr.Click += new System.EventHandler(this.button_mr_Click);
             // 
             // button_m_plus
             // 
@@ -96,6 +101,7 @@
             this.button_m_plus.TabIndex = 0;
             this.button_m_plus.Text = "M+";
             this.button_m_plus.UseVisualStyleBackColor = true;
+            this.button_m_plus.Click += new System.EventHandler(this.button_m_plus_Click);
             // 
             // button_m_minus
             // 
@@ -106,6 +112,7 @@
             this.button_m_minus.TabIndex = 0;
             this.button_m_minus.Text = "M-";
             this.button_m_minus.UseVisualStyleBackColor = true;
+            this.button_m_minus.Click += new System.EventHandler(this.button_m_minus_Click);
             // 
             // button_ms
             // 
@@ -116,6 +123,7 @@
             this.button_ms.TabIndex = 0;
             this.button_ms.Text = "MS";
             this.button_ms.UseVisualStyleBackColor = true;
+            this.button_ms.Click += new System.EventHandler(this.button_ms_Click);
             // 
             // button_ce
             // 
@@ -374,6 +382,16 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void Button_m_plus_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void Button_mr_Click(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         #endregion
