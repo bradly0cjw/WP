@@ -15,7 +15,7 @@ namespace HW1
         private bool _operationPressed = false;
         private bool _equalPressed = false;
         private bool _init = true;
-        
+
         // Constant
         private const string Zero = "0";
         private const string Dot = ".";

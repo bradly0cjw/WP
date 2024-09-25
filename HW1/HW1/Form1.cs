@@ -35,7 +35,7 @@ namespace HW1
             button_div.Click += OperationButton_Click;
 
             // Assign event handler to solve button
-            button_equ.Click += (sender,e) => result.Text = model.CalculateResult();
+            button_equ.Click += (sender, e) => result.Text = model.CalculateResult();
 
             // Assign event handlers to memory and clear buttons
             button_c.Click += (sender, e) => result.Text = model.Clear();
