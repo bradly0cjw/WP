@@ -19,11 +19,11 @@ namespace HW1
         // Constant
         private const string Zero = "0";
         private const string Dot = ".";
-        private const string plus = "+";
-        private const string minus = "-";
-        private const string multiply = "*";
-        private const string divide = "/";
-        private const string result = "result";
+        private const string Plus = "+";
+        private const string Minus = "-";
+        private const string Multiply = "*";
+        private const string Divide = "/";
+        private const string GetResult = "GetResult";
 
         // Debug method for internal state debugging
         //public void Debug()
@@ -39,20 +39,20 @@ namespace HW1
             //Debug();
             switch (operation)
             {
-                case plus:
+                case Plus:
                     return _resultNum + _inputNum;
-                case minus:
+                case Minus:
                     return _resultNum - _inputNum;
-                case multiply:
+                case Multiply:
                     return _resultNum * _inputNum;
-                case divide:
+                case Divide:
                     // Prevent division by zero
                     if (_inputNum != 0) return _resultNum / _inputNum;
 
                     MessageBox.Show("Can't divide by zero");
                     Clear();
                     return 0;
-                case result:
+                case GetResult:
                     return _resultNum;
                 // If no operation is set, return the current number
                 default:
@@ -69,7 +69,8 @@ namespace HW1
             }
             if (_equalPressed)
             {
-                _operation = result;
+                _operation = GetResult;
+                _inputNum = _resultNum;
                 _equalPressed = false;
             }
             _resultNum = Calculate(_operation);
