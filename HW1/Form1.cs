@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HW1
 {
     public partial class Form1 : Form
     {
-        Model model= new Model();
+        private readonly Model model = new Model();
+
         public Form1()
         {
             InitializeComponent();
+            AssignEventHandlers();
+        }
+
+        private void AssignEventHandlers()
+        {
             // Assign the same event handler to all digit buttons
             button_0.Click += DigitButton_Click;
             button_1.Click += DigitButton_Click;
@@ -28,81 +27,45 @@ namespace HW1
             button_8.Click += DigitButton_Click;
             button_9.Click += DigitButton_Click;
             button_dot.Click += DigitButton_Click;
+
+            // Assign the same event handler to all operation buttons
             button_add.Click += OperationButton_Click;
             button_sub.Click += OperationButton_Click;
             button_mul.Click += OperationButton_Click;
             button_div.Click += OperationButton_Click;
-            button_equ.Click += Solve;
-        }
 
-        private void button_add_Click(object sender, EventArgs e)
-        {
-            //result.Text=
-        }
+            // Assign event handler to solve button
+            button_equ.Click += EqualButton_Click;
 
+            // Assign event handlers to memory and clear buttons
+            button_c.Click += (sender, e) => result.Text = model.Clear();
+            button_ce.Click += (sender, e) => result.Text = model.ClearEntry();
+            button_mr.Click += (sender, e) => result.Text = model.MemoryRecall();
+            button_ms.Click += (sender, e) => model.MemoryStore(result.Text);
+            button_mc.Click += (sender, e) => model.MemoryClear();
+            button_m_plus.Click += (sender, e) => model.MemoryPlus(result.Text);
+            button_m_minus.Click += (sender, e) => model.MemoryMinus(result.Text);
+        }
 
         private void DigitButton_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            if (sender is Button button)
             {
-                result.Text = model.SetDigit(result.Text, button.Text);
+                result.Text = model.AppendDigit(result.Text, button.Text);
             }
         }
 
         private void OperationButton_Click(object sender, EventArgs e)
         {
-            Button button = sender as Button;
-            if (button != null)
+            if (sender is Button button)
             {
                 model.SetOperation(button.Text);
-                //MessageBox.Show("Called "+ button.Text);
             }
         }
 
-        private void Solve(object sender, EventArgs e)
+        private void EqualButton_Click(object sender, EventArgs e)
         {
-            result.Text = model.Calculate();
-        }
-
-        private void button_c_Click(object sender, EventArgs e)
-        {
-            result.Text = model.Clear();
-        }
-
-        private void button_ce_Click(object sender, EventArgs e)
-        {
-            result.Text = model.ClearEntry();
-        }
-
-        private void button_mr_Click(object sender, EventArgs e)
-        {
-            result.Text = model.MRecall();
-        }
-
-        private void button_ms_Click(object sender, EventArgs e)
-        {
-            model.MStore(result.Text);
-        }
-
-        private void button_mc_Click(object sender, EventArgs e)
-        {
-            model.MClear();
-        }
-
-        private void button_m_plus_Click(object sender, EventArgs e)
-        {
-            model.MPlus(result.Text);
-        }
-
-        private void button_m_minus_Click(object sender, EventArgs e)
-        {
-            model.MMinus(result.Text);
-        }
-
-        private void result_TextChanged(object sender, EventArgs e)
-        {
-
+            result.Text = model.CalculateResult();
         }
     }
 }
