@@ -47,10 +47,8 @@ namespace HW1
                     return _resultNum * _inputNum;
                 case divide:
                     // Prevent division by zero
-                    if (_inputNum != 0)
-                    {
-                        return _resultNum / _inputNum;
-                    }
+                    if (_inputNum != 0) return _resultNum / _inputNum;
+
                     MessageBox.Show("Can't divide by zero");
                     Clear();
                     return 0;
@@ -79,40 +77,59 @@ namespace HW1
             _operationPressed = true;
             //Debug();
         }
-        // Append a digit to the current number
         public string AppendDigit(string original, string append)
         {
-            // Clear the number if the equal button was pressed
+            original = HandleEqualPressed(original);
+            original = HandleOperationPressed(original);
+            if (IsMultipleDots(original, append)) return original;
+            original = HandleLeadingZeros(original, append);
+
+            _inputNum = double.Parse(original + append);
+            return original + append;
+        }
+
+        // Clear the number if the equal button is pressed
+        private string HandleEqualPressed(string original)
+        {
             if (_equalPressed)
             {
                 Clear();
-                original = Zero;
                 _equalPressed = false;
+                return Zero;
             }
-            // Clear the number if an operation was pressed
-            if (_operationPressed)
-            {
-                original = Zero;
-                _operationPressed = false;
-            }
-            // Prevent multiple dots
-            if (append == Dot && original.Contains(Dot)) return original;
+            return original;
+        }
 
-            // Prevent leading zeros
+        // Clear the number if an operation button is pressed
+        private string HandleOperationPressed(string original)
+        {
+            if (!_operationPressed) return original;
+            _operationPressed = false;
+            return Zero;
+        }
+
+        // Prevent multiple dots in a number
+        private bool IsMultipleDots(string original, string append)
+        {
+            return append == Dot && original.Contains(Dot);
+        }
+
+        // Prevent leading zeros in a number
+        private string HandleLeadingZeros(string original, string append)
+        {
+            // Prevent leading zeros 
             if (original == Zero && append != Dot)
             {
-                original = null;
+                return null;
             }
             // Prevent multiple leading zeros
-            else if (original.Length > 1 && original[0] == char.Parse(Zero) && original[1] == char.Parse(Zero))
+            if (original.Length > 1 && original[0] == char.Parse(Zero) && original[1] == char.Parse(Zero))
             {
-                original = original.Remove(1, 1);
+                return original.Remove(1, 1);
             }
-
-            _inputNum = double.Parse(original + append);
-            //Debug();
-            return original + append;
+            return original;
         }
+
         // Add a number to memory
         public void MemoryPlus(string number)
         {
