@@ -16,7 +16,10 @@ namespace HW2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Model model = new Model();
+            Form1 form = new Form1( model);
+            Application.Run(form);
+
         }
     }
 }
