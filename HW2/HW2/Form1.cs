@@ -22,6 +22,13 @@ namespace HW2
             comboBox_shape.Items.Add("Decision");
             dataGridView_graph.Rows.Clear();
             dataGridView_graph.Columns.Clear();
+            dataGridView_graph.Columns.Add("Id", "Id");
+            dataGridView_graph.Columns.Add("ShapeType", "Shape Type");
+            dataGridView_graph.Columns.Add("Text", "Text");
+            dataGridView_graph.Columns.Add("X", "X");
+            dataGridView_graph.Columns.Add("Y", "Y");
+            dataGridView_graph.Columns.Add("Width", "Width");
+            dataGridView_graph.Columns.Add("Height", "Height");
             this.model = model;
         }
 
@@ -32,7 +39,28 @@ namespace HW2
 
         private void button_add_Click(object sender, EventArgs e)
         {
+            int err = 0;
+            err=model.AddShape(comboBox_shape.Text,textBox_text.Text,textBox_x.Text,textBox_y.Text,textBox_h.Text,textBox_w.Text);
+            if (err == 1)
+            {
+                MessageBox.Show("Invalid shape type");
+            }
+            UpdateGrid();
+        }
 
+        private void UpdateGrid()
+        {
+            // Fetch the list of shapes from the model
+            List<Shape> shapes = model.UpdateShape();
+
+            // Clear existing rows in the DataGridView
+            dataGridView_graph.Rows.Clear();
+
+            // Add each shape as a new row in the DataGridView
+            foreach (Shape shape in shapes)
+            {
+                dataGridView_graph.Rows.Add(shape.Id, shape.ShapeName, shape.Text, shape.X, shape.Y, shape.Width, shape.Height);
+            }
         }
     }
 }
