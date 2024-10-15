@@ -13,15 +13,14 @@ namespace HW2
         //add shape to list
         public int AddShape(string shapeSelect,string text,string x,string y,string h,string w)
         {
-            int id = shapes.NewId();
             int xPos = int.Parse(x);
             int yPos = int.Parse(y);
             int height = int.Parse(h);
             int width = int.Parse(w);
             try
             {
-                Shape shape = ShapeFactory.CreateShape(shapeSelect, id, text, xPos, yPos, height, width);
-                shapes.AddShape(shape);
+                Shape shape = ShapeFactory.CreateShape(shapeSelect, text, xPos, yPos, height, width);
+                shapes.AddShape(shape,shapeSelect);
             }catch (Exception)
             {
                 return 1;
@@ -36,7 +35,7 @@ namespace HW2
         }
 
         // Get shape list for UI
-        public List<Shape> UpdateShape()
+        public List<ShapeWrapper> UpdateShape()
         {
             return shapes.GetShapes();
         }

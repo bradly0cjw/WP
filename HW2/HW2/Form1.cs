@@ -22,6 +22,13 @@ namespace HW2
             comboBox_shape.Items.Add("Decision");
             dataGridView_graph.Rows.Clear();
             dataGridView_graph.Columns.Clear();
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
+            deleteButtonColumn.Name = "Delete";
+            deleteButtonColumn.HeaderText = "Delete";
+            deleteButtonColumn.Text = "Delete";
+            deleteButtonColumn.UseColumnTextForButtonValue = true;
+            dataGridView_graph.Columns.Add(deleteButtonColumn);
+            
             dataGridView_graph.Columns.Add("Id", "Id");
             dataGridView_graph.Columns.Add("ShapeType", "Shape Type");
             dataGridView_graph.Columns.Add("Text", "Text");
@@ -29,14 +36,13 @@ namespace HW2
             dataGridView_graph.Columns.Add("Y", "Y");
             dataGridView_graph.Columns.Add("Width", "Width");
             dataGridView_graph.Columns.Add("Height", "Height");
+            
             this.model = model;
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            // Subscribe to the CellClick event
+            dataGridView_graph.CellClick += dataGridView_graph_CellClick;
 
         }
-
+        
         private void button_add_Click(object sender, EventArgs e)
         {
             int err = 0;
@@ -51,15 +57,30 @@ namespace HW2
         private void UpdateGrid()
         {
             // Fetch the list of shapes from the model
-            List<Shape> shapes = model.UpdateShape();
+            List<ShapeWrapper> shapes = model.UpdateShape();
 
             // Clear existing rows in the DataGridView
             dataGridView_graph.Rows.Clear();
 
             // Add each shape as a new row in the DataGridView
-            foreach (Shape shape in shapes)
+            foreach (ShapeWrapper shapeWrapper in shapes)
             {
-                dataGridView_graph.Rows.Add(shape.Id, shape.ShapeName, shape.Text, shape.X, shape.Y, shape.Width, shape.Height);
+                dataGridView_graph.Rows.Add(shapeWrapper.Id, shapeWrapper.ShapeType, shapeWrapper.Shape.Text, shapeWrapper.Shape.X, shapeWrapper.Shape.Y, shapeWrapper.Shape.Width, shapeWrapper.Shape.Height);
+            }
+        }
+        private void dataGridView_graph_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Check if the clicked cell is a delete button
+            if (e.ColumnIndex == dataGridView_graph.Columns["Delete"].Index && e.RowIndex >= 0)
+            {
+                // Get the shape ID from the row
+                int shapeId = (int)dataGridView_graph.Rows[e.RowIndex].Cells["Id"].Value;
+
+                // Remove the shape from the model
+                model.RemoveShape(shapeId);
+
+                // Update the DataGridView
+                UpdateGrid();
             }
         }
     }

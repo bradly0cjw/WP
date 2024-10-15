@@ -50,7 +50,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Shape = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Shapetype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +68,7 @@
             this.dataGridView_graph.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.delete,
             this.ID,
-            this.Shape,
+            this.Shapetype,
             this.text,
             this.x,
             this.y,
@@ -88,7 +88,6 @@
             this.comboBox_shape.Size = new System.Drawing.Size(72, 21);
             this.comboBox_shape.TabIndex = 1;
             this.comboBox_shape.Text = "形狀";
-            this.comboBox_shape.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -284,11 +283,11 @@
             this.ID.ReadOnly = true;
             this.ID.Width = 40;
             // 
-            // Shape
+            // Shapetype
             // 
-            this.Shape.HeaderText = "形狀";
-            this.Shape.Name = "Shape";
-            this.Shape.Width = 65;
+            this.Shapetype.HeaderText = "形狀";
+            this.Shapetype.Name = "Shapetype";
+            this.Shapetype.Width = 65;
             // 
             // text
             // 
@@ -370,7 +369,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewButtonColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Shape;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Shapetype;
         private System.Windows.Forms.DataGridViewTextBoxColumn text;
         private System.Windows.Forms.DataGridViewTextBoxColumn x;
         private System.Windows.Forms.DataGridViewTextBoxColumn y;
