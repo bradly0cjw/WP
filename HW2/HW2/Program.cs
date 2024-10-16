@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HW2
@@ -19,7 +16,6 @@ namespace HW2
             Model model = new Model();
             Form1 form = new Form1(model);
             Application.Run(form);
-
         }
     }
 }

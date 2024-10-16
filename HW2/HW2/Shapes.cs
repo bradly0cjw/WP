@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW2
 {
@@ -12,10 +9,10 @@ namespace HW2
         public string ShapeType { get; set; }
         public Shape Shape { get; set; }
     }
+
     public class Shapes
     {
         private int uid = 0;
-        // List to store different shapes
         private List<ShapeWrapper> shapeList;
 
         public Shapes()
@@ -23,7 +20,6 @@ namespace HW2
             shapeList = new List<ShapeWrapper>();
         }
 
-        // Method to add a shape to the list
         public void AddShape(Shape shape, string shapeType)
         {
             var shapeWrapper = new ShapeWrapper
@@ -35,13 +31,11 @@ namespace HW2
             shapeList.Add(shapeWrapper);
         }
 
-        // Method to get all shapes
         public List<ShapeWrapper> GetShapes()
         {
             return shapeList;
         }
 
-        // Delete a shape by ID
         public void DeleteShape(int id)
         {
             var shapeToRemove = shapeList.FirstOrDefault(s => s.Id == id);
@@ -51,17 +45,14 @@ namespace HW2
             }
         }
 
-        // Retrieve a specific shape by its ID
         public ShapeWrapper GetShapeById(int id)
         {
             return shapeList.FirstOrDefault(s => s.Id == id);
         }
 
-        // Count the total number of shapes
         public int NewId()
         {
             return uid++;
         }
     }
 }
-

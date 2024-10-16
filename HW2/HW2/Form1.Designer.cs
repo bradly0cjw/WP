@@ -66,6 +66,7 @@
             // 
             this.dataGridView_graph.AllowUserToAddRows = false;
             this.dataGridView_graph.AllowUserToDeleteRows = false;
+            this.dataGridView_graph.AllowUserToResizeRows = false;
             this.dataGridView_graph.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_graph.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.delete,
@@ -77,6 +78,7 @@
             this.h,
             this.w});
             this.dataGridView_graph.Location = new System.Drawing.Point(3, 58);
+            this.dataGridView_graph.MultiSelect = false;
             this.dataGridView_graph.Name = "dataGridView_graph";
             this.dataGridView_graph.ReadOnly = true;
             this.dataGridView_graph.RowHeadersVisible = false;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW2
 {
@@ -10,32 +7,35 @@ namespace HW2
     {
         private Shapes shapes = new Shapes();
 
-        //add shape to list
-        public int AddShape(string shapeSelect,string text,string x,string y,string h,string w)
+        // Add shape to list
+        public int AddShape(ShapeData shapeData)
         {
-            int xPos = int.Parse(x);
-            int yPos = int.Parse(y);
-            int height = int.Parse(h);
-            int width = int.Parse(w);
             try
             {
-                Shape shape = ShapeFactory.CreateShape(shapeSelect, text, xPos, yPos, height, width);
-                shapes.AddShape(shape,shapeSelect);
-            }catch (Exception)
+                Shape shape = ShapeFactory.CreateShape(shapeData.ShapeType, shapeData.Text, shapeData.X, shapeData.Y, shapeData.Width, shapeData.Height);
+                shapes.AddShape(shape, shapeData.ShapeType);
+            }
+            catch (FormatException)
             {
+                // Handle parsing errors
+                return 2;
+            }
+            catch (Exception)
+            {
+                // Handle other errors (e.g., from ShapeFactory)
                 return 1;
             }
             return 0;
         }
 
-        //remove shape from list
+        // Remove shape from list
         public void RemoveShape(int id)
         {
             shapes.DeleteShape(id);
         }
 
         // Get shape list for UI
-        public List<ShapeWrapper> UpdateShape()
+        public List<ShapeWrapper> GetShapes()
         {
             return shapes.GetShapes();
         }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW2
 {
@@ -13,13 +9,13 @@ namespace HW2
             switch (shapeSelect.ToLower())
             {
                 case "start":
-                    return new Start { Text = text, X = x, Y = y, Height = height, Width = width };
+                    return new Start(text, x, y, width, height);
                 case "terminator":
-                    return new Terminator { Text = text, X = x, Y = y, Height = height, Width = width };
+                    return new Terminator(text, x, y, width, height);
                 case "process":
-                    return new Process { Text = text, X = x, Y = y, Height = height, Width = width };
+                    return new Process(text, x, y, width, height);
                 case "decision":
-                    return new Decision { Text = text, X = x, Y = y, Height = height, Width = width };
+                    return new Decision(text, x, y, width, height);
                 default:
                     throw new ArgumentException("Invalid shape type");
             }
