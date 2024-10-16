@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.dataGridView_graph = new System.Windows.Forms.DataGridView();
+            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Shapetype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.comboBox_shape = new System.Windows.Forms.ComboBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,22 +48,14 @@
             this.textBox_x = new System.Windows.Forms.TextBox();
             this.textBox_text = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Shapetype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.text = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.x = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.h = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -64,6 +64,8 @@
             // 
             // dataGridView_graph
             // 
+            this.dataGridView_graph.AllowUserToAddRows = false;
+            this.dataGridView_graph.AllowUserToDeleteRows = false;
             this.dataGridView_graph.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_graph.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.delete,
@@ -76,9 +78,66 @@
             this.w});
             this.dataGridView_graph.Location = new System.Drawing.Point(3, 58);
             this.dataGridView_graph.Name = "dataGridView_graph";
+            this.dataGridView_graph.ReadOnly = true;
             this.dataGridView_graph.RowHeadersVisible = false;
             this.dataGridView_graph.Size = new System.Drawing.Size(403, 365);
             this.dataGridView_graph.TabIndex = 0;
+            // 
+            // delete
+            // 
+            this.delete.HeaderText = "刪除";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Text = "刪除";
+            this.delete.Width = 40;
+            // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Width = 40;
+            // 
+            // Shapetype
+            // 
+            this.Shapetype.HeaderText = "形狀";
+            this.Shapetype.Name = "Shapetype";
+            this.Shapetype.ReadOnly = true;
+            this.Shapetype.Width = 65;
+            // 
+            // text
+            // 
+            this.text.HeaderText = "文字";
+            this.text.Name = "text";
+            this.text.ReadOnly = true;
+            // 
+            // x
+            // 
+            this.x.HeaderText = "X";
+            this.x.Name = "x";
+            this.x.ReadOnly = true;
+            this.x.Width = 40;
+            // 
+            // y
+            // 
+            this.y.HeaderText = "Y";
+            this.y.Name = "y";
+            this.y.ReadOnly = true;
+            this.y.Width = 40;
+            // 
+            // h
+            // 
+            this.h.HeaderText = "H";
+            this.h.Name = "h";
+            this.h.ReadOnly = true;
+            this.h.Width = 40;
+            // 
+            // w
+            // 
+            this.w.HeaderText = "W";
+            this.w.Name = "w";
+            this.w.ReadOnly = true;
+            this.w.Width = 40;
             // 
             // comboBox_shape
             // 
@@ -180,41 +239,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "資料顯示";
             // 
-            // textBox6
+            // textBox10
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox6.Location = new System.Drawing.Point(162, 13);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(89, 13);
-            this.textBox6.TabIndex = 9;
-            this.textBox6.Text = "文字";
-            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox7
-            // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox7.Location = new System.Drawing.Point(257, 13);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(32, 13);
-            this.textBox7.TabIndex = 10;
-            this.textBox7.Text = "X";
-            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBox8
-            // 
-            this.textBox8.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox8.Location = new System.Drawing.Point(295, 13);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(32, 13);
-            this.textBox8.TabIndex = 11;
-            this.textBox8.Text = "Y";
-            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox10.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox10.Location = new System.Drawing.Point(371, 13);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(32, 13);
+            this.textBox10.TabIndex = 13;
+            this.textBox10.Text = "W";
+            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox9
             // 
@@ -228,17 +263,41 @@
             this.textBox9.Text = "H";
             this.textBox9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox10
+            // textBox8
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBox10.Location = new System.Drawing.Point(371, 13);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(32, 13);
-            this.textBox10.TabIndex = 13;
-            this.textBox10.Text = "W";
-            this.textBox10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox8.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox8.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox8.Location = new System.Drawing.Point(295, 13);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(32, 13);
+            this.textBox8.TabIndex = 11;
+            this.textBox8.Text = "Y";
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox7
+            // 
+            this.textBox7.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox7.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox7.Location = new System.Drawing.Point(257, 13);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(32, 13);
+            this.textBox7.TabIndex = 10;
+            this.textBox7.Text = "X";
+            this.textBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox6.Location = new System.Drawing.Point(162, 13);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(89, 13);
+            this.textBox6.TabIndex = 9;
+            this.textBox6.Text = "文字";
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // groupBox2
             // 
@@ -252,14 +311,6 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 13);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 76);
-            this.button2.TabIndex = 14;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(6, 95);
@@ -268,60 +319,13 @@
             this.button3.TabIndex = 15;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // delete
+            // button2
             // 
-            this.delete.HeaderText = "刪除";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Text = "刪除";
-            this.delete.Width = 40;
-            // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Width = 40;
-            // 
-            // Shapetype
-            // 
-            this.Shapetype.HeaderText = "形狀";
-            this.Shapetype.Name = "Shapetype";
-            this.Shapetype.Width = 65;
-            // 
-            // text
-            // 
-            this.text.HeaderText = "文字";
-            this.text.Name = "text";
-            this.text.ReadOnly = true;
-            // 
-            // x
-            // 
-            this.x.HeaderText = "X";
-            this.x.Name = "x";
-            this.x.ReadOnly = true;
-            this.x.Width = 40;
-            // 
-            // y
-            // 
-            this.y.HeaderText = "Y";
-            this.y.Name = "y";
-            this.y.ReadOnly = true;
-            this.y.Width = 40;
-            // 
-            // h
-            // 
-            this.h.HeaderText = "H";
-            this.h.Name = "h";
-            this.h.ReadOnly = true;
-            this.h.Width = 40;
-            // 
-            // w
-            // 
-            this.w.HeaderText = "W";
-            this.w.Name = "w";
-            this.w.ReadOnly = true;
-            this.w.Width = 40;
+            this.button2.Location = new System.Drawing.Point(6, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(121, 76);
+            this.button2.TabIndex = 14;
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

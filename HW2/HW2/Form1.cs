@@ -20,29 +20,53 @@ namespace HW2
             comboBox_shape.Items.Add("Terminator");
             comboBox_shape.Items.Add("Process");
             comboBox_shape.Items.Add("Decision");
-            dataGridView_graph.Rows.Clear();
-            dataGridView_graph.Columns.Clear();
-            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
-            deleteButtonColumn.Name = "Delete";
-            deleteButtonColumn.HeaderText = "Delete";
-            deleteButtonColumn.Text = "Delete";
-            deleteButtonColumn.UseColumnTextForButtonValue = true;
-            dataGridView_graph.Columns.Add(deleteButtonColumn);
-            
-            dataGridView_graph.Columns.Add("Id", "Id");
-            dataGridView_graph.Columns.Add("ShapeType", "Shape Type");
-            dataGridView_graph.Columns.Add("Text", "Text");
-            dataGridView_graph.Columns.Add("X", "X");
-            dataGridView_graph.Columns.Add("Y", "Y");
-            dataGridView_graph.Columns.Add("Width", "Width");
-            dataGridView_graph.Columns.Add("Height", "Height");
-            
+            //dataGridView_graph.Rows.Clear();
+            //dataGridView_graph.Columns.Clear();
+            //DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
+            //deleteButtonColumn.Name = "Delete";
+            //deleteButtonColumn.HeaderText = "Delete";
+            //deleteButtonColumn.Text = "Delete";
+            //deleteButtonColumn.UseColumnTextForButtonValue = true;
+            //dataGridView_graph.Columns.Add(deleteButtonColumn);
+
+            //dataGridView_graph.Columns.Add("Id", "Id");
+            //dataGridView_graph.Columns.Add("ShapeType", "Shape Type");
+            //dataGridView_graph.Columns.Add("Text", "Text");
+            //dataGridView_graph.Columns.Add("X", "X");
+            //dataGridView_graph.Columns.Add("Y", "Y");
+            //dataGridView_graph.Columns.Add("Width", "Width");
+            //dataGridView_graph.Columns.Add("Height", "Height");
+
+            // Initialize DataGridView columns
+            InitializeDataGridView();
+
             this.model = model;
             // Subscribe to the CellClick event
             dataGridView_graph.CellClick += dataGridView_graph_CellClick;
 
         }
-        
+
+        private void InitializeDataGridView()
+        {
+            dataGridView_graph.Rows.Clear();
+            //dataGridView_graph.Columns.Clear();
+
+            //DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn();
+            //deleteButtonColumn.Name = "Delete";
+            //deleteButtonColumn.HeaderText = "Delete";
+            //deleteButtonColumn.Text = "Delete";
+            //deleteButtonColumn.UseColumnTextForButtonValue = true;
+            //dataGridView_graph.Columns.Add(deleteButtonColumn);
+
+            //dataGridView_graph.Columns.Add("Id", "Id");
+            //dataGridView_graph.Columns.Add("ShapeType", "Shape Type");
+            //dataGridView_graph.Columns.Add("Text", "Text");
+            //dataGridView_graph.Columns.Add("X", "X");
+            //dataGridView_graph.Columns.Add("Y", "Y");
+            //dataGridView_graph.Columns.Add("Width", "Width");
+            //dataGridView_graph.Columns.Add("Height", "Height");
+        }
+
         private void button_add_Click(object sender, EventArgs e)
         {
             int err = 0;
@@ -65,7 +89,7 @@ namespace HW2
             // Add each shape as a new row in the DataGridView
             foreach (ShapeWrapper shapeWrapper in shapes)
             {
-                dataGridView_graph.Rows.Add(shapeWrapper.Id, shapeWrapper.ShapeType, shapeWrapper.Shape.Text, shapeWrapper.Shape.X, shapeWrapper.Shape.Y, shapeWrapper.Shape.Width, shapeWrapper.Shape.Height);
+                dataGridView_graph.Rows.Add("Delete", shapeWrapper.Id, shapeWrapper.ShapeType, shapeWrapper.Shape.Text, shapeWrapper.Shape.X, shapeWrapper.Shape.Y, shapeWrapper.Shape.Width, shapeWrapper.Shape.Height);
             }
         }
         private void dataGridView_graph_CellClick(object sender, DataGridViewCellEventArgs e)
