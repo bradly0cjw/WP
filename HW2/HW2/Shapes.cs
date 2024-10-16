@@ -1,58 +1,65 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace HW2
 {
-    public class ShapeWrapper
-    {
-        public int Id { get; set; }
-        public string ShapeType { get; set; }
-        public Shape Shape { get; set; }
-    }
+    
 
     public class Shapes
     {
-        private int uid = 0;
-        private List<ShapeWrapper> shapeList;
+        private int _uid = 0;
+        private readonly List<ShapeWrapper> _shapeList;
 
+        // Constructor
         public Shapes()
         {
-            shapeList = new List<ShapeWrapper>();
+            _shapeList = new List<ShapeWrapper>();
         }
 
-        public void AddShape(Shape shape, string shapeType)
+        // Add shape to list
+        public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
+            // Create shape using ShapeFactory
+            Shape shape = ShapeFactory.CreateShape(shapeName, x, y, width, height);
             var shapeWrapper = new ShapeWrapper
             {
                 Id = NewId(),
-                ShapeType = shapeType,
+                Text = text,
                 Shape = shape
             };
-            shapeList.Add(shapeWrapper);
+            _shapeList.Add(shapeWrapper);
         }
 
+        // Get shape list for UI
         public List<ShapeWrapper> GetShapes()
         {
-            return shapeList;
+            return _shapeList;
         }
 
+        // Remove shape from list
         public void DeleteShape(int id)
         {
-            var shapeToRemove = shapeList.FirstOrDefault(s => s.Id == id);
+            var shapeToRemove = _shapeList.FirstOrDefault(s => s.Id == id);
             if (shapeToRemove != null)
             {
-                shapeList.Remove(shapeToRemove);
+                _shapeList.Remove(shapeToRemove);
             }
         }
 
-        public ShapeWrapper GetShapeById(int id)
-        {
-            return shapeList.FirstOrDefault(s => s.Id == id);
-        }
-
+        // Generate new id for shape
         public int NewId()
         {
-            return uid++;
+            return _uid++;
+        }
+
+        // Draw shape by id 
+        // This method is not used in the current implementation
+        // Polymorphism is used to draw shapes in the UI
+        public void DrawShape(int id)
+        {
+            var shapeToDraw = _shapeList.FirstOrDefault(s => s.Id == id);
+            shapeToDraw?.Shape.Draw();
         }
     }
 }

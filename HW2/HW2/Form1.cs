@@ -6,7 +6,7 @@ namespace HW2
 {
     public partial class Form1 : Form
     {
-        private Model model;
+        private readonly Model _model;
 
         public Form1(Model model)
         {
@@ -14,73 +14,80 @@ namespace HW2
             InitializeComboBox();
             InitializeDataGridView();
 
-            this.model = model;
-            dataGridView_graph.CellClick += dataGridView_graph_CellClick;
+            this._model = model; // Assign the model parameter to the _model field
+            dataGridView_graph.CellClick += DataGridView_graph_CellClick;
         }
 
+        // Initialize the combobox with the shape names
         private void InitializeComboBox()
         {
-            comboBox_shape.Items.Add("Start");
-            comboBox_shape.Items.Add("Terminator");
-            comboBox_shape.Items.Add("Process");
-            comboBox_shape.Items.Add("Decision");
+            comboBox_shapeName.Items.Add("Start");
+            comboBox_shapeName.Items.Add("Terminator");
+            comboBox_shapeName.Items.Add("Process");
+            comboBox_shapeName.Items.Add("Decision");
         }
 
+        // Initialize the datagridview
         private void InitializeDataGridView()
         {
             dataGridView_graph.Rows.Clear();
         }
 
-        private void button_add_Click(object sender, EventArgs e)
+        private void Button_add_Click(object sender, EventArgs e)
         {
-            ShapeData shapeData = new ShapeData
+            try
             {
-                ShapeType = comboBox_shape.Text,
-                Text = textBox_text.Text,
-                X = int.Parse(textBox_x.Text),
-                Y = int.Parse(textBox_y.Text),
-                Width = int.Parse(textBox_w.Text),
-                Height = int.Parse(textBox_h.Text)
-            };
+                string shapeName = comboBox_shapeName.Text;
+                string text = textBox_text.Text;
+                int x = int.Parse(textBox_x.Text);
+                int y = int.Parse(textBox_y.Text);
+                int width = int.Parse(textBox_width.Text);
+                int height = int.Parse(textBox_height.Text);
 
-            int err = model.AddShape(shapeData);
-            HandleError(err);
-
-            UpdateGrid();
-        }
-
-        private void HandleError(int err)
-        {
-            switch (err)
-            {
-                case 1:
-                    MessageBox.Show("Invalid shape type");
-                    break;
-                case 2:
-                    MessageBox.Show("Invalid input");
-                    break;
+                // Add shape to the model
+                _model.AddShape(shapeName, text, x, y, width, height);
+                UpdateGrid();
             }
+            catch
+            {
+                MessageBox.Show("Invalid Input");
+            }
+
         }
 
         private void UpdateGrid()
         {
-            List<ShapeWrapper> shapes = model.GetShapes();
+            // Get the shapes from the model
+            List<ShapeWrapper> shapes = _model.GetShapes();
+            // Clear the grid
             dataGridView_graph.Rows.Clear();
 
+            // Add the shapes to the grid
             foreach (ShapeWrapper shapeWrapper in shapes)
             {
-                dataGridView_graph.Rows.Add("Delete", shapeWrapper.Id, shapeWrapper.ShapeType, shapeWrapper.Shape.Text, shapeWrapper.Shape.X, shapeWrapper.Shape.Y, shapeWrapper.Shape.Width, shapeWrapper.Shape.Height);
+                Shape shape = shapeWrapper.Shape;
+                dataGridView_graph.Rows.Add(
+                    "Delete",
+                    shapeWrapper.Id,
+                    shapeWrapper.Text,
+                    shape.ShapeName,
+                    shape.X,
+                    shape.Y,
+                    shape.Width,
+                    shape.Height
+                );
             }
         }
 
-        private void dataGridView_graph_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView_graph_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView_graph.Columns["Delete"].Index && e.RowIndex >= 0)
-            {
-                int shapeId = (int)dataGridView_graph.Rows[e.RowIndex].Cells["Id"].Value;
-                model.RemoveShape(shapeId);
-                UpdateGrid();
-            }
+            // Check if the delete button is clicked
+            if (e.ColumnIndex != dataGridView_graph.Columns["Delete"].Index || e.RowIndex < 0)
+                return;
+            // Get the shape id
+            int shapeId = (int)dataGridView_graph.Rows[e.RowIndex].Cells["Id"].Value;
+            _model.RemoveShape(shapeId);
+            UpdateGrid();
         }
     }
 }

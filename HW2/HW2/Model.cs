@@ -8,24 +8,9 @@ namespace HW2
         private Shapes shapes = new Shapes();
 
         // Add shape to list
-        public int AddShape(ShapeData shapeData)
+        public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            try
-            {
-                Shape shape = ShapeFactory.CreateShape(shapeData.ShapeType, shapeData.Text, shapeData.X, shapeData.Y, shapeData.Width, shapeData.Height);
-                shapes.AddShape(shape, shapeData.ShapeType);
-            }
-            catch (FormatException)
-            {
-                // Handle parsing errors
-                return 2;
-            }
-            catch (Exception)
-            {
-                // Handle other errors (e.g., from ShapeFactory)
-                return 1;
-            }
-            return 0;
+            shapes.AddShape(shapeName, text,  x,  y, width,  height);
         }
 
         // Remove shape from list
@@ -40,4 +25,5 @@ namespace HW2
             return shapes.GetShapes();
         }
     }
+    
 }
