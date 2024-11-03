@@ -112,8 +112,8 @@ namespace HW2
                     shape.ShapeName,
                     shape.X,
                     shape.Y,
-                    shape.Width,
-                    shape.Height
+                    shape.W,
+                    shape.H
                 );
             }
         }

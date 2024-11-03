@@ -8,19 +8,34 @@ namespace HW2
         public event ModelChangedEventHandler ModelChanged;
         public delegate void ModelChangedEventHandler();
         private Shapes shapes = new Shapes();
-        private int mouse_x, mouse_y,mouse_ix,mouse_iy;
+        private int mouse_x, mouse_y, mouse_ix, mouse_iy;
         private bool _ispress = false;
         private string _mode = "";
+        private Shape _hint;
 
         // Add shape to list
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            shapes.AddShape(shapeName, text,  x,  y, width,  height);
+            shapes.AddShape(shapeName, text, x, y, width, height);
         }
 
         public void PreviewShape(string shapeName)
         {
-            shapes.PreviewShape(shapeName, mouse_ix, mouse_iy, mouse_x, mouse_y);
+            _hint = shapes.PreviewShape(shapeName, mouse_ix, mouse_iy, mouse_x, mouse_y);
+        }
+
+        public void Draw(Igraphic graphic)
+        {
+            graphic.ClearAll();
+            foreach (var shape in shapes.GetShapes())
+            {
+                shape.Shape.Draw(graphic);
+            }
+
+            if (_ispress)
+            {
+                _hint.Draw(graphic);
+            }
         }
 
         public void MouseMoveHandler(int x, int y)
@@ -42,6 +57,7 @@ namespace HW2
             mouse_ix = x;
             mouse_iy = y;
             _ispress = true;
+            PreviewShape(_mode);
             NotifyObserver();
         }
 
@@ -52,7 +68,7 @@ namespace HW2
         public void MouseUpHandeler(int x, int y)
         {
             _ispress = false;
-            shapes.AddShape(_mode,"",mouse_ix,mouse_iy,mouse_x,mouse_y);
+            shapes.AddShape(_mode, "", mouse_ix, mouse_iy, mouse_x, mouse_y);
             NotifyObserver();
         }
 
@@ -74,5 +90,5 @@ namespace HW2
                 ModelChanged();
         }
     }
-    
+
 }

@@ -24,7 +24,7 @@ namespace HW2
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
             // Create shape using ShapeFactory
-            Shape shape = ShapeFactory.CreateShape(shapeName, x, y, width, height,graphic);
+            Shape shape = ShapeFactory.CreateShape(shapeName, x, y, width, height);
             var shapeWrapper = new ShapeWrapper
             {
                 Id = NewId(),
@@ -34,9 +34,10 @@ namespace HW2
             _shapeList.Add(shapeWrapper);
         }
 
-        public void PreviewShape(string shapeName, int click_x, int click_y, int mouse_x, int mouse_y)
+        public Shape PreviewShape(string shapeName, int click_x, int click_y, int mouse_x, int mouse_y)
         {
-            Shape shape = ShapeFactory.CreateShape(shapeName, click_x, click_y, mouse_x - click_x, mouse_y - click_y, graphic);
+            Shape shape = ShapeFactory.CreateShape(shapeName, click_x, click_y, mouse_x - click_x, mouse_y - click_y);
+            return shape;
         }
 
 

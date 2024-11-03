@@ -8,10 +8,10 @@ namespace HW2
     {
         Igraphic _graphic;
         public string ShapeName { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int W { get; set; }
+        public int H { get; set; }
 
         // Constructor
         public Shape(string shapeName, int x, int y, int width, int height)
@@ -19,13 +19,13 @@ namespace HW2
             ShapeName = shapeName;
             X = x;
             Y = y;
-            Width = width;
-            Height = height;
+            W = width;
+            H = height;
         }
         // Virtual method
-        public virtual void Draw(int x, int y, int width, int height)
+        public virtual void Draw(Igraphic graphic)
         {
-            Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {Width} and height {Height}");
+            Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
         }
     }
 }
