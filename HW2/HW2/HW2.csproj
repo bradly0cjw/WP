@@ -46,8 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Process.cs" />
-    <Compile Include="Decision.cs" />
+    <Compile Include="FormGraphicAdaptercs.cs" />
+    <Compile Include="Igraphic.cs" />
+    <Compile Include="Shape\Process.cs" />
+    <Compile Include="Shape\Decision.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -61,10 +63,11 @@
     <Compile Include="Shape.cs" />
     <Compile Include="Shapes.cs" />
     <Compile Include="Shapewrapper.cs" />
-    <Compile Include="Terminator.cs" />
-    <Compile Include="Start.cs" />
+    <Compile Include="Shape\Terminator.cs" />
+    <Compile Include="Shape\Start.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,5 +91,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

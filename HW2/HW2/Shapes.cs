@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace HW2
@@ -56,10 +57,10 @@ namespace HW2
         // Draw shape by id 
         // This method is not used in the current implementation
         // Polymorphism is used to draw shapes in the UI
-        public void DrawShape(int id)
-        {
-            var shapeToDraw = _shapeList.FirstOrDefault(s => s.Id == id);
-            shapeToDraw?.Shape.Draw();
-        }
+        //public void DrawShape(int id)
+        //{
+        //    var shapeToDraw = _shapeList.FirstOrDefault(s => s.Id == id);
+        //    shapeToDraw?.Shape.Draw();
+        //}
     }
 }

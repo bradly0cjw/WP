@@ -21,7 +21,7 @@ namespace HW2
             Height = height;
         }
         // Virtual method
-        public virtual void Draw()
+        public virtual void Draw(int x, int y, int w, int h)
         {
             Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {Width} and height {Height}");
         }
