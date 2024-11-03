@@ -10,14 +10,16 @@ namespace HW2
     public class Process : Shape
     {
         // Constructor
-        public Process(string shapeName, int x, int y, int width, int height) : base(
-            shapeName, x, y, width, height) { }
+        public Process(string shapeName, string text, int id, int x, int y, int width, int height) : base(
+            shapeName, text, id, x, y, width, height)
+        { }
 
         // Draw method
         public override void Draw(Igraphic graphic)
         {
-            graphic.DrawRectangle(X,Y,W,H);
+            graphic.DrawRectangle(X, Y, W, H);
             Console.WriteLine($"Drawing Process shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+            graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
         }
     }
 }

@@ -6,8 +6,8 @@ namespace HW2
     public class Terminator : Shape
     {
         // Constructor
-        public Terminator(string shapeName, int X, int y, int width, int height) : base(
-            shapeName, X, y, width, height)
+        public Terminator(string shapeName, string text, int id, int X, int y, int width, int height) : base(
+            shapeName, text, id, X, y, width, height)
         { }
 
         // Draw method
@@ -18,6 +18,7 @@ namespace HW2
             graphic.DrawLine(X + H / 2, Y, X + W + H / 2, Y);
             graphic.DrawLine(X + H / 2, Y + H, X + W + H / 2, Y + H);
             Console.WriteLine($"Drawing Terminator shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+            graphic.DrawString(Text,X + (W / 2), Y + (H / 2));
         }
     }
 }

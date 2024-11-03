@@ -62,6 +62,7 @@
             this.buttonTerminator = new System.Windows.Forms.ToolStripButton();
             this.buttonDecision = new System.Windows.Forms.ToolStripButton();
             this.buttonProcess = new System.Windows.Forms.ToolStripButton();
+            this.panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -357,7 +358,7 @@
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(23, 22);
             this.buttonStart.Text = "Start";
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            
             // 
             // buttonTerminator
             // 
@@ -367,7 +368,7 @@
             this.buttonTerminator.Name = "buttonTerminator";
             this.buttonTerminator.Size = new System.Drawing.Size(23, 22);
             this.buttonTerminator.Text = "terminator";
-            this.buttonTerminator.Click += new System.EventHandler(this.buttonTerminator_Click);
+            
             // 
             // buttonDecision
             // 
@@ -377,7 +378,7 @@
             this.buttonDecision.Name = "buttonDecision";
             this.buttonDecision.Size = new System.Drawing.Size(23, 22);
             this.buttonDecision.Text = "Decision";
-            this.buttonDecision.Click += new System.EventHandler(this.buttonDecision_Click);
+            
             // 
             // buttonProcess
             // 
@@ -387,13 +388,21 @@
             this.buttonProcess.Name = "buttonProcess";
             this.buttonProcess.Size = new System.Drawing.Size(23, 22);
             this.buttonProcess.Text = "Process";
-            this.buttonProcess.Click += new System.EventHandler(this.buttonProcess_Click);
+            
+            // 
+            // panel
+            // 
+            this.panel.Location = new System.Drawing.Point(134, 46);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(574, 429);
+            this.panel.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1118, 492);
+            this.Controls.Add(this.panel);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -449,6 +458,7 @@
         private System.Windows.Forms.ToolStripButton buttonTerminator;
         private System.Windows.Forms.ToolStripButton buttonDecision;
         private System.Windows.Forms.ToolStripButton buttonProcess;
+        private System.Windows.Forms.Panel panel;
     }
 }
 

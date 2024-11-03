@@ -10,13 +10,13 @@ namespace HW2
     public class Shapes
     {
         private int _uid = 0;
-        private readonly List<ShapeWrapper> _shapeList;
+        private readonly List<Shape> _shapeList;
         private Igraphic graphic;
 
         // Constructor
         public Shapes()
         {
-            _shapeList = new List<ShapeWrapper>();
+            _shapeList = new List<Shape>();
 
         }
 
@@ -24,25 +24,19 @@ namespace HW2
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
             // Create shape using ShapeFactory
-            Shape shape = ShapeFactory.CreateShape(shapeName, x, y, width, height);
-            var shapeWrapper = new ShapeWrapper
-            {
-                Id = NewId(),
-                Text = text,
-                Shape = shape
-            };
-            _shapeList.Add(shapeWrapper);
+            Shape shape = ShapeFactory.CreateShape(shapeName,text,NewId(), x, y, width, height);
+            _shapeList.Add(shape);
         }
 
-        public Shape PreviewShape(string shapeName, int click_x, int click_y, int mouse_x, int mouse_y)
+        public Shape PreviewShape(string shapeName, string shapetext, int id, int click_x, int click_y, int mouse_x, int mouse_y)
         {
-            Shape shape = ShapeFactory.CreateShape(shapeName, click_x, click_y, mouse_x - click_x, mouse_y - click_y);
+            Shape shape = ShapeFactory.CreateShape(shapeName, shapetext, id, click_x, click_y, mouse_x - click_x, mouse_y - click_y);
             return shape;
         }
 
 
         // Get shape list for UI
-        public List<ShapeWrapper> GetShapes()
+        public List<Shape> GetShapes()
         {
             return _shapeList;
         }
@@ -50,7 +44,7 @@ namespace HW2
         // Remove shape from list
         public void DeleteShape(int id)
         {
-            var shapeToRemove = _shapeList.FirstOrDefault(s => s.Id == id);
+            var shapeToRemove = _shapeList.FirstOrDefault(s => s.ID == id);
             if (shapeToRemove != null)
             {
                 _shapeList.Remove(shapeToRemove);

@@ -13,25 +13,30 @@ namespace HW2
         private bool _processpressed = false;
         private bool _decisionpressed = false;
 
-        private double canvas_x1=133;
-        private double canvas_y1=49;
-        private double canvas_x2=710;
-        private double canvas_y2=476;
+        private double canvas_x1 = 133;
+        private double canvas_y1 = 49;
+        private double canvas_x2 = 710;
+        private double canvas_y2 = 476;
 
         public Form1(Model model)
         {
             InitializeComponent();
             InitializeComboBox();
             InitializeDataGridView();
-            MouseMove += MouseMoveHandler;
-            MouseDown += MouseDownHandeler;
-            MouseUp += MouseUpHandler;
+            panel.MouseMove += MouseMoveHandler;
+            panel.MouseDown += MouseDownHandeler;
+            panel.MouseUp += MouseUpHandler;
             model.ModelChanged += UpdateView;
+            model.ModelChanged += UpdateGrid;
+            panel.Paint += HandelCanvasPaint;
+            buttonStart.Click += buttonShape_Click;
+            buttonTerminator.Click += buttonShape_Click;
+            buttonProcess.Click += buttonShape_Click;
+            buttonDecision.Click += buttonShape_Click;
+
             this._model = model; // Assign the model parameter to the _model field
             dataGridView_graph.CellClick += DataGridView_graph_CellClick;
         }
-
-        
 
         // Initialize the combobox with the shape names
         private void InitializeComboBox()
@@ -52,19 +57,22 @@ namespace HW2
         {
             Console.WriteLine($"Current cursor {e.X},{e.Y}");
             _model.MouseMoveHandler(e.X, e.Y);
-            if (e.X < canvas_x1 || e.X > canvas_x2 || e.Y < canvas_y1 || e.Y > canvas_y2)
+            //Cursor = Cursors.Default;
+            if (_model.GetMode() != "")
             {
-                Cursor = Cursors.Default;
+                panel.Cursor = Cursors.Cross;
             }
             else
             {
-                Cursor = Cursors.Cross;
-            }
+                panel.Cursor = Cursors.Default;
+            };
+
         }
 
         private void MouseUpHandler(object sender, MouseEventArgs e)
         {
             _model.MouseUpHandeler(e.X, e.Y);
+            clickHelper();
         }
 
         private void MouseDownHandeler(object sender, MouseEventArgs e)
@@ -97,19 +105,18 @@ namespace HW2
         private void UpdateGrid()
         {
             // Get the shapes from the model
-            List<ShapeWrapper> shapes = _model.GetShapes();
+            List<Shape> shapes = _model.GetShapes();
             // Clear the grid
             dataGridView_graph.Rows.Clear();
 
             // Add the shapes to the grid
-            foreach (ShapeWrapper shapeWrapper in shapes)
+            foreach (Shape shape in shapes)
             {
-                Shape shape = shapeWrapper.Shape;
                 dataGridView_graph.Rows.Add(
                     "Delete",
-                    shapeWrapper.Id,
-                    shapeWrapper.Text,
+                    shape.ID,
                     shape.ShapeName,
+                    shape.Text,
                     shape.X,
                     shape.Y,
                     shape.W,
@@ -129,37 +136,28 @@ namespace HW2
             UpdateGrid();
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void buttonShape_Click(object sender, EventArgs e)
         {
             clickHelper();
-            _startpressed = true;
-            buttonStart.Checked = true;
-            setMode();
-        }
+            var button = sender as ToolStripButton;
+            if (button == null) return;
 
-        private void buttonTerminator_Click(object sender, EventArgs e)
-        {
-            clickHelper();
-            _terminatorpressed = true;
-            buttonTerminator.Checked = true;
-            setMode();
-        }
-
-        private void buttonProcess_Click(object sender, EventArgs e)
-        {
-
-            clickHelper();
-            _processpressed = true;
-            buttonProcess.Checked = true;
-            setMode();
-        }
-
-        private void buttonDecision_Click(object sender, EventArgs e)
-        {
-
-            clickHelper();
-            _decisionpressed = true;
-            buttonDecision.Checked = true;
+            button.Checked = true;
+            switch (button.Name)
+            {
+                case "buttonStart":
+                    _startpressed = true;
+                    break;
+                case "buttonTerminator":
+                    _terminatorpressed = true;
+                    break;
+                case "buttonProcess":
+                    _processpressed = true;
+                    break;
+                case "buttonDecision":
+                    _decisionpressed = true;
+                    break;
+            }
             setMode();
         }
         private void setMode()
@@ -194,7 +192,13 @@ namespace HW2
         }
         private void UpdateView()
         {
-            Invalidate();
+            Invalidate(true);
+
+        }
+
+        private void HandelCanvasPaint(object sender, PaintEventArgs e)
+        {
+            _model.Draw(new FormGraphicAdapter(e.Graphics));
         }
     }
 }

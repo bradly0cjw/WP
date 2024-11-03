@@ -11,17 +11,17 @@ namespace HW2
     {
         void ClearAll();
 
-        void DrawLine(double x1, double y1, double x2, double y2);
+        void DrawLine(int x1, int y1, int x2, int y2);
 
-        void DrawRectangle(double x1, double y1, double x2, double y2);
+        void DrawRectangle(int x1, int y1, int x2, int y2);
 
-        void DrawEllipse(double x1, double y1, double x2, double y2);
-
-
-        void DrawArc(double x1, double y1, double x2, double y2, int deg1, int deg2);
+        void DrawEllipse(int x1, int y1, int x2, int y2);
 
 
-        void DrawString(string text, double x, double y);
+        void DrawArc(int x1, int y1, int x2, int y2, int deg1, int deg2);
+
+
+        void DrawString(string text, int x, int y);
 
 
         void DrawPolygon(Point[] points);
