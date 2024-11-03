@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView_graph = new System.Windows.Forms.DataGridView();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,10 +57,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.buttonStart = new System.Windows.Forms.ToolStripButton();
+            this.buttonTerminator = new System.Windows.Forms.ToolStripButton();
+            this.buttonDecision = new System.Windows.Forms.ToolStripButton();
+            this.buttonProcess = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView_graph
@@ -234,7 +241,7 @@
             this.groupBox1.Controls.Add(this.textBox_y);
             this.groupBox1.Controls.Add(this.textBox_x);
             this.groupBox1.Controls.Add(this.textBox_height);
-            this.groupBox1.Location = new System.Drawing.Point(711, 27);
+            this.groupBox1.Location = new System.Drawing.Point(711, 52);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(407, 429);
             this.groupBox1.TabIndex = 9;
@@ -307,7 +314,7 @@
             this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Location = new System.Drawing.Point(0, 27);
+            this.groupBox2.Location = new System.Drawing.Point(0, 46);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(133, 423);
             this.groupBox2.TabIndex = 10;
@@ -329,11 +336,65 @@
             this.button2.TabIndex = 14;
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.buttonStart,
+            this.buttonTerminator,
+            this.buttonDecision,
+            this.buttonProcess});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1118, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonStart.Image = ((System.Drawing.Image)(resources.GetObject("buttonStart.Image")));
+            this.buttonStart.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(23, 22);
+            this.buttonStart.Text = "Start";
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
+            // buttonTerminator
+            // 
+            this.buttonTerminator.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonTerminator.Image = ((System.Drawing.Image)(resources.GetObject("buttonTerminator.Image")));
+            this.buttonTerminator.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonTerminator.Name = "buttonTerminator";
+            this.buttonTerminator.Size = new System.Drawing.Size(23, 22);
+            this.buttonTerminator.Text = "terminator";
+            this.buttonTerminator.Click += new System.EventHandler(this.buttonTerminator_Click);
+            // 
+            // buttonDecision
+            // 
+            this.buttonDecision.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonDecision.Image = ((System.Drawing.Image)(resources.GetObject("buttonDecision.Image")));
+            this.buttonDecision.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonDecision.Name = "buttonDecision";
+            this.buttonDecision.Size = new System.Drawing.Size(23, 22);
+            this.buttonDecision.Text = "Decision";
+            this.buttonDecision.Click += new System.EventHandler(this.buttonDecision_Click);
+            // 
+            // buttonProcess
+            // 
+            this.buttonProcess.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonProcess.Image = ((System.Drawing.Image)(resources.GetObject("buttonProcess.Image")));
+            this.buttonProcess.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonProcess.Name = "buttonProcess";
+            this.buttonProcess.Size = new System.Drawing.Size(23, 22);
+            this.buttonProcess.Text = "Process";
+            this.buttonProcess.Click += new System.EventHandler(this.buttonProcess_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1118, 450);
+            this.ClientSize = new System.Drawing.Size(1118, 492);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -346,6 +407,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,6 +444,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn y;
         private System.Windows.Forms.DataGridViewTextBoxColumn h;
         private System.Windows.Forms.DataGridViewTextBoxColumn w;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton buttonStart;
+        private System.Windows.Forms.ToolStripButton buttonTerminator;
+        private System.Windows.Forms.ToolStripButton buttonDecision;
+        private System.Windows.Forms.ToolStripButton buttonProcess;
     }
 }
 
