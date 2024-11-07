@@ -7,8 +7,8 @@ namespace HW2
     {
         public event ModelChangedEventHandler ModelChanged;
         public delegate void ModelChangedEventHandler();
-        private Shapes shapes = new Shapes();
-        private int mouse_x, mouse_y, mouse_ix, mouse_iy;
+        private readonly Shapes _shapes = new Shapes();
+        private int _mouseX, _mouseY, _mouseIx, _mouseIy;
         private bool _ispress = false;
         private string _mode = "";
         private Shape _hint;
@@ -16,19 +16,24 @@ namespace HW2
         // Add shape to list
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            shapes.AddShape(shapeName, text, x, y, width, height);
+            if (width < 0 || height < 0)
+            {
+                throw new ArgumentException("Width and height must be positive");
+            }
+            _shapes.AddShape(shapeName, text, x, y, width, height);
             NotifyObserver();
         }
 
         public void PreviewShape(string shapeName)
         {
-            _hint = shapes.PreviewShape(shapeName, "", 0, mouse_ix, mouse_iy, mouse_x, mouse_y);
+            _hint = Shapes.PreviewShape(shapeName, "", 0, _mouseIx, _mouseIy, _mouseX, _mouseY);
         }
 
-        public void Draw(Igraphic graphic)
+
+        public void Draw(IGraphic graphic)
         {
             graphic.ClearAll();
-            foreach (var shape in shapes.GetShapes())
+            foreach (var shape in _shapes.GetShapes())
             {
                 shape.Draw(graphic);
             }
@@ -41,8 +46,8 @@ namespace HW2
 
         public void MouseMoveHandler(int x, int y)
         {
-            mouse_x = x;
-            mouse_y = y;
+            _mouseX = x;
+            _mouseY = y;
             if (_ispress && _mode != "")
             {
                 PreviewShape(_mode);
@@ -54,10 +59,10 @@ namespace HW2
         public void MouseDownHandeler(int x, int y)
         {
             Console.WriteLine("Down");
-            mouse_x = x;
-            mouse_y = y;
-            mouse_ix = x;
-            mouse_iy = y;
+            _mouseX = x;
+            _mouseY = y;
+            _mouseIx = x;
+            _mouseIy = y;
             _ispress = true;
             if (_mode != "")
             {
@@ -76,11 +81,11 @@ namespace HW2
             if (_mode != "")
             {
 
-                mouse_x = x;
-                mouse_y = y;
+                _mouseX = x;
+                _mouseY = y;
                 Console.WriteLine("Up");
                 _ispress = false;
-                shapes.AddShape(_mode, "", mouse_ix, mouse_iy, mouse_x - mouse_ix, mouse_y - mouse_iy);
+                _shapes.AddShape(_mode, "", _mouseIx, _mouseIy, _mouseX - _mouseIx, _mouseY - _mouseIy);
                 _mode = "";
                 NotifyObserver();
             }
@@ -89,20 +94,18 @@ namespace HW2
         // Remove shape from list
         public void RemoveShape(int id)
         {
-            shapes.DeleteShape(id);
+            _shapes.DeleteShape(id);
         }
 
         // Get shape list for UI
         public List<Shape> GetShapes()
         {
-            //NotifyObserver();
-            return shapes.GetShapes();
+            return _shapes.GetShapes();
         }
 
         public void NotifyObserver()
         {
-            if (ModelChanged != null)
-                ModelChanged();
+            ModelChanged?.Invoke();
         }
 
         public string GetMode()
@@ -110,19 +113,6 @@ namespace HW2
             return _mode;
         }
 
-        //public static string GenerateRandomString(int length)
-        //{
-        //    const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        //    StringBuilder result = new StringBuilder(length);
-        //    Random random = new Random();
-
-        //    for (int i = 0; i < length; i++)
-        //    {
-        //        result.Append(chars[random.Next(chars.Length)]);
-        //    }
-
-        //    return result.ToString();
-        //}
     }
 
 }

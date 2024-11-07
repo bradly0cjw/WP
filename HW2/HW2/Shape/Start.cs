@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+
 
 namespace HW2
 {
@@ -12,7 +12,7 @@ namespace HW2
         }
 
         // Draw method
-        public override void Draw(Igraphic graphic)
+        public override void Draw(IGraphic graphic)
         {
             //Graphics g = Graphics.FromHwnd(IntPtr.Zero);
             //Pen pen = new Pen(Color.Black, 2);

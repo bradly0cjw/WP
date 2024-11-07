@@ -11,14 +11,18 @@ namespace HW2
         { }
 
         // Draw method
-        public override void Draw(Igraphic graphic)
+        public override void Draw(IGraphic graphic)
         {
-            graphic.DrawArc(X, Y, H, H, 90, 180);
-            graphic.DrawArc(X + W, Y, H, H, 270, 180);
-            graphic.DrawLine(X + H / 2, Y, X + W + H / 2, Y);
-            graphic.DrawLine(X + H / 2, Y + H, X + W + H / 2, Y + H);
-            Console.WriteLine($"Drawing Terminator shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
-            graphic.DrawString(Text,X + (W / 2), Y + (H / 2));
+            if (H != 0 || W != 0)
+            {
+                graphic.DrawArc(X, Y, H, H, 90, 180);
+                graphic.DrawArc(X + W, Y, H, H, 270, 180);
+                graphic.DrawLine(X + H / 2, Y, X + W + H / 2, Y);
+                graphic.DrawLine(X + H / 2, Y + H, X + W + H / 2, Y + H);
+                Console.WriteLine($"Drawing Terminator shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+                graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
+            }
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HW2
 {
@@ -13,10 +14,6 @@ namespace HW2
         private bool _processpressed = false;
         private bool _decisionpressed = false;
 
-        private double canvas_x1 = 133;
-        private double canvas_y1 = 49;
-        private double canvas_x2 = 710;
-        private double canvas_y2 = 476;
 
         public Form1(Model model)
         {
@@ -29,10 +26,10 @@ namespace HW2
             model.ModelChanged += UpdateView;
             model.ModelChanged += UpdateGrid;
             panel.Paint += HandelCanvasPaint;
-            buttonStart.Click += buttonShape_Click;
-            buttonTerminator.Click += buttonShape_Click;
-            buttonProcess.Click += buttonShape_Click;
-            buttonDecision.Click += buttonShape_Click;
+            buttonStart.Click += ButtonShape_Click;
+            buttonTerminator.Click += ButtonShape_Click;
+            buttonProcess.Click += ButtonShape_Click;
+            buttonDecision.Click += ButtonShape_Click;
 
             this._model = model; // Assign the model parameter to the _model field
             dataGridView_graph.CellClick += DataGridView_graph_CellClick;
@@ -57,7 +54,7 @@ namespace HW2
         {
             Console.WriteLine($"Current cursor {e.X},{e.Y}");
             _model.MouseMoveHandler(e.X, e.Y);
-            //Cursor = Cursors.Default;
+            
             if (_model.GetMode() != "")
             {
                 panel.Cursor = Cursors.Cross;
@@ -65,14 +62,13 @@ namespace HW2
             else
             {
                 panel.Cursor = Cursors.Default;
-            };
-
+            }
         }
 
         private void MouseUpHandler(object sender, MouseEventArgs e)
         {
             _model.MouseUpHandeler(e.X, e.Y);
-            clickHelper();
+            ClickHelper();
         }
 
         private void MouseDownHandeler(object sender, MouseEventArgs e)
@@ -85,14 +81,14 @@ namespace HW2
             try
             {
                 string shapeName = comboBox_shapeName.Text;
-                string text = textBox_text.Text;
-                int x = int.Parse(textBox_x.Text);
-                int y = int.Parse(textBox_y.Text);
+                string textboxText = textBox_text.Text;
+                int textboxX = int.Parse(textBox_x.Text);
+                int textboxY = int.Parse(textBox_y.Text);
                 int width = int.Parse(textBox_width.Text);
                 int height = int.Parse(textBox_height.Text);
 
                 // Add shape to the model
-                _model.AddShape(shapeName, text, x, y, width, height);
+                _model.AddShape(shapeName, textboxText, textboxX, textboxY, width, height);
                 UpdateGrid();
             }
             catch
@@ -136,11 +132,10 @@ namespace HW2
             UpdateGrid();
         }
 
-        private void buttonShape_Click(object sender, EventArgs e)
+        private void ButtonShape_Click(object sender, EventArgs e)
         {
-            clickHelper();
-            var button = sender as ToolStripButton;
-            if (button == null) return;
+            ClickHelper();
+            if (!(sender is ToolStripButton button)) return;
 
             button.Checked = true;
             switch (button.Name)
@@ -158,9 +153,9 @@ namespace HW2
                     _decisionpressed = true;
                     break;
             }
-            setMode();
+            SetMode();
         }
-        private void setMode()
+        private void SetMode()
         {
             if (_startpressed)
             {
@@ -179,7 +174,7 @@ namespace HW2
                 _model.SetMode("Decision");
             }
         }
-        private void clickHelper()
+        private void ClickHelper()
         {
             _startpressed = false;
             _terminatorpressed = false;

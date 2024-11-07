@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Drawing;
+
 
 namespace HW2
 {
     // Shape class to store the properties of a shape
     public class Shape
     {
-        Igraphic _graphic;
+        
         public string ShapeName { get; set; }
         public string Text { get; set; }
         public int ID { get; set; }
@@ -27,7 +27,7 @@ namespace HW2
             H = height;
         }
         // Virtual method
-        public virtual void Draw(Igraphic graphic)
+        public virtual void Draw(IGraphic graphic)
         {
             Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
         }

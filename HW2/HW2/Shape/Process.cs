@@ -15,7 +15,7 @@ namespace HW2
         { }
 
         // Draw method
-        public override void Draw(Igraphic graphic)
+        public override void Draw(IGraphic graphic)
         {
             graphic.DrawRectangle(X, Y, W, H);
             Console.WriteLine($"Drawing Process shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");

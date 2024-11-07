@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HW2
 {
-    public class FormGraphicAdapter : Igraphic
+    public class FormGraphicAdapter : IGraphic
     {
         private Graphics _graphics;
         private Pen _pen;
@@ -25,14 +25,7 @@ namespace HW2
 
         public void DrawArc(int x, int y, int height, int width, int startAngle, int sweepAngle)
         {
-            try
-            {
-                _graphics.DrawArc(_pen, x, y, width, height, startAngle, sweepAngle);
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            _graphics.DrawArc(_pen, x, y, width, height, startAngle, sweepAngle);
         }
 
         public void DrawEllipse(int x1, int y1, int x2, int y2)
@@ -47,7 +40,8 @@ namespace HW2
 
         public void DrawPolygon(Point[] points)
         {
-            _graphics.DrawPolygon(_pen, points);
+            var drawingPoints = points.Select(p => new System.Drawing.PointF(p.X, p.Y)).ToArray();
+            _graphics.DrawPolygon(_pen, drawingPoints);
         }
 
         public void DrawRectangle(int x1, int y1, int x2, int y2)

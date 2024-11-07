@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+
 using System.Linq;
 
 namespace HW2
@@ -11,7 +11,6 @@ namespace HW2
     {
         private int _uid = 0;
         private readonly List<Shape> _shapeList;
-        private Igraphic graphic;
 
         // Constructor
         public Shapes()
@@ -28,7 +27,7 @@ namespace HW2
             _shapeList.Add(shape);
         }
 
-        public Shape PreviewShape(string shapeName, string shapetext, int id, int click_x, int click_y, int mouse_x, int mouse_y)
+        public static Shape PreviewShape(string shapeName, string shapetext, int id, int click_x, int click_y, int mouse_x, int mouse_y)
         {
             Shape shape = ShapeFactory.CreateShape(shapeName, shapetext, id, click_x, click_y, mouse_x - click_x, mouse_y - click_y);
             return shape;
@@ -44,7 +43,7 @@ namespace HW2
         // Remove shape from list
         public void DeleteShape(int id)
         {
-            var shapeToRemove = _shapeList.FirstOrDefault(s => s.ID == id);
+            var shapeToRemove = _shapeList.Find(s => s.ID == id);
             if (shapeToRemove != null)
             {
                 _shapeList.Remove(shapeToRemove);
@@ -57,13 +56,5 @@ namespace HW2
             return _uid++;
         }
 
-        // Draw shape by id 
-        // This method is not used in the current implementation
-        // Polymorphism is used to draw shapes in the UI
-        //public void DrawShape(int id)
-        //{
-        //    var shapeToDraw = _shapeList.FirstOrDefault(s => s.Id == id);
-        //    shapeToDraw?.Shape.Draw();
-        //}
     }
 }

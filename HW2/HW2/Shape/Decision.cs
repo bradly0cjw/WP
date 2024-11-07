@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace HW2
             width, height) { }
 
         // Draw method
-        public override void Draw(Igraphic graphic)
+        public override void Draw(IGraphic graphic)
         {
             Point[] points = new Point[4];
             points[0] = new Point((int)(X + H / 2), (int)Y);
