@@ -29,7 +29,13 @@ namespace HW2
         // Virtual method
         public virtual void Draw(IGraphic graphic)
         {
-            Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+            //Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+        }
+
+        public virtual bool IsClickInShape(int x, int y)
+        {
+            //Console.WriteLine($"Checking if click is in shape {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+            return false;
         }
     }
 }

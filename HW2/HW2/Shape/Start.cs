@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 
 namespace HW2
@@ -20,6 +22,17 @@ namespace HW2
             Console.WriteLine($"Drawing Start shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
             graphic.DrawEllipse(X, Y, H, W);
             graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
+        }
+
+        public override bool IsClickInShape(int x, int y)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            
+            path.AddRectangle(new Rectangle(X,Y,W,H));
+            return path.IsVisible(new System.Drawing.Point((int)x, (int)y));
+
+
         }
     }
 }

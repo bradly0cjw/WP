@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 
 namespace HW2
 {
@@ -13,26 +14,35 @@ namespace HW2
         private bool _terminatorpressed = false;
         private bool _processpressed = false;
         private bool _decisionpressed = false;
+        private PresetationModel _pModel;
 
 
         public Form1(Model model)
         {
+            this._pModel = new PresetationModel(model);
             InitializeComponent();
             InitializeComboBox();
             InitializeDataGridView();
+
             panel.MouseMove += MouseMoveHandler;
             panel.MouseDown += MouseDownHandeler;
             panel.MouseUp += MouseUpHandler;
+
             model.ModelChanged += UpdateView;
             model.ModelChanged += UpdateGrid;
+
             panel.Paint += HandelCanvasPaint;
-            buttonStart.Click += ButtonShape_Click;
-            buttonTerminator.Click += ButtonShape_Click;
-            buttonProcess.Click += ButtonShape_Click;
-            buttonDecision.Click += ButtonShape_Click;
+
+            buttonStart.Click += ButtonStart_Click;
+            buttonTerminator.Click += ButtonTerminator_Click;
+            buttonProcess.Click += ButtonProcess_Click;
+            buttonDecision.Click += ButtonDecision_Click;
+            buttonSelect.Click += ButtonSelect_Click;
 
             this._model = model; // Assign the model parameter to the _model field
             dataGridView_graph.CellClick += DataGridView_graph_CellClick;
+            _pModel.SelectPressed();
+            RefreshControls();
         }
 
         // Initialize the combobox with the shape names
@@ -55,7 +65,7 @@ namespace HW2
             Console.WriteLine($"Current cursor {e.X},{e.Y}");
             _model.MouseMoveHandler(e.X, e.Y);
             
-            if (_model.GetMode() != "")
+            if (!_pModel.IsSelectedChecked())
             {
                 panel.Cursor = Cursors.Cross;
             }
@@ -68,7 +78,8 @@ namespace HW2
         private void MouseUpHandler(object sender, MouseEventArgs e)
         {
             _model.MouseUpHandeler(e.X, e.Y);
-            ClickHelper();
+            _pModel.SelectPressed();
+            RefreshControls();
         }
 
         private void MouseDownHandeler(object sender, MouseEventArgs e)
@@ -132,63 +143,47 @@ namespace HW2
             UpdateGrid();
         }
 
-        private void ButtonShape_Click(object sender, EventArgs e)
+        private void ButtonStart_Click(object sender, EventArgs e)
         {
-            ClickHelper();
-            if (!(sender is ToolStripButton button)) return;
+            _pModel.StartPressed();
+            RefreshControls();
+        }
 
-            button.Checked = true;
-            switch (button.Name)
-            {
-                case "buttonStart":
-                    _startpressed = true;
-                    break;
-                case "buttonTerminator":
-                    _terminatorpressed = true;
-                    break;
-                case "buttonProcess":
-                    _processpressed = true;
-                    break;
-                case "buttonDecision":
-                    _decisionpressed = true;
-                    break;
-            }
-            SetMode();
-        }
-        private void SetMode()
+        private void ButtonTerminator_Click(object sender, EventArgs e)
         {
-            if (_startpressed)
-            {
-                _model.SetMode("Start");
-            }
-            else if (_terminatorpressed)
-            {
-                _model.SetMode("Terminator");
-            }
-            else if (_processpressed)
-            {
-                _model.SetMode("Process");
-            }
-            else if (_decisionpressed)
-            {
-                _model.SetMode("Decision");
-            }
+            _pModel.TerminatorPressed();
+            RefreshControls();
         }
-        private void ClickHelper()
+
+        private void ButtonProcess_Click(object sender, EventArgs e)
         {
-            _startpressed = false;
-            _terminatorpressed = false;
-            _processpressed = false;
-            _decisionpressed = false;
-            buttonStart.Checked = false;
-            buttonTerminator.Checked = false;
-            buttonProcess.Checked = false;
-            buttonDecision.Checked = false;
+            _pModel.ProcessPressed();
+            RefreshControls();
+        }
+
+        private void ButtonDecision_Click(object sender, EventArgs e)
+        {
+            _pModel.DecisionPressed();
+            RefreshControls();
+        }
+
+        private void ButtonSelect_Click(object sender, EventArgs e)
+        {
+            _pModel.SelectPressed();
+            RefreshControls();
+        }
+        private void RefreshControls()
+        {
+            buttonStart.Checked = _pModel.IsStartChecked();
+            buttonTerminator.Checked = _pModel.IsTerminatorChecked();
+            buttonProcess.Checked = _pModel.IsProcessChecked();
+            buttonDecision.Checked = _pModel.IsDecisionChecked();
+            buttonSelect.Checked = _pModel.IsSelectedChecked();
+
         }
         private void UpdateView()
         {
             Invalidate(true);
-
         }
 
         private void HandelCanvasPaint(object sender, PaintEventArgs e)

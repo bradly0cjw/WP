@@ -62,6 +62,7 @@
             this.buttonTerminator = new System.Windows.Forms.ToolStripButton();
             this.buttonDecision = new System.Windows.Forms.ToolStripButton();
             this.buttonProcess = new System.Windows.Forms.ToolStripButton();
+            this.buttonSelect = new System.Windows.Forms.ToolStripButton();
             this.panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -343,7 +344,8 @@
             this.buttonStart,
             this.buttonTerminator,
             this.buttonDecision,
-            this.buttonProcess});
+            this.buttonProcess,
+            this.buttonSelect});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1118, 25);
@@ -358,7 +360,6 @@
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(23, 22);
             this.buttonStart.Text = "Start";
-            
             // 
             // buttonTerminator
             // 
@@ -368,7 +369,6 @@
             this.buttonTerminator.Name = "buttonTerminator";
             this.buttonTerminator.Size = new System.Drawing.Size(23, 22);
             this.buttonTerminator.Text = "terminator";
-            
             // 
             // buttonDecision
             // 
@@ -378,7 +378,6 @@
             this.buttonDecision.Name = "buttonDecision";
             this.buttonDecision.Size = new System.Drawing.Size(23, 22);
             this.buttonDecision.Text = "Decision";
-            
             // 
             // buttonProcess
             // 
@@ -388,7 +387,15 @@
             this.buttonProcess.Name = "buttonProcess";
             this.buttonProcess.Size = new System.Drawing.Size(23, 22);
             this.buttonProcess.Text = "Process";
-            
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonSelect.Image = ((System.Drawing.Image)(resources.GetObject("buttonSelect.Image")));
+            this.buttonSelect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Size = new System.Drawing.Size(23, 22);
+            this.buttonSelect.Text = "Select";
             // 
             // panel
             // 
@@ -459,6 +466,7 @@
         private System.Windows.Forms.ToolStripButton buttonDecision;
         private System.Windows.Forms.ToolStripButton buttonProcess;
         private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.ToolStripButton buttonSelect;
     }
 }
 
