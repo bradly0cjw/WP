@@ -1,0 +1,14 @@
+- [ ] 選取的外框
+- [ ] 拖曳外框
+- [x] 資料驗證
+- [ ] double buffer
+- [x] toolbar button
+
+- [ ] Drag
+- [ ] Data binding
+- [x] Presentation Model Pattern
+- [x] Observer pattern
+- [x] Inhert
+- [x] polymorphism
+- [x] Factory
+- [ ] State pattern

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -39,6 +40,7 @@ namespace HW2
             buttonDecision.Click += ButtonDecision_Click;
             buttonSelect.Click += ButtonSelect_Click;
 
+            
             this._model = model; // Assign the model parameter to the _model field
             dataGridView_graph.CellClick += DataGridView_graph_CellClick;
             _pModel.SelectPressed();
@@ -89,23 +91,20 @@ namespace HW2
 
         private void Button_add_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string shapeName = comboBox_shapeName.Text;
-                string textboxText = textBox_text.Text;
-                int textboxX = int.Parse(textBox_x.Text);
-                int textboxY = int.Parse(textBox_y.Text);
-                int width = int.Parse(textBox_width.Text);
-                int height = int.Parse(textBox_height.Text);
+            
+                //string shapeName = comboBox_shapeName.Text;
+                //string textboxText = textBox_text.Text;
+                //int textboxX = int.Parse(textBox_x.Text);
+                //int textboxY = int.Parse(textBox_y.Text);
+                //int width = int.Parse(textBox_width.Text);
+                //int height = int.Parse(textBox_height.Text);
 
-                // Add shape to the model
-                _model.AddShape(shapeName, textboxText, textboxX, textboxY, width, height);
+                //// Add shape to the model
+                //_model.AddShape(shapeName, textboxText, textboxX, textboxY, width, height);
+
+                _pModel.AddShape();
                 UpdateGrid();
-            }
-            catch
-            {
-                MessageBox.Show("Invalid Input");
-            }
+            
 
         }
 
@@ -179,6 +178,12 @@ namespace HW2
             buttonProcess.Checked = _pModel.IsProcessChecked();
             buttonDecision.Checked = _pModel.IsDecisionChecked();
             buttonSelect.Checked = _pModel.IsSelectedChecked();
+            button_add.Enabled = _pModel.IsAddEnable();
+            textBox_h_readonly.ForeColor = _pModel.HeightLabelColor();
+            textBox_w_readonly.ForeColor = _pModel.WidthLabelColor();
+            textBox_x_readonly.ForeColor = _pModel.XLabelColor();
+            textBox_y_readonly.ForeColor = _pModel.YLabelColor();
+            comboBox_shapeName.ForeColor = _pModel.ShapeNameColor();
 
         }
         private void UpdateView()
@@ -189,6 +194,41 @@ namespace HW2
         private void HandelCanvasPaint(object sender, PaintEventArgs e)
         {
             _model.Draw(new FormGraphicAdapter(e.Graphics));
+        }
+
+        private void textBox_x_TextChanged(object sender, EventArgs e)
+        {
+            _pModel.XChanged(textBox_x.Text);
+            RefreshControls();
+        }
+
+        private void textBox_y_TextChanged(object sender, EventArgs e)
+        {
+            _pModel.YChanged(textBox_y.Text);
+            RefreshControls();
+        }
+
+        private void textBox_height_TextChanged(object sender, EventArgs e)
+        {
+            _pModel.HeightChanged(textBox_height.Text);
+            RefreshControls();
+        }
+
+        private void textBox_width_TextChanged(object sender, EventArgs e)
+        {
+            _pModel.WidthChanged(textBox_width.Text);
+            RefreshControls();
+        }
+
+        private void comboBox_shapeName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _pModel.ShapeChanged(comboBox_shapeName.Text);
+            RefreshControls();
+        }
+
+        private void textBox_text_TextChanged(object sender, EventArgs e)
+        {
+            _pModel.TextChanged(textBox_text.Text);
         }
     }
 }
