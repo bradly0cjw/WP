@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace HW2
@@ -7,8 +8,8 @@ namespace HW2
     public class Terminator : Shape
     {
         // Constructor
-        public Terminator(string shapeName, string text, int id, int X, int y, int width, int height) : base(
-            shapeName, text, id, X, y, width, height)
+        public Terminator(string shapeName, string text, int id, int x, int y, int width, int height) : base(
+            shapeName, text, id, x, y, width, height)
         {
         }
 
@@ -17,25 +18,23 @@ namespace HW2
         {
             if (H != 0 || W != 0)
             {
-                graphic.DrawArc(X, Y, W, W, 90, 180);
-                graphic.DrawArc(X + H - W, Y, W, W, 270, 180);
-                graphic.DrawLine(X + W / 2, Y, X + H - (W / 2), Y);
-                graphic.DrawLine(X + W / 2, Y + W, X + H - (W / 2), Y + W);
-                Console.WriteLine($"Drawing Terminator shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+                graphic.DrawArc(X, Y, H, H, 90, 180);
+                graphic.DrawArc(X + W - H, Y, H, H, 270, 180);
+                graphic.DrawLine(X + H / 2, Y, X + W - (H / 2), Y);
+                graphic.DrawLine(X + H / 2, Y + H, X + W - (H / 2), Y + H);
                 graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
             }
-
         }
 
         public override bool IsClickInShape(int x, int y)
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddArc(X, Y, W, W, 90, 180);
-            path.AddLine(X + W / 2, Y, X + H + (W / 2), Y);
-            path.AddArc(X + W, Y, W, W, 270, 180);
-            path.AddLine(X + W / 2, Y + W, X + H - (W / 2), Y + W);
+            path.AddArc(X, Y, H, H, 90, 180);
+            path.AddLine(X + H / 2, Y, X + W - (H / 2), Y);
+            path.AddArc(X + W - H, Y, H, H, 270, 180);
+            path.AddLine(X + H / 2, Y + H, X + W - (H / 2), Y + H);
             path.CloseFigure();
-            return path.IsVisible(new System.Drawing.Point((int)x, (int)y));
+            return path.IsVisible(new Point(x, y));
         }
     }
 }

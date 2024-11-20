@@ -9,7 +9,7 @@ namespace HW2
     public class DrawState : IState
     {
         private Model _model;
-        private PointState _pointState;
+        
 
         private int _initX;
         private int _initY;
@@ -17,10 +17,7 @@ namespace HW2
 
         Shape _hint;
 
-        public DrawState(PointState pointState)
-        {
-            this._pointState = pointState;
-        }
+        
         public void Initialize(Model model)
         {
             this._model = model;
@@ -39,8 +36,8 @@ namespace HW2
         {
             if (_isPressed)
             {
-                _hint.W = y - _initY;
-                _hint.H = x - _initX;
+                _hint.H = y - _initY;
+                _hint.W = x - _initX;
                 _model.NotifyObserver();
             }
         }

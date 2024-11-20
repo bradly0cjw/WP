@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,10 @@ namespace HW2
         public override bool IsClickInShape(int x, int y)
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new System.Drawing.Rectangle(X, Y, H, W));
-            return path.IsVisible(new System.Drawing.Point(x, y));
+            path.AddRectangle(new Rectangle(X, Y, W, H));
+
+            return path.IsVisible(new Point(x, y));
         }
+
     }
 }

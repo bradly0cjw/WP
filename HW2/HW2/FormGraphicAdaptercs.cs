@@ -37,7 +37,7 @@ namespace HW2
 
         public void DrawEllipse(int x1, int y1, int x2, int y2)
         {
-            _graphics.DrawEllipse(_pen, (float)x1, (float)y1, (float)y2, (float)x2);
+            _graphics.DrawEllipse(_pen, x1, y1, x2, y2);
         }
 
         public void DrawLine(int x1, int y1, int x2, int y2)
@@ -53,7 +53,7 @@ namespace HW2
 
         public void DrawRectangle(int x1, int y1, int x2, int y2)
         {
-            _graphics.DrawRectangle(_pen, (float)x1, (float)y1, (float)y2, (float)x2);
+            _graphics.DrawRectangle(_pen, x1, y1, x2, y2);
         }
 
         public void DrawString(string text, int x, int y)

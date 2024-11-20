@@ -8,20 +8,17 @@ namespace HW2
         public event ModelChangedEventHandler ModelChanged;
         public delegate void ModelChangedEventHandler();
         public Shapes Shapes = new Shapes();
-        private int _mouseX, _mouseY, _mouseIx, _mouseIy;
-        private bool _ispress = false;
         private string _mode = "";
-        private Shape _hint;
 
-        private IState _pointState;
-        private IState _drawState;
+        private readonly IState _pointState;
+        private readonly IState _drawState;
         private IState _currentState;
 
 
         public Model()
         {
             _pointState = new PointState();
-            _drawState = new DrawState((PointState)_pointState);
+            _drawState = new DrawState();
             _currentState = _pointState;
         }
 

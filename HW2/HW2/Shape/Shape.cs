@@ -34,7 +34,7 @@ namespace HW2
 
         public void DrawBounding(IGraphic graphic)
         {
-            graphic.DrawBounding(X - 1, Y - 1, W + 2, H + 2);
+            graphic.DrawBounding(X - 1, Y - 1, H + 2,W + 2);
         }
 
         public void Normalize()
