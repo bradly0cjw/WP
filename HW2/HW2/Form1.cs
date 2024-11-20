@@ -38,7 +38,7 @@ namespace HW2
             buttonDecision.Click += ButtonDecision_Click;
             buttonSelect.Click += ButtonSelect_Click;
 
-            
+
             this._model = model; // Assign the model parameter to the _model field
             dataGridView_graph.CellClick += DataGridView_graph_CellClick;
             _pModel.SelectPressed();
@@ -77,10 +77,10 @@ namespace HW2
 
         private void Button_add_Click(object sender, EventArgs e)
         {
-            
-                _pModel.AddShape();
-                UpdateGrid();
-            
+
+            _pModel.AddShape();
+            UpdateGrid();
+
 
         }
 

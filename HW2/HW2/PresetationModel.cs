@@ -131,7 +131,7 @@ namespace HW2
         {
             try
             {
-               int X = Convert.ToInt32(_x);
+                int X = Convert.ToInt32(_x);
                 return X > 0;
             }
             catch
@@ -156,8 +156,8 @@ namespace HW2
         {
             try
             {
-               int W= Convert.ToInt32(_width);
-               return W > 0;
+                int W = Convert.ToInt32(_width);
+                return W > 0;
             }
             catch
             {
@@ -168,7 +168,7 @@ namespace HW2
         {
             try
             {
-               int H = Convert.ToInt32(_height);
+                int H = Convert.ToInt32(_height);
                 return H > 0;
             }
             catch

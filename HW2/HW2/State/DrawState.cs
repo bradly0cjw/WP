@@ -9,7 +9,7 @@ namespace HW2
     public class DrawState : IState
     {
         private Model _model;
-        
+
 
         private int _initX;
         private int _initY;
@@ -17,7 +17,7 @@ namespace HW2
 
         Shape _hint;
 
-        
+
         public void Initialize(Model model)
         {
             this._model = model;

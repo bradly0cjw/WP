@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HW2
 {
-    
+
 
     public class Shapes
     {

@@ -49,7 +49,7 @@ namespace HW2
         }
         public void PointerDown(int x, int y)
         {
-            _currentState.MouseDown(x,y);
+            _currentState.MouseDown(x, y);
         }
         public void PointerMove(int x, int y)
         {
@@ -72,7 +72,7 @@ namespace HW2
             _drawState.Initialize(this);
             _currentState = _drawState;
         }
-        
+
         // Remove shape from list
         public void RemoveShape(int id)
         {
