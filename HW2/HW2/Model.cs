@@ -7,135 +7,86 @@ namespace HW2
     {
         public event ModelChangedEventHandler ModelChanged;
         public delegate void ModelChangedEventHandler();
-        public Shapes shapes = new Shapes();
+        public Shapes Shapes = new Shapes();
         private int _mouseX, _mouseY, _mouseIx, _mouseIy;
         private bool _ispress = false;
         private string _mode = "";
         private Shape _hint;
 
-        private IState pointState;
-        private IState drawState;
-        private IState currentState;
+        private IState _pointState;
+        private IState _drawState;
+        private IState _currentState;
 
 
         public Model()
         {
-            pointState = new PointState();
-            drawState = new DrawState((PointState)pointState);
-            currentState = pointState;
+            _pointState = new PointState();
+            _drawState = new DrawState((PointState)_pointState);
+            _currentState = _pointState;
         }
 
         // Add shape to list
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            shapes.AddShape(shapeName, text, x, y, width, height);
+            Shapes.AddShape(shapeName, text, x, y, width, height);
             NotifyObserver();
         }
 
         public void Draw(IGraphic graphic)
         {
-            currentState.Draw(graphic);
+            _currentState.Draw(graphic);
         }
-
-
 
         public void SetDrawingMode(string shape)
         {
             _mode = shape;
-            setDrawState();
+            SetDrawState();
             NotifyObserver();
         }
 
         public void SetSelectMode()
         {
             _mode = "";
-            setPointState();
+            SetPointState();
             NotifyObserver();
         }
         public void PointerDown(int x, int y)
         {
-            currentState.MouseDown(x,y);
+            _currentState.MouseDown(x,y);
         }
         public void PointerMove(int x, int y)
         {
-            currentState.MouseMove(x, y);
+            _currentState.MouseMove(x, y);
         }
 
         public void PointerUp(int x, int y)
         {
-            currentState.MouseUp(x, y);
+            _currentState.MouseUp(x, y);
         }
 
-        public void setPointState()
+        public void SetPointState()
         {
-            
-            pointState.Initialize(this);
-            currentState = pointState;
+            _pointState.Initialize(this);
+            _currentState = _pointState;
         }
 
-        public void setDrawState()
+        public void SetDrawState()
         {
-            drawState.Initialize(this);
-            currentState = drawState;
+            _drawState.Initialize(this);
+            _currentState = _drawState;
         }
-        //public void MouseMoveHandler(int x, int y)
-        //{
-        //    _mouseX = x;
-        //    _mouseY = y;
-        //    if (_ispress && _mode != "")
-        //    {
-        //        PreviewShape(_mode);
-        //        NotifyObserver();
-
-        //    }
-        //}
-
-        //public void MouseDownHandeler(int x, int y)
-        //{
-        //    Console.WriteLine("Down");
-        //    _mouseX = x;
-        //    _mouseY = y;
-        //    _mouseIx = x;
-        //    _mouseIy = y;
-        //    _ispress = true;
-        //    if (_mode != "")
-        //    {
-
-        //        PreviewShape(_mode);
-        //        NotifyObserver();
-        //    }
-        //}
-
-        //public void SetMode(string s)
-        //{
-        //    _mode = s;
-        //}
-        //public void MouseUpHandeler(int x, int y)
-        //{
-        //    if (_mode != "")
-        //    {
-
-        //        _mouseX = x;
-        //        _mouseY = y;
-        //        Console.WriteLine("Up");
-        //        _ispress = false;
-        //        _shapes.AddShape(_mode, "", _mouseIx, _mouseIy, _mouseX - _mouseIx, _mouseY - _mouseIy);
-        //        _mode = "";
-        //        NotifyObserver();
-        //    }
-        //}
-
+        
         // Remove shape from list
         public void RemoveShape(int id)
         {
-            shapes.DeleteShape(id);
+            Shapes.DeleteShape(id);
             NotifyObserver();
         }
 
         // Get shape list for UI
         public List<Shape> GetShapes()
         {
-            return shapes.GetShapes();
+            return Shapes.GetShapes();
         }
 
         public void NotifyObserver()

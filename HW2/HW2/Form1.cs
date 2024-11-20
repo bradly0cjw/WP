@@ -11,11 +11,7 @@ namespace HW2
     public partial class Form1 : Form
     {
         private readonly Model _model;
-        private bool _startpressed = false;
-        private bool _terminatorpressed = false;
-        private bool _processpressed = false;
-        private bool _decisionpressed = false;
-        private PresetationModel _pModel;
+        private readonly PresetationModel _pModel;
 
 
         public Form1(Model model)
@@ -66,7 +62,6 @@ namespace HW2
 
         private void MouseMoveHandler(object sender, MouseEventArgs e)
         {
-            //Console.WriteLine($"Current cursor {e.X},{e.Y}");
             _model.PointerMove(e.X, e.Y);
         }
 
@@ -83,16 +78,6 @@ namespace HW2
         private void Button_add_Click(object sender, EventArgs e)
         {
             
-                //string shapeName = comboBox_shapeName.Text;
-                //string textboxText = textBox_text.Text;
-                //int textboxX = int.Parse(textBox_x.Text);
-                //int textboxY = int.Parse(textBox_y.Text);
-                //int width = int.Parse(textBox_width.Text);
-                //int height = int.Parse(textBox_height.Text);
-
-                //// Add shape to the model
-                //_model.AddShape(shapeName, textboxText, textboxX, textboxY, width, height);
-
                 _pModel.AddShape();
                 UpdateGrid();
             
@@ -190,37 +175,37 @@ namespace HW2
             _model.Draw(new FormGraphicAdapter(e.Graphics));
         }
 
-        private void textBox_x_TextChanged(object sender, EventArgs e)
+        private void TextBox_x_TextChanged(object sender, EventArgs e)
         {
             _pModel.XChanged(textBox_x.Text);
             RefreshControls();
         }
 
-        private void textBox_y_TextChanged(object sender, EventArgs e)
+        private void TextBox_y_TextChanged(object sender, EventArgs e)
         {
             _pModel.YChanged(textBox_y.Text);
             RefreshControls();
         }
 
-        private void textBox_height_TextChanged(object sender, EventArgs e)
+        private void TextBox_height_TextChanged(object sender, EventArgs e)
         {
             _pModel.HeightChanged(textBox_height.Text);
             RefreshControls();
         }
 
-        private void textBox_width_TextChanged(object sender, EventArgs e)
+        private void TextBox_width_TextChanged(object sender, EventArgs e)
         {
             _pModel.WidthChanged(textBox_width.Text);
             RefreshControls();
         }
 
-        private void comboBox_shapeName_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox_shapeName_SelectedIndexChanged(object sender, EventArgs e)
         {
             _pModel.ShapeChanged(comboBox_shapeName.Text);
             RefreshControls();
         }
 
-        private void textBox_text_TextChanged(object sender, EventArgs e)
+        private void TextBox_text_TextChanged(object sender, EventArgs e)
         {
             _pModel.TextChanged(textBox_text.Text);
         }

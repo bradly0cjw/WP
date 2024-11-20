@@ -131,11 +131,8 @@ namespace HW2
         {
             try
             {
-                if (int.Parse(_x) < 0)
-                {
-                    return false;
-                }
-                return true;
+               int X = Convert.ToInt32(_x);
+                return X > 0;
             }
             catch
             {
@@ -147,11 +144,8 @@ namespace HW2
         {
             try
             {
-                if (int.Parse(_y) < 0)
-                {
-                    return false;
-                }
-                return true;
+                int Y = Convert.ToInt32(_y);
+                return Y > 0;
             }
             catch
             {
@@ -162,11 +156,8 @@ namespace HW2
         {
             try
             {
-                if (int.Parse(_width) < 0)
-                {
-                    return false;
-                }
-                return true;
+               int W= Convert.ToInt32(_width);
+               return W > 0;
             }
             catch
             {
@@ -177,11 +168,8 @@ namespace HW2
         {
             try
             {
-                if (int.Parse(_height) < 0)
-                {
-                    return false;
-                }
-                return true;
+               int H = Convert.ToInt32(_height);
+                return H > 0;
             }
             catch
             {
@@ -273,7 +261,7 @@ namespace HW2
         }
         public void AddShape()
         {
-            _model.AddShape(_shape, _text, int.Parse(_x), int.Parse(_y), int.Parse(_width), int.Parse(_height));
+            _model.AddShape(_shape, _text, Convert.ToInt32(_x), Convert.ToInt32(_y), Convert.ToInt32(_width), Convert.ToInt32(_height));
         }
     }
 }

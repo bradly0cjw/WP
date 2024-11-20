@@ -158,7 +158,7 @@
             this.comboBox_shapeName.Size = new System.Drawing.Size(72, 21);
             this.comboBox_shapeName.TabIndex = 1;
             this.comboBox_shapeName.Text = "形狀";
-            this.comboBox_shapeName.SelectedIndexChanged += new System.EventHandler(this.comboBox_shapeName_SelectedIndexChanged);
+            this.comboBox_shapeName.SelectedIndexChanged += new System.EventHandler(this.ComboBox_shapeName_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -200,7 +200,7 @@
             this.textBox_width.Name = "textBox_width";
             this.textBox_width.Size = new System.Drawing.Size(32, 20);
             this.textBox_width.TabIndex = 4;
-            this.textBox_width.TextChanged += new System.EventHandler(this.textBox_width_TextChanged);
+            this.textBox_width.TextChanged += new System.EventHandler(this.TextBox_width_TextChanged);
             // 
             // textBox_height
             // 
@@ -208,7 +208,7 @@
             this.textBox_height.Name = "textBox_height";
             this.textBox_height.Size = new System.Drawing.Size(32, 20);
             this.textBox_height.TabIndex = 5;
-            this.textBox_height.TextChanged += new System.EventHandler(this.textBox_height_TextChanged);
+            this.textBox_height.TextChanged += new System.EventHandler(this.TextBox_height_TextChanged);
             // 
             // textBox_y
             // 
@@ -216,7 +216,7 @@
             this.textBox_y.Name = "textBox_y";
             this.textBox_y.Size = new System.Drawing.Size(32, 20);
             this.textBox_y.TabIndex = 6;
-            this.textBox_y.TextChanged += new System.EventHandler(this.textBox_y_TextChanged);
+            this.textBox_y.TextChanged += new System.EventHandler(this.TextBox_y_TextChanged);
             // 
             // textBox_x
             // 
@@ -224,7 +224,7 @@
             this.textBox_x.Name = "textBox_x";
             this.textBox_x.Size = new System.Drawing.Size(32, 20);
             this.textBox_x.TabIndex = 7;
-            this.textBox_x.TextChanged += new System.EventHandler(this.textBox_x_TextChanged);
+            this.textBox_x.TextChanged += new System.EventHandler(this.TextBox_x_TextChanged);
             // 
             // textBox_text
             // 
@@ -232,7 +232,7 @@
             this.textBox_text.Name = "textBox_text";
             this.textBox_text.Size = new System.Drawing.Size(89, 20);
             this.textBox_text.TabIndex = 8;
-            this.textBox_text.TextChanged += new System.EventHandler(this.textBox_text_TextChanged);
+            this.textBox_text.TextChanged += new System.EventHandler(this.TextBox_text_TextChanged);
             // 
             // groupBox1
             // 

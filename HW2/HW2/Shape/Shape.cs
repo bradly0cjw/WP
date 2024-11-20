@@ -16,7 +16,7 @@ namespace HW2
         public int H { get; set; }
 
         // Constructor
-        public Shape(string shapeName, string text, int id, int x, int y, int width, int height)
+        protected Shape(string shapeName, string text, int id, int x, int y, int width, int height)
         {
             ShapeName = shapeName;
             Text = text;
@@ -30,11 +30,7 @@ namespace HW2
         // not virtual method
         public abstract void Draw(IGraphic graphic);
 
-
         public abstract bool IsClickInShape(int x, int y);
-        //Console.WriteLine($"Checking if click is in shape {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
-
-
 
         public void DrawBounding(IGraphic graphic)
         {
@@ -46,12 +42,12 @@ namespace HW2
             if (H < 0)
             {
                 H *= -1;
-                X -= H;
+                Y -= H;
             }
             if (W < 0)
             {
                 W *= -1;
-                Y -= W;
+                X -= W;
             }
         }
     }

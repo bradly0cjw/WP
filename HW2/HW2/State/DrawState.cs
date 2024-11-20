@@ -21,7 +21,6 @@ namespace HW2
         {
             this._pointState = pointState;
         }
-
         public void Initialize(Model model)
         {
             this._model = model;
@@ -33,13 +32,12 @@ namespace HW2
             _initX = x;
             _initY = y;
             _isPressed = true;
-            _hint = _model.shapes.NewShape(_model.GetMode(), "", _initX, _initY, 0, 0);
+            _hint = _model.Shapes.NewShape(_model.GetMode(), "", _initX, _initY, 0, 0);
         }
 
         public void MouseMove(int x, int y)
         {
-            //Console.WriteLine("@");
-            if(_isPressed)
+            if (_isPressed)
             {
                 _hint.W = y - _initY;
                 _hint.H = x - _initX;
@@ -51,12 +49,11 @@ namespace HW2
         {
             if (_isPressed)
             {
-                _hint.Normalize();
-                _model.AddShape(_model.GetMode(), "", _initX, _initY, _hint.W,_hint.H);
-                _model.NotifyObserver();
+                _model.AddShape(_model.GetMode(), "", _initX, _initY, _hint.W, _hint.H);
                 _isPressed = false;
+                _model.SetSelectMode();
+                _model.NotifyObserver();
             }
-            _model.setPointState();
         }
 
         public void Draw(IGraphic graphic)
@@ -73,6 +70,6 @@ namespace HW2
             }
         }
 
-        
+
     }
 }

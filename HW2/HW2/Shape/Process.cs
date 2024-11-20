@@ -20,7 +20,6 @@ namespace HW2
         public override void Draw(IGraphic graphic)
         {
             graphic.DrawRectangle(X, Y, W, H);
-            Console.WriteLine($"Drawing Process shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
             graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
         }
 
@@ -28,7 +27,7 @@ namespace HW2
         {
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new System.Drawing.Rectangle(X, Y, H, W));
-            return path.IsVisible(new System.Drawing.Point((int)x, (int)y));
+            return path.IsVisible(new System.Drawing.Point(x, y));
         }
     }
 }
