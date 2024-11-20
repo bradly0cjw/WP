@@ -1,14 +1,14 @@
-﻿[] 選取的外框
-[] 拖曳外框
-[v] 資料驗證
-[] double buffer
-[v] toolbar button
+- [ ] 選取的外框
+- [ ] 拖曳外框
+- [x] 資料驗證
+- [ ] double buffer
+- [x] toolbar button
 
-[] Drag
-[] Data binding
-[v] Presentation Model Pattern
-[v] Observer pattern
-[v] Inhert
-[v] polymorphism
-[v] Factory
-[] State pattern
+- [ ] Drag
+- [ ] Data binding
+- [x] Presentation Model Pattern
+- [x] Observer pattern
+- [x] Inhert
+- [x] polymorphism
+- [x] Factory
+- [ ] State pattern
