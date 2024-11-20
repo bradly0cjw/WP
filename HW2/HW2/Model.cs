@@ -95,6 +95,7 @@ namespace HW2
         public void RemoveShape(int id)
         {
             _shapes.DeleteShape(id);
+            NotifyObserver();
         }
 
         // Get shape list for UI
