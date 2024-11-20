@@ -20,7 +20,7 @@ namespace HW2
             //Pen pen = new Pen(Color.Black, 2);
             //g.DrawEllipse(pen, x, y, w, h);
             Console.WriteLine($"Drawing Start shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
-            graphic.DrawEllipse(X, Y, H, W);
+            graphic.DrawEllipse(X, Y, W, H);
             graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
         }
 
@@ -29,7 +29,7 @@ namespace HW2
             GraphicsPath path = new GraphicsPath();
 
             
-            path.AddRectangle(new Rectangle(X,Y,W,H));
+            path.AddEllipse(new Rectangle(X,Y,H,W));
             return path.IsVisible(new System.Drawing.Point((int)x, (int)y));
 
 

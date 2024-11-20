@@ -4,9 +4,9 @@
 namespace HW2
 {
     // Shape class to store the properties of a shape
-    public class Shape
+    public abstract class Shape
     {
-        
+
         public string ShapeName { get; set; }
         public string Text { get; set; }
         public int ID { get; set; }
@@ -26,16 +26,33 @@ namespace HW2
             W = width;
             H = height;
         }
-        // Virtual method
-        public virtual void Draw(IGraphic graphic)
+        // abstract method
+        // not virtual method
+        public abstract void Draw(IGraphic graphic);
+
+
+        public abstract bool IsClickInShape(int x, int y);
+        //Console.WriteLine($"Checking if click is in shape {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+
+
+
+        public void DrawBounding(IGraphic graphic)
         {
-            //Console.WriteLine($"Drawing {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
+            graphic.DrawBounding(X - 1, Y - 1, W + 2, H + 2);
         }
 
-        public virtual bool IsClickInShape(int x, int y)
+        public void Normalize()
         {
-            //Console.WriteLine($"Checking if click is in shape {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
-            return false;
+            if (H < 0)
+            {
+                H *= -1;
+                X -= H;
+            }
+            if (W < 0)
+            {
+                W *= -1;
+                Y -= W;
+            }
         }
     }
 }

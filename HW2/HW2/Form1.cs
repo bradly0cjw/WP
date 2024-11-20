@@ -34,6 +34,8 @@ namespace HW2
 
             panel.Paint += HandelCanvasPaint;
 
+            button_add.DataBindings.Add("Enabled", _pModel, "IsAddEnabled");
+
             buttonStart.Click += ButtonStart_Click;
             buttonTerminator.Click += ButtonTerminator_Click;
             buttonProcess.Click += ButtonProcess_Click;
@@ -64,29 +66,18 @@ namespace HW2
 
         private void MouseMoveHandler(object sender, MouseEventArgs e)
         {
-            Console.WriteLine($"Current cursor {e.X},{e.Y}");
-            _model.MouseMoveHandler(e.X, e.Y);
-            
-            if (!_pModel.IsSelectedChecked())
-            {
-                panel.Cursor = Cursors.Cross;
-            }
-            else
-            {
-                panel.Cursor = Cursors.Default;
-            }
+            //Console.WriteLine($"Current cursor {e.X},{e.Y}");
+            _model.PointerMove(e.X, e.Y);
         }
 
         private void MouseUpHandler(object sender, MouseEventArgs e)
         {
-            _model.MouseUpHandeler(e.X, e.Y);
-            _pModel.SelectPressed();
-            RefreshControls();
+            _model.PointerUp(e.X, e.Y);
         }
 
         private void MouseDownHandeler(object sender, MouseEventArgs e)
         {
-            _model.MouseDownHandeler(e.X, e.Y);
+            _model.PointerDown(e.X, e.Y);
         }
 
         private void Button_add_Click(object sender, EventArgs e)
@@ -178,7 +169,9 @@ namespace HW2
             buttonProcess.Checked = _pModel.IsProcessChecked();
             buttonDecision.Checked = _pModel.IsDecisionChecked();
             buttonSelect.Checked = _pModel.IsSelectedChecked();
-            button_add.Enabled = _pModel.IsAddEnable();
+
+            panel.Cursor = _pModel.CursorType();
+
             textBox_h_readonly.ForeColor = _pModel.HeightLabelColor();
             textBox_w_readonly.ForeColor = _pModel.WidthLabelColor();
             textBox_x_readonly.ForeColor = _pModel.XLabelColor();
@@ -189,6 +182,7 @@ namespace HW2
         private void UpdateView()
         {
             Invalidate(true);
+            RefreshControls();
         }
 
         private void HandelCanvasPaint(object sender, PaintEventArgs e)

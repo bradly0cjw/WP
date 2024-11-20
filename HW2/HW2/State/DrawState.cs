@@ -8,20 +8,71 @@ namespace HW2
 {
     public class DrawState : IState
     {
-        public DrawState()
-        {
+        private Model _model;
+        private PointState _pointState;
 
+        private int _initX;
+        private int _initY;
+        private bool _isPressed;
+
+        Shape _hint;
+
+        public DrawState(PointState pointState)
+        {
+            this._pointState = pointState;
         }
 
+        public void Initialize(Model model)
+        {
+            this._model = model;
+            this._isPressed = false;
+        }
 
         public void MouseDown(int x, int y)
         {
-            
+            _initX = x;
+            _initY = y;
+            _isPressed = true;
+            _hint = _model.shapes.NewShape(_model.GetMode(), "", _initX, _initY, 0, 0);
         }
 
         public void MouseMove(int x, int y)
         {
-            
+            //Console.WriteLine("@");
+            if(_isPressed)
+            {
+                _hint.W = y - _initY;
+                _hint.H = x - _initX;
+                _model.NotifyObserver();
+            }
         }
+
+        public void MouseUp(int x, int y)
+        {
+            if (_isPressed)
+            {
+                _hint.Normalize();
+                _model.AddShape(_model.GetMode(), "", _initX, _initY, _hint.W,_hint.H);
+                _model.NotifyObserver();
+                _isPressed = false;
+            }
+            _model.setPointState();
+        }
+
+        public void Draw(IGraphic graphic)
+        {
+            graphic.ClearAll();
+            foreach (var shape in _model.GetShapes())
+            {
+                shape.Draw(graphic);
+            }
+
+            if (_isPressed)
+            {
+                _hint.Draw(graphic);
+            }
+        }
+
+        
     }
 }

@@ -1,11 +1,10 @@
 - [ ] 選取的外框
-- [ ] 拖曳外框
 - [x] 資料驗證
-- [ ] double buffer
+- [X] double buffer
 - [x] toolbar button
 
 - [ ] Drag
-- [ ] Data binding
+- [X] Data binding
 - [x] Presentation Model Pattern
 - [x] Observer pattern
 - [x] Inhert

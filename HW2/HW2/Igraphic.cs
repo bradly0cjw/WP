@@ -25,5 +25,6 @@ namespace HW2
 
         void DrawPolygon(Point[] points);
 
+        void DrawBounding(int x1, int y1, int x2, int y2);
     }
 }

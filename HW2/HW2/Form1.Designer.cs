@@ -63,7 +63,7 @@
             this.buttonDecision = new System.Windows.Forms.ToolStripButton();
             this.buttonProcess = new System.Windows.Forms.ToolStripButton();
             this.buttonSelect = new System.Windows.Forms.ToolStripButton();
-            this.panel = new System.Windows.Forms.Panel();
+            this.panel = new HW2.DoubleBufferPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -471,8 +471,8 @@
         private System.Windows.Forms.ToolStripButton buttonTerminator;
         private System.Windows.Forms.ToolStripButton buttonDecision;
         private System.Windows.Forms.ToolStripButton buttonProcess;
-        private System.Windows.Forms.Panel panel;
         private System.Windows.Forms.ToolStripButton buttonSelect;
+        private DoubleBufferPanel panel;
     }
 }
 
