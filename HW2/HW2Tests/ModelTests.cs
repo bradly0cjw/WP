@@ -11,7 +11,7 @@ namespace HW2.Tests
     [TestClass()]
     public class ModelTests
     {
-        public Model model;
+        public Model model= new Model();
 
         //[TestMethod()]
         //public void ModelTest()
@@ -22,7 +22,7 @@ namespace HW2.Tests
         [TestMethod()]
         public void AddShapeTest()
         {
-            Model model = new Model();
+            
 
             model.AddShape("start","aaa",0,0,100,200);
 
