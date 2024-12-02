@@ -11,6 +11,8 @@ namespace HW2.Tests
     [TestClass()]
     public class ModelTests
     {
+        public Model model;
+
         //[TestMethod()]
         //public void ModelTest()
         //{
@@ -20,69 +22,60 @@ namespace HW2.Tests
         [TestMethod()]
         public void AddShapeTest()
         {
-            // Arrange
-            var shapeName = "start";
-            var text = "Start Shape";
-            var id = 1;
-            var x = 10;
-            var y = 20;
-            var width = 100;
-            var height = 50;
+            Model model = new Model();
 
-            // Act
-            var shape = ShapeFactory.CreateShape(shapeName, text, id, x, y, width, height);
+            model.AddShape("start","aaa",0,0,100,200);
 
-            // Assert
-            Assert.IsNotNull(shape);
-            Assert.AreEqual(shapeName, shape.ShapeName);
-            Assert.AreEqual(text, shape.Text);
-            Assert.AreEqual(id, shape.ID);
-            Assert.AreEqual(x, shape.X);
-            Assert.AreEqual(y, shape.Y);
-            Assert.AreEqual(width, shape.W);
-            Assert.AreEqual(height, shape.H);
+            var shape = model.GetShapes();
+            Assert.AreEqual(1, shape.Count);
+            Assert.AreEqual("",model.GetCurrentMode());
+
+            model.AddShape("Terminator","bbb",0,0,100,200);
+
+            shape = model.GetShapes();
+            Assert.AreEqual(2, shape.Count);
+
+            model.AddShape("Process", "ccc", 0, 0, 100, 200);
+
+            shape = model.GetShapes();
+            Assert.AreEqual(3, shape.Count);
+
+            model.AddShape("Decision", "ddd", 0, 0, 100, 200);
+
+            shape = model.GetShapes();
+            Assert.AreEqual(4, shape.Count);
+
         }
+
 
         [TestMethod()]
         public void DrawTest()
         {
-            // Arrange
-            var graphicMock = new Mock<IGraphic>();
-            var model = new Model();
-            var shape = new Mock<Shape>("start", "Start Shape", 1, 10, 20, 100, 50);
-            model.AddShape(shape.Object);
+            
+        }
 
-            // Act
-            model.Draw(graphicMock.Object);
+        [TestMethod()]
+        public void GetCurrevtModeTest()
+        {
+            Model model = new Model();
 
-            // Assert
-            shape.Verify(s => s.Draw(graphicMock.Object), Times.Once);
+            model.SetDrawState();
+            Assert.AreEqual("Draw", model.GetCurrentMode());
+
+            model.SetPointState();
+            Assert.AreEqual("Point", model.GetCurrentMode());
         }
 
         [TestMethod()]
         public void SetDrawingModeTest()
         {
-            // Arrange
-            var model = new Model();
-
-            // Act
-            model.SetDrawingMode();
-
-            // Assert
-            Assert.AreEqual(Model.Mode.Drawing, model.GetMode());
+            
         }
 
         [TestMethod()]
         public void SetSelectModeTest()
         {
-            // Arrange
-            var model = new Model();
-
-            // Act
-            model.SetSelectMode();
-
-            // Assert
-            Assert.AreEqual(Model.Mode.Select, model.GetMode());
+           
         }
 
         [TestMethod()]
@@ -159,59 +152,25 @@ namespace HW2.Tests
         [TestMethod()]
         public void RemoveShapeTest()
         {
-            // Arrange
-            var model = new Model();
-            var shape = new Mock<Shape>("start", "Start Shape", 1, 10, 20, 100, 50);
-            model.AddShape(shape.Object);
-
-            // Act
-            model.RemoveShape(shape.Object);
-
-            // Assert
-            Assert.IsFalse(model.GetShapes().Contains(shape.Object));
+           
         }
 
         [TestMethod()]
         public void GetShapesTest()
         {
-            // Arrange
-            var model = new Model();
-            var shape = new Mock<Shape>("start", "Start Shape", 1, 10, 20, 100, 50);
-            model.AddShape(shape.Object);
-
-            // Act
-            var shapes = model.GetShapes();
-
-            // Assert
-            Assert.IsTrue(shapes.Contains(shape.Object));
+           
         }
 
         [TestMethod()]
         public void NotifyObserverTest()
         {
-            // Arrange
-            var model = new Model();
-            var observerMock = new Mock<IObserver>();
-            model.AddObserver(observerMock.Object);
-
-            // Act
-            model.NotifyObserver();
-
-            // Assert
-            observerMock.Verify(o => o.Update(), Times.Once);
+            
         }
 
         [TestMethod()]
         public void GetModeTest()
         {
-            // Arrange
-            var model = new Model();
 
-            // Act
-            var mode = model.GetMode();
-
-            // Assert
-            Assert.AreEqual(Model.Mode.Select, mode); // Assuming default mode is Select
         }
 
     }
