@@ -33,11 +33,12 @@ namespace HW2
         {
             _currentState.Draw(graphic);
         }
-
-        public string GetCurrentMode()
+        
+        public IState GetCurrentState()
         {
-            return _mode;
+            return _currentState;
         }
+
         public void SetDrawingMode(string shape)
         {
             _mode = shape;

@@ -3,6 +3,7 @@ using HW2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace HW2.Tests
 
             var shape = model.GetShapes();
             Assert.AreEqual(1, shape.Count);
-            Assert.AreEqual("",model.GetCurrentMode());
+            Assert.AreEqual("",model.GetMode());
 
             model.AddShape("Terminator","bbb",0,0,100,200);
 
@@ -51,31 +52,29 @@ namespace HW2.Tests
         [TestMethod()]
         public void DrawTest()
         {
-            
+            Assert.Fail();
         }
 
         [TestMethod()]
-        public void GetCurrevtModeTest()
+        public void GetCurrentStateTest()
         {
-            Model model = new Model();
-
             model.SetDrawState();
-            Assert.AreEqual("Draw", model.GetCurrentMode());
+            Assert.AreEqual("",model.GetCurrentState());
 
             model.SetPointState();
-            Assert.AreEqual("Point", model.GetCurrentMode());
+            Assert.AreEqual("", model.GetCurrentState());
         }
 
         [TestMethod()]
         public void SetDrawingModeTest()
         {
-            
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void SetSelectModeTest()
         {
-           
+            Assert.Fail();
         }
 
         [TestMethod()]
@@ -88,7 +87,7 @@ namespace HW2.Tests
 
             // Act
             model.PointerDown(x, y);
-
+            Assert.Fail();
             // Assert
             // Add appropriate assertions based on the expected behavior of PointerDown
         }
@@ -103,7 +102,7 @@ namespace HW2.Tests
 
             // Act
             model.PointerMove(x, y);
-
+            Assert.Fail();
             // Assert
             // Add appropriate assertions based on the expected behavior of PointerMove
         }
@@ -118,7 +117,7 @@ namespace HW2.Tests
 
             // Act
             model.PointerUp(x, y);
-
+            Assert.Fail();
             // Assert
             // Add appropriate assertions based on the expected behavior of PointerUp
         }
@@ -126,14 +125,12 @@ namespace HW2.Tests
         [TestMethod()]
         public void SetPointStateTest()
         {
-            // Arrange
-            var model = new Model();
 
             // Act
             model.SetPointState();
-
+            Assert.Fail();
             // Assert
-            // Add appropriate assertions based on the expected behavior of SetPointState
+
         }
 
         [TestMethod()]
@@ -144,7 +141,7 @@ namespace HW2.Tests
 
             // Act
             model.SetDrawState();
-
+            Assert.Fail();
             // Assert
             // Add appropriate assertions based on the expected behavior of SetDrawState
         }
@@ -152,25 +149,30 @@ namespace HW2.Tests
         [TestMethod()]
         public void RemoveShapeTest()
         {
-           
+            model.AddShape("start", "aaa", 0, 0, 100, 200);
+            model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
+            model.AddShape("Process", "ccc", 0, 0, 100, 200);
+            model.RemoveShape(2);
+            var shape = model.GetShapes();
+            Assert.AreEqual(2, shape.Count);
         }
 
         [TestMethod()]
         public void GetShapesTest()
         {
-           
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void NotifyObserverTest()
         {
-            
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void GetModeTest()
         {
-
+            Assert.Fail();
         }
 
     }
