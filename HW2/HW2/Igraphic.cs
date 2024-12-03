@@ -24,7 +24,7 @@ namespace HW2
         void DrawString(string text, int x, int y);
 
 
-        void DrawPolygon(Point[] points);
+        void DrawPolygon(int x, int y, int w, int h);
 
         void DrawBounding(int x1, int y1, int x2, int y2);
     }

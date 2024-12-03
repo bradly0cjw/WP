@@ -19,12 +19,7 @@ namespace HW2
         // Draw method
         public override void Draw(IGraphic graphic)
         {
-            Point[] points = new Point[4];
-            points[0] = new Point(X + W / 2, Y);
-            points[1] = new Point(X + W, Y + H / 2);
-            points[2] = new Point(X + W / 2, Y + H);
-            points[3] = new Point(X, Y + H / 2);
-            graphic.DrawPolygon(points);
+            graphic.DrawPolygon(X,Y,W,H);
             graphic.DrawString(Text, X + (W / 2), Y + (H / 2));
             //Console.WriteLine($"Drawing Decision shape: {ShapeName} at ({X}, {Y}) with width {W} and height {H}");
         }

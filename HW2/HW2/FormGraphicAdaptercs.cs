@@ -45,10 +45,14 @@ namespace HW2
             _graphics.DrawLine(_pen, (float)x1, (float)y1, (float)x2, (float)y2);
         }
 
-        public void DrawPolygon(Point[] points)
-        {
-            var drawingPoints = points.Select(p => new System.Drawing.PointF(p.X, p.Y)).ToArray();
-            _graphics.DrawPolygon(_pen, drawingPoints);
+        public void DrawPolygon(int x,int y ,int w, int h)
+        { 
+            Point[] points = new Point[4];
+            points[0] = new Point(x + w / 2, y);
+            points[1] = new Point(x + w, y + h / 2);
+            points[2] = new Point(x +w / 2, y + h);
+            points[3] = new Point(x, y + h / 2);
+            _graphics.DrawPolygon(_pen, points);
         }
 
         public void DrawRectangle(int x1, int y1, int x2, int y2)

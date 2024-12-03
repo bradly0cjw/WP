@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using HW2Tests;
 
 namespace HW2.Tests
 {
@@ -81,7 +82,8 @@ namespace HW2.Tests
         public void PointerDownTest()
         {
             // Arrange
-            var model = new Model();
+            IState mockstate = new MockState();
+            model._currentState = mockstate;
             var x = 10;
             var y = 20;
 
