@@ -19,10 +19,10 @@ namespace HW2Tests
         public int mouseMoveY;
 
 
+        public bool isDrawCalled;
 
 
-
-        public  void Initialize(Model model)
+        public void Initialize(Model model)
         {
             _model = model;
         }
@@ -43,7 +43,7 @@ namespace HW2Tests
         }
         public void Draw(IGraphic graphic)
         {
-            throw new NotImplementedException();
+            isDrawCalled = true;
         }
 
     }

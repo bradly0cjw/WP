@@ -27,5 +27,7 @@ namespace HW2
         void DrawPolygon(int x, int y, int w, int h);
 
         void DrawBounding(int x1, int y1, int x2, int y2);
+
+        void DrawDot(int x1, int y1, int x2, int y2);
     }
 }

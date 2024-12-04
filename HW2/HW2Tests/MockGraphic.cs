@@ -9,7 +9,7 @@ using System.Drawing;
 
 namespace HW2Tests
 {
-    internal class MockGraphics : IGraphic
+    internal class MockGraphic : IGraphic
     {
         public void ClearAll() { }
 
@@ -26,9 +26,11 @@ namespace HW2Tests
         public void DrawString(string text, int x, int y) { }
 
 
-        public void DrawPolygon(int x,int y,int w, int h) { }
+        public void DrawPolygon(int x, int y, int w, int h) { }
 
-        public void DrawBounding(int x1, int y1, int x2, int y2){ }
+        public void DrawBounding(int x1, int y1, int x2, int y2) { }
+
+        public void DrawDot(int x1, int y1, int x2, int y2) { }
 
 
     }

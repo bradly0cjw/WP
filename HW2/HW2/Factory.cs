@@ -20,7 +20,7 @@ namespace HW2
                 case "decision":
                     return new Decision(shapeName, text, id, x, y, width, height);
                 default:
-                    throw new ArgumentException("Invalid shape type");
+                    return null;
             }
         }
     }

@@ -14,6 +14,9 @@ namespace HW2
         private int _initX;
         private int _initY;
         private bool _isPressed;
+        private string _random;
+
+        public const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         Shape _hint;
 
@@ -29,15 +32,39 @@ namespace HW2
             _initX = x;
             _initY = y;
             _isPressed = true;
-            _hint = _model.Shapes.NewShape(_model.GetMode(), "", _initX, _initY, 0, 0);
+            _random = GenerateRandomText();
+            _hint = _model.Shapes.NewShape(_model.GetMode(), _random, _initX, _initY, 0, 0);
         }
 
         public void MouseMove(int x, int y)
         {
             if (_isPressed)
             {
-                _hint.H = y - _initY;
-                _hint.W = x - _initX;
+                int newWidth = x - _initX;
+                int newHeight = y - _initY;
+
+                if (newWidth < 0)
+                {
+                    _hint.X = x;
+                    _hint.W = -newWidth;
+                }
+                else
+                {
+                    _hint.X = _initX;
+                    _hint.W = newWidth;
+                }
+
+                if (newHeight < 0)
+                {
+                    _hint.Y = y;
+                    _hint.H = -newHeight;
+                }
+                else
+                {
+                    _hint.Y = _initY;
+                    _hint.H = newHeight;
+                }
+
                 _model.NotifyObserver();
             }
         }
@@ -46,7 +73,8 @@ namespace HW2
         {
             if (_isPressed)
             {
-                _model.AddShape(_model.GetMode(), "", _initX, _initY, _hint.W, _hint.H);
+                _hint.Normalize();
+                _model.AddShape(_model.GetMode(), _random, _hint.X, _hint.Y, _hint.W, _hint.H);
                 _isPressed = false;
                 _model.SetSelectMode();
                 _model.NotifyObserver();
@@ -67,6 +95,13 @@ namespace HW2
             }
         }
 
+        public string GenerateRandomText()
+        {
+            Random random = new Random();
+            return new string(Enumerable.Repeat(chars, 5)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+
+        }
 
     }
 }

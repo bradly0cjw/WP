@@ -12,7 +12,7 @@ namespace HW2
 
         private readonly IState _pointState;
         private readonly IState _drawState;
-        private IState _currentState;
+        public IState _currentState;
 
 
         public Model()
@@ -32,11 +32,6 @@ namespace HW2
         public void Draw(IGraphic graphic)
         {
             _currentState.Draw(graphic);
-        }
-        
-        public IState GetCurrentState()
-        {
-            return _currentState;
         }
 
         public void SetDrawingMode(string shape)

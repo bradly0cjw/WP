@@ -11,12 +11,12 @@ namespace HW2
     public partial class Form1 : Form
     {
         private readonly Model _model;
-        private readonly PresetationModel _pModel;
+        private readonly PresentationModel _pModel;
 
 
         public Form1(Model model)
         {
-            this._pModel = new PresetationModel(model);
+            this._pModel = new PresentationModel(model);
             InitializeComponent();
             InitializeComboBox();
             InitializeDataGridView();
@@ -162,6 +162,7 @@ namespace HW2
             textBox_x_readonly.ForeColor = _pModel.XLabelColor();
             textBox_y_readonly.ForeColor = _pModel.YLabelColor();
             comboBox_shapeName.ForeColor = _pModel.ShapeNameColor();
+            textBox_text.ForeColor = _pModel.TextColor();
 
         }
         private void UpdateView()

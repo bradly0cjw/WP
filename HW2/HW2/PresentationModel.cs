@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace HW2
 {
-    public class PresetationModel : INotifyPropertyChanged
+    public class PresentationModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,7 +44,7 @@ namespace HW2
             }
         }
 
-        public PresetationModel(Model model)
+        public PresentationModel(Model model)
         {
             this._model = model;
 
@@ -125,6 +125,7 @@ namespace HW2
         public void TextChanged(string text)
         {
             _text = text;
+            UpdateIsAddEnabled();
         }
 
         public bool IsXValid()
@@ -178,7 +179,16 @@ namespace HW2
         }
         public bool IsShapeValid()
         {
-            if (_shape == "")
+            if (_shape != "Start" && _shape != "Terminator" && _shape != "Process" && _shape != "Decision")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool IsTextValid()
+        {
+            if (_text == "")
             {
                 return false;
             }
@@ -187,12 +197,16 @@ namespace HW2
 
         private void Notify(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
 
         private void UpdateIsAddEnabled()
         {
-            IsAddEnabled = IsXValid() && IsYValid() && IsWidthValid() && IsHeightValid() && IsShapeValid();
+            IsAddEnabled = IsXValid() && IsYValid() && IsWidthValid() && IsHeightValid() && IsShapeValid() && IsTextValid();
+            Notify("IsAddEnabled");
         }
 
         public Color XLabelColor()
@@ -236,11 +250,21 @@ namespace HW2
             return Color.Red;
         }
 
+        public Color TextColor()
+        {
+            if (IsTextValid())
+            {
+                return Color.Black;
+            }
+            return Color.Red;
+        }
+
+
         public Cursor CursorType()
         {
             return _cursor;
         }
-
+        
         public void UpdateState()
         {
             string mode = _model.GetMode();

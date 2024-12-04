@@ -15,8 +15,12 @@ namespace HW2
         public int W { get; set; }
         public int H { get; set; }
 
+        public int BiasX { get; set; }
+
+        public int BiasY { get; set; }
+
         // Constructor
-        protected Shape(string shapeName, string text, int id, int x, int y, int width, int height)
+        protected Shape(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0, int biasY = 0)
         {
             ShapeName = shapeName;
             Text = text;
@@ -25,6 +29,8 @@ namespace HW2
             Y = y;
             W = width;
             H = height;
+            BiasX = biasX;
+            BiasY = biasY;
         }
         // abstract method
         // not virtual method
@@ -32,9 +38,14 @@ namespace HW2
 
         public abstract bool IsClickInShape(int x, int y);
 
+        public abstract bool IsClickOnText(int x, int y);
+
         public void DrawBounding(IGraphic graphic)
         {
             graphic.DrawBounding(X - 1, Y - 1, H + 2, W + 2);
+            graphic.DrawBounding(X + (W / 2) + BiasX, Y + (H / 2) + BiasY, 20, 60);
+            graphic.DrawDot(X + (W / 2) + BiasX, Y + (H / 2) + BiasY, 60, 20);
+
         }
 
         public void Normalize()

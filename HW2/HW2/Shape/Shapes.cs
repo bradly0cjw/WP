@@ -27,15 +27,8 @@ namespace HW2
 
         public Shape NewShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            if (text == "")
-            {
-                text = GenerateRandomText();
-            }
             return ShapeFactory.CreateShape(shapeName, text, NewId(), x, y, width, height);
-
         }
-
-
 
         // Get shape list for UI
         public List<Shape> GetShapes()
@@ -64,13 +57,6 @@ namespace HW2
             return _shapeList.Last().ID + 1;
         }
 
-        public string GenerateRandomText()
-        {
-            Random random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, 5)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
 
-        }
     }
 }

@@ -45,12 +45,12 @@ namespace HW2
             _graphics.DrawLine(_pen, (float)x1, (float)y1, (float)x2, (float)y2);
         }
 
-        public void DrawPolygon(int x,int y ,int w, int h)
-        { 
+        public void DrawPolygon(int x, int y, int w, int h)
+        {
             Point[] points = new Point[4];
             points[0] = new Point(x + w / 2, y);
             points[1] = new Point(x + w, y + h / 2);
-            points[2] = new Point(x +w / 2, y + h);
+            points[2] = new Point(x + w / 2, y + h);
             points[3] = new Point(x, y + h / 2);
             _graphics.DrawPolygon(_pen, points);
         }
@@ -69,6 +69,13 @@ namespace HW2
         {
             _graphics.DrawRectangle(new Pen(Color.Red), (float)x1, (float)y1, (float)y2, (float)x2);
         }
-    }
 
+        public void DrawDot(int x1, int y1, int x2, int y2)
+        {
+            var x = x1 + (x2 / 2);
+            var y = y1;
+            _graphics.FillRectangle(new SolidBrush(Color.Red), x, y, 5, 5);
+            //Console.WriteLine("Rec "+ x+" "+y );
+        }
+    }
 }

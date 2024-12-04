@@ -53,29 +53,33 @@ namespace HW2.Tests
         [TestMethod()]
         public void DrawTest()
         {
-            Assert.Fail();
-        }
+            IState mockstate = new MockState();
+            mockstate.Initialize(model);
+            model._currentState = mockstate;
+            IGraphic mockGraphic = new MockGraphic();
 
-        [TestMethod()]
-        public void GetCurrentStateTest()
-        {
-            model.SetDrawState();
-            Assert.AreEqual("",model.GetCurrentState());
+            model.Draw(mockGraphic);
+            
+            MockState state = (MockState)model._currentState;
 
-            model.SetPointState();
-            Assert.AreEqual("", model.GetCurrentState());
+            Assert.IsTrue(state.isDrawCalled);
+
+
         }
 
         [TestMethod()]
         public void SetDrawingModeTest()
         {
-            Assert.Fail();
+            model.SetDrawingMode("Start");
+            Assert.AreEqual("Start", model.GetMode());
+
         }
 
         [TestMethod()]
         public void SetSelectModeTest()
         {
-            Assert.Fail();
+            model.SetSelectMode();
+            Assert.AreEqual("", model.GetMode());
         }
 
         [TestMethod()]
@@ -84,44 +88,56 @@ namespace HW2.Tests
             // Arrange
             IState mockstate = new MockState();
             model._currentState = mockstate;
+            mockstate.Initialize(model);
             var x = 10;
             var y = 20;
 
             // Act
             model.PointerDown(x, y);
-            Assert.Fail();
-            // Assert
-            // Add appropriate assertions based on the expected behavior of PointerDown
+            MockState state = (MockState)model._currentState;
+
+            Assert.AreEqual(x, state.mouseDownX);
+            Assert.AreEqual(y, state.mouseDownY);
+            
         }
 
         [TestMethod()]
         public void PointerMoveTest()
         {
             // Arrange
-            var model = new Model();
+            IState mockstate = new MockState();
+            model._currentState = mockstate;
+            mockstate.Initialize(model);
             var x = 10;
             var y = 20;
 
             // Act
             model.PointerMove(x, y);
-            Assert.Fail();
-            // Assert
-            // Add appropriate assertions based on the expected behavior of PointerMove
+            MockState state = (MockState)model._currentState;
+
+            Assert.AreEqual(x, state.mouseMoveX);
+            Assert.AreEqual(y, state.mouseMoveY);
         }
 
         [TestMethod()]
         public void PointerUpTest()
         {
             // Arrange
-            var model = new Model();
+
+            IState mockstate = new MockState();
+            model._currentState = mockstate;
+            mockstate.Initialize(model);
+
             var x = 10;
             var y = 20;
 
             // Act
             model.PointerUp(x, y);
-            Assert.Fail();
-            // Assert
-            // Add appropriate assertions based on the expected behavior of PointerUp
+            MockState state = (MockState)model._currentState;
+
+            Assert.AreEqual(x, state.mouseUpX);
+            Assert.AreEqual(y, state.mouseUpY);
+
         }
 
         [TestMethod()]
@@ -129,8 +145,9 @@ namespace HW2.Tests
         {
 
             // Act
-            model.SetPointState();
-            Assert.Fail();
+            model.SetSelectMode();
+
+            Assert.AreEqual("", model.GetMode());
             // Assert
 
         }
@@ -139,11 +156,13 @@ namespace HW2.Tests
         public void SetDrawStateTest()
         {
             // Arrange
-            var model = new Model();
 
             // Act
-            model.SetDrawState();
-            Assert.Fail();
+            model.SetDrawingMode("Start");
+
+            Assert.AreEqual("Start",model.GetMode());
+            
+
             // Assert
             // Add appropriate assertions based on the expected behavior of SetDrawState
         }
@@ -155,6 +174,7 @@ namespace HW2.Tests
             model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
             model.AddShape("Process", "ccc", 0, 0, 100, 200);
             model.RemoveShape(2);
+            model.RemoveShape(3);F
             var shape = model.GetShapes();
             Assert.AreEqual(2, shape.Count);
         }
@@ -162,19 +182,47 @@ namespace HW2.Tests
         [TestMethod()]
         public void GetShapesTest()
         {
-            Assert.Fail();
+            
+            model.AddShape("start", "aaa", 0, 0, 100, 200);
+            model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
+            model.AddShape("Process", "ccc", 0, 0, 100, 200);
+            model.AddShape("Decision", "ddd", 0, 0, 100, 200);
+            var shape = model.GetShapes();
+            Assert.AreEqual(4, shape.Count);
+
         }
 
         [TestMethod()]
         public void NotifyObserverTest()
         {
-            Assert.Fail();
+            bool isNotified = false;
+            model.ModelChanged += () => isNotified = true;
+            isNotified = false;
+
+            model.NotifyObserver();
+
+            Assert.IsTrue(isNotified);
         }
 
         [TestMethod()]
         public void GetModeTest()
         {
-            Assert.Fail();
+            
+            model.SetDrawingMode("Start");
+            Assert.AreEqual("Start", model.GetMode());
+
+            model.SetSelectMode();
+            Assert.AreEqual("", model.GetMode());
+        }
+
+        [TestMethod()]
+        public void GetShapeTest()
+        {
+            model.AddShape("start", "aaa", 0, 0, 100, 200);
+            model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
+            model.AddShape("Process", "ccc", 0, 0, 100, 200);
+            model.AddShape("Decision", "ddd", 0, 0, 100, 200);
+            Assert.AreEqual(4,model.GetShapes().Count);
         }
 
     }

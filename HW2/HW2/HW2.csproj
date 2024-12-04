@@ -49,7 +49,7 @@
     <Compile Include="DoubleBufferPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresetationModel.cs" />
+    <Compile Include="PresentationModel.cs" />
     <Compile Include="State\DrawState.cs" />
     <Compile Include="FormGraphicAdaptercs.cs" />
     <Compile Include="Igraphic.cs" />

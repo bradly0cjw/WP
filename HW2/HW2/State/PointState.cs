@@ -14,7 +14,9 @@ namespace HW2
         private int _preX;
         private int _preY;
         private bool _isPressed = false;
-        private Shape selectedShape;
+        private bool _isTextClicked = false;
+
+        public Shape SelectedShape;
         public PointState()
         {
         }
@@ -22,36 +24,51 @@ namespace HW2
         public void Initialize(Model model)
         {
             this._model = model;
-            selectedShape = null;
+            SelectedShape = null;
         }
 
 
         public void MouseDown(int x, int y)
         {
-            foreach (Shape _shape in Enumerable.Reverse(_model.GetShapes()))
+            foreach (Shape shape in Enumerable.Reverse(_model.GetShapes()))
             {
-                if (_shape.IsClickInShape(x, y))
+                if (shape.IsClickInShape(x, y))
                 {
-                    selectedShape = _shape;
+                    SelectedShape = shape;
                     _isPressed = true;
                     _preX = x;
                     _preY = y;
+                    if (shape.IsClickOnText(x, y))
+                    {
+                        _isTextClicked = true;
+                    }
                     _model.NotifyObserver();
                     return;
                 }
             }
 
-            selectedShape = null;
+
+            SelectedShape = null;
             _model.NotifyObserver();
         }
         public void MouseMove(int x, int y)
         {
-            if (_isPressed)
+            if (_isTextClicked)
             {
                 int dx = x - _preX;
                 int dy = y - _preY;
-                selectedShape.X += dx;
-                selectedShape.Y += dy;
+                SelectedShape.BiasX += dx;
+                SelectedShape.BiasY += dy;
+                _preX = x;
+                _preY = y;
+                _model.NotifyObserver();
+            }
+            else if (_isPressed)
+            {
+                int dx = x - _preX;
+                int dy = y - _preY;
+                SelectedShape.X += dx;
+                SelectedShape.Y += dy;
                 _preX = x;
                 _preY = y;
                 _model.NotifyObserver();
@@ -60,19 +77,20 @@ namespace HW2
         public void MouseUp(int x, int y)
         {
             _isPressed = false;
+            _isTextClicked = false;
         }
         public void Draw(IGraphic graphic)
         {
             graphic.ClearAll();
             // 畫出所有的Shape
-            foreach (Shape _shape in _model.GetShapes())
+            foreach (Shape shape in _model.GetShapes())
             {
-                _shape.Draw(graphic);
+                shape.Draw(graphic);
             }
 
-            if (selectedShape != null)
+            if (SelectedShape != null)
             {
-                selectedShape.DrawBounding(graphic);
+                SelectedShape.DrawBounding(graphic);
             }
 
         }
