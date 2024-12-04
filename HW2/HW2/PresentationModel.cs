@@ -188,7 +188,7 @@ namespace HW2
 
         public bool IsTextValid()
         {
-            if (_text == "")
+            if (string.IsNullOrEmpty(_text))
             {
                 return false;
             }

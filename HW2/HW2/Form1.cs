@@ -162,7 +162,7 @@ namespace HW2
             textBox_x_readonly.ForeColor = _pModel.XLabelColor();
             textBox_y_readonly.ForeColor = _pModel.YLabelColor();
             comboBox_shapeName.ForeColor = _pModel.ShapeNameColor();
-            textBox_text.ForeColor = _pModel.TextColor();
+            textBox_text_readonly.ForeColor = _pModel.TextColor();
 
         }
         private void UpdateView()
@@ -209,6 +209,7 @@ namespace HW2
         private void TextBox_text_TextChanged(object sender, EventArgs e)
         {
             _pModel.TextChanged(textBox_text.Text);
+            RefreshControls();
         }
     }
 }

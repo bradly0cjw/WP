@@ -9,8 +9,6 @@ namespace HW2Tests
 {
     internal class MockState : IState
     {
-        Model _model;
-
         public int mouseDownX;
         public int mouseDownY;
         public int mouseUpX;
@@ -24,7 +22,6 @@ namespace HW2Tests
 
         public void Initialize(Model model)
         {
-            _model = model;
         }
         public void MouseDown(int x, int y)
         {

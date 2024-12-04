@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace HW2
 {
@@ -31,7 +26,6 @@ namespace HW2
             }
             catch
             {
-                return;
             }
         }
 
@@ -42,7 +36,7 @@ namespace HW2
 
         public void DrawLine(int x1, int y1, int x2, int y2)
         {
-            _graphics.DrawLine(_pen, (float)x1, (float)y1, (float)x2, (float)y2);
+            _graphics.DrawLine(_pen, x1, y1, x2, (float)y2);
         }
 
         public void DrawPolygon(int x, int y, int w, int h)
@@ -62,12 +56,12 @@ namespace HW2
 
         public void DrawString(string text, int x, int y)
         {
-            _graphics.DrawString(text, new Font("Arial", 12), Brushes.Black, (float)x, (float)y);
+            _graphics.DrawString(text, new Font("Arial", 12), Brushes.Black, x, y);
         }
 
         public void DrawBounding(int x1, int y1, int x2, int y2)
         {
-            _graphics.DrawRectangle(new Pen(Color.Red), (float)x1, (float)y1, (float)y2, (float)x2);
+            _graphics.DrawRectangle(new Pen(Color.Red), x1, y1, y2, (float)x2);
         }
 
         public void DrawDot(int x1, int y1, int x2, int y2)

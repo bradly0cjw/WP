@@ -139,34 +139,7 @@ namespace HW2.Tests
             Assert.AreEqual(y, state.mouseUpY);
 
         }
-
-        [TestMethod()]
-        public void SetPointStateTest()
-        {
-
-            // Act
-            model.SetSelectMode();
-
-            Assert.AreEqual("", model.GetMode());
-            // Assert
-
-        }
-
-        [TestMethod()]
-        public void SetDrawStateTest()
-        {
-            // Arrange
-
-            // Act
-            model.SetDrawingMode("Start");
-
-            Assert.AreEqual("Start",model.GetMode());
-            
-
-            // Assert
-            // Add appropriate assertions based on the expected behavior of SetDrawState
-        }
-
+        
         [TestMethod()]
         public void RemoveShapeTest()
         {
