@@ -198,7 +198,7 @@ namespace HW2.Tests
                 propertyChanged = true;
             };
 
-            Assert.IsFalse(propertyChanged);F
+            Assert.IsFalse(propertyChanged);
             pm.TextChanged("aaa");
             Assert.IsNotNull(po.GetFieldOrProperty("PropertyChanged"));
             Assert.IsTrue(propertyChanged);

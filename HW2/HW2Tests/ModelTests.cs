@@ -174,7 +174,7 @@ namespace HW2.Tests
             model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
             model.AddShape("Process", "ccc", 0, 0, 100, 200);
             model.RemoveShape(2);
-            model.RemoveShape(3);F
+            model.RemoveShape(3);
             var shape = model.GetShapes();
             Assert.AreEqual(2, shape.Count);
         }
