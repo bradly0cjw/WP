@@ -1,13 +1,18 @@
-- [ ] 選取的外框
+- [X] 選取的外框
 - [x] 資料驗證
 - [X] double buffer
 - [x] toolbar button
 
-- [ ] Drag
+- [X] Drag
 - [X] Data binding
 - [x] Presentation Model Pattern
 - [x] Observer pattern
 - [x] Inhert
 - [x] polymorphism
 - [x] Factory
-- [ ] State pattern
+- [X] State pattern
+
+
+Line 
+dont record location
+record connected obj
