@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW2
 {
@@ -24,7 +20,7 @@ namespace HW2
 
         public void Undo()
         {
-            _model.RemoveShape(_shape);
+            _model.RemoveShape(_shape.ID);
         }
     }
 }

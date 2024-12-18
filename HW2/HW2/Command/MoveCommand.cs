@@ -1,12 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HW2
 {
     public class MoveCommand : ICommand
     {
+        private Shape _shape;
+        private Model _model;
+        private int _oldX;
+        private int _oldY;
+        private int _newX;
+        private int _newY;
+
+        public MoveCommand(Shape shape, Model model, int oldX, int oldY, int newX, int newY)
+        {
+            _shape = shape;
+            _model = model;
+            _oldX = oldX;
+            _oldY = oldY;
+            _newX = newX;
+            _newY = newY;
+        }
+
+        public void Execute()
+        {
+            _shape.X = _newX;
+            _shape.Y = _newY;
+        }
+
+        public void Undo()
+        {
+            _shape.X = _oldX;
+            _shape.Y = _oldY;
+        }
     }
 }

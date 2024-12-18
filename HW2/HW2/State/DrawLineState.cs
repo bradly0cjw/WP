@@ -27,5 +27,21 @@ namespace HW2.State
                 }
             }
         }
+
+        public void MouseMove(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void MouseUp(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Draw(IGraphic graphic)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

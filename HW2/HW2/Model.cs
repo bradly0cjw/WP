@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HW2
 {
@@ -14,18 +15,33 @@ namespace HW2
         private readonly IState _drawState;
         public IState _currentState;
 
+        private readonly CommandManager _commandManager;
 
         public Model()
         {
             _pointState = new PointState();
             _drawState = new DrawState();
             _currentState = _pointState;
+            _commandManager = new CommandManager();
         }
 
         // Add shape to list
+        public void AddShape(Shape shape)
+        {
+            Shapes.AddShape(shape.ShapeName, shape.Text, shape.X, shape.Y, shape.W, shape.H);
+            NotifyObserver();
+        }
+
         public void AddShape(string shapeName, string text, int x, int y, int width, int height)
         {
-            Shapes.AddShape(shapeName, text, x, y, width, height);
+            var shape = Shapes.NewShape(shapeName, text, x, y, width, height);
+            AddShape(shape);
+        }
+
+        // Remove shape from list
+        public void RemoveShape(int id)
+        {
+            Shapes.DeleteShape(id);
             NotifyObserver();
         }
 
@@ -47,10 +63,12 @@ namespace HW2
             SetPointState();
             NotifyObserver();
         }
+
         public void PointerDown(int x, int y)
         {
             _currentState.MouseDown(x, y);
         }
+
         public void PointerMove(int x, int y)
         {
             _currentState.MouseMove(x, y);
@@ -73,10 +91,17 @@ namespace HW2
             _currentState = _drawState;
         }
 
-        // Remove shape from list
-        public void RemoveShape(int id)
+        public void MoveShape(Shape shape, int newX, int newY)
         {
-            Shapes.DeleteShape(id);
+            var moveCommand = new MoveCommand(shape, this, shape.X, shape.Y, newX, newY);
+            _commandManager.ExecuteCommand(moveCommand);
+            NotifyObserver();
+        }
+
+        public void MoveText(Shape shape, int newBiasX, int newBiasY)
+        {
+            var textMoveCommand = new TextMoveCommand(this, shape, shape.BiasX, shape.BiasY, newBiasX, newBiasY);
+            _commandManager.ExecuteCommand(textMoveCommand);
             NotifyObserver();
         }
 
@@ -96,6 +121,10 @@ namespace HW2
             return _mode;
         }
 
+        public void Undo()
+        {
+            _commandManager.Undo();
+            NotifyObserver();
+        }
     }
-
 }
