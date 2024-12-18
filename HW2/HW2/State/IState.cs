@@ -12,6 +12,7 @@ namespace HW2
         void MouseDown(int x, int y);
         void MouseMove(int x, int y);
         void MouseUp(int x, int y);
+        void MouseDoubleClick(int x, int y);
         void Draw(IGraphic graphic);
     }
 }

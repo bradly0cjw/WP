@@ -9,11 +9,13 @@ namespace HW2
     public class TextChangedCommand : ICommand
     {
         private Shape _shape;
+        private Model _model;
         private string _oldText;
         private string _newText;
 
-        public TextChangedCommand(Shape shape, string oldText, string newText)
+        public TextChangedCommand(Model model,Shape shape, string oldText, string newText)
         {
+            _model = model;
             _shape = shape;
             _oldText = oldText;
             _newText = newText;
@@ -24,7 +26,7 @@ namespace HW2
             _shape.Text = _newText;
         }
 
-        public void Undo()
+        public void Unexecute()
         {
             _shape.Text = _oldText;
         }

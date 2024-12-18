@@ -43,5 +43,10 @@ namespace HW2.State
             throw new NotImplementedException();
         }
 
+        public void MouseDoubleClick(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

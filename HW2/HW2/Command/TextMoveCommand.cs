@@ -25,14 +25,12 @@ namespace HW2
         {
             _shape.BiasX = _newBiasX;
             _shape.BiasY = _newBiasY;
-            _model.NotifyObserver();
         }
 
-        public void Undo()
+        public void Unexecute()
         {
             _shape.BiasX = _oldBiasX;
             _shape.BiasY = _oldBiasY;
-            _model.NotifyObserver();
         }
     }
 }

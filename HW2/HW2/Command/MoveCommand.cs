@@ -11,7 +11,7 @@ namespace HW2
         private int _newX;
         private int _newY;
 
-        public MoveCommand(Shape shape, Model model, int oldX, int oldY, int newX, int newY)
+        public MoveCommand(Model model, Shape shape, int oldX, int oldY, int newX, int newY)
         {
             _shape = shape;
             _model = model;
@@ -27,7 +27,7 @@ namespace HW2
             _shape.Y = _newY;
         }
 
-        public void Undo()
+        public void Unexecute()
         {
             _shape.X = _oldX;
             _shape.Y = _oldY;

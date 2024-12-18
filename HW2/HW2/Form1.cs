@@ -24,6 +24,7 @@ namespace HW2
             panel.MouseMove += MouseMoveHandler;
             panel.MouseDown += MouseDownHandeler;
             panel.MouseUp += MouseUpHandler;
+            panel.MouseDoubleClick += MouseDoubleClickHandler;
 
             model.ModelChanged += UpdateView;
             model.ModelChanged += UpdateGrid;
@@ -32,11 +33,14 @@ namespace HW2
 
             button_add.DataBindings.Add("Enabled", _pModel, "IsAddEnabled");
 
+
             buttonStart.Click += ButtonStart_Click;
             buttonTerminator.Click += ButtonTerminator_Click;
             buttonProcess.Click += ButtonProcess_Click;
             buttonDecision.Click += ButtonDecision_Click;
             buttonSelect.Click += ButtonSelect_Click;
+            buttonUndo.Click += ButtonUndo_Click;
+            buttonRedo.Click += ButtonRedo_Click;
 
 
             this._model = model; // Assign the model parameter to the _model field
@@ -60,6 +64,10 @@ namespace HW2
             dataGridView_graph.Rows.Clear();
         }
 
+        private void MouseDoubleClickHandler(object sender, MouseEventArgs e)
+        {
+            _model.PointerDoubleClick(e.X, e.Y);
+        }
         private void MouseMoveHandler(object sender, MouseEventArgs e)
         {
             _model.PointerMove(e.X, e.Y);
@@ -147,6 +155,19 @@ namespace HW2
             _pModel.SelectPressed();
             RefreshControls();
         }
+
+        private void ButtonUndo_Click(object sender, EventArgs e)
+        {
+            _pModel.Undo();
+            RefreshControls();
+        }
+
+        private void ButtonRedo_Click(object sender, EventArgs e)
+        {
+            _pModel.Redo();
+            RefreshControls();
+        }
+
         private void RefreshControls()
         {
             buttonStart.Checked = _pModel.IsStartChecked();
@@ -154,6 +175,9 @@ namespace HW2
             buttonProcess.Checked = _pModel.IsProcessChecked();
             buttonDecision.Checked = _pModel.IsDecisionChecked();
             buttonSelect.Checked = _pModel.IsSelectedChecked();
+
+            buttonUndo.Enabled = _pModel.IsUndoClickable();
+            buttonRedo.Enabled = _pModel.IsRedoClickable();
 
             panel.Cursor = _pModel.CursorType();
 

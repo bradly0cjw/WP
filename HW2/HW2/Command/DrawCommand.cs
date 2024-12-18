@@ -18,7 +18,7 @@ namespace HW2
             _model.AddShape(_shape);
         }
 
-        public void Undo()
+        public void Unexecute()
         {
             _model.RemoveShape(_shape.ID);
         }

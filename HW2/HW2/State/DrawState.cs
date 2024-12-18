@@ -81,6 +81,11 @@ namespace HW2
             }
         }
 
+        public void MouseDoubleClick(int x, int y)
+        {
+
+        }
+
         public void Draw(IGraphic graphic)
         {
             graphic.ClearAll();
