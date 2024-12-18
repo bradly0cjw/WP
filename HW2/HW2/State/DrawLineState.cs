@@ -26,11 +26,11 @@ namespace HW2.State
             _init = _hoverShape.IsClickConnectionPoint(x, y);
             if (_init != -1)
             {
-                Console.WriteLine("Trigger");
                 _selectShape = _hoverShape;
                 (tempX, tempY) = _selectShape.GetConnectionPoint(_init);
                 Console.WriteLine("X: " + tempX + " Y:" + tempY);
                 _hint = _model.Shapes.NewShape(_model.GetMode(), "", tempX, tempY, 0, 0);
+                
             }
         }
 
@@ -38,7 +38,6 @@ namespace HW2.State
         {
             if (_selectShape != null)
             {
-                Console.WriteLine("Trigger2");
                 _hint.W = x;
                 _hint.H = y;
                 _model.NotifyObserver();
@@ -59,16 +58,22 @@ namespace HW2.State
         {
             if (_selectShape != null)
             {
-                if (_selectShape != _hoverShape)
+                if (_selectShape != _hoverShape && _hoverShape != null)
                 {
                     int tempX, tempY;
                     int end = _hoverShape.IsClickConnectionPoint(x, y);
                     if (end != -1)
                     {
                         (tempX, tempY) = _hoverShape.GetConnectionPoint(end);
-                        Console.WriteLine(tempY + "@@@" + tempY);
-                        _model.AddShape("Line", "", _hint.X, _hint.Y, tempX, tempY);
+                        var line = new Line("Line", "", _hint.X, _hint.Y, tempX, tempY, 0, 0);
+                        line.SetConnection1(_selectShape, _init);
+                        line.SetConnection2(_hoverShape, end);
+                        //line.SetConnection1(_model.GetShapes(initID), _init);
+                        //line.SetConnection2(_model.GetShapes(endID), end);
+                        Console.WriteLine(line);
+                        _model.AddShapeObj(line);
                     }
+                    Console.WriteLine("@@@");
                 }
                 _selectShape = null;
                 _hint = null;

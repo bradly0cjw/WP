@@ -34,6 +34,12 @@ public class Model
         NotifyObserver();
     }
 
+    public void AddShapeObj(Shape shape)
+    {
+        Shapes.AddShape(shape);
+        NotifyObserver();
+    }
+
     public void AddShape(string shapeName, string text, int x, int y, int width, int height)
     {
         var shape = Shapes.NewShape(shapeName, text, x, y, width, height);

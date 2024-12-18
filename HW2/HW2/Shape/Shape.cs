@@ -18,9 +18,7 @@ namespace HW2
         public int Y { get; set; }
         public int W { get; set; }
         public int H { get; set; }
-
         public int BiasX { get; set; }
-
         public int BiasY { get; set; }
 
         // Constructor

@@ -25,6 +25,11 @@ namespace HW2
             _shapeList.Add(NewShape(shapeName, text, x, y, width, height));
         }
 
+        public void AddShape(Shape shape)
+        {
+            _shapeList.Add(shape);
+        }
+
         public Shape NewShape(string shapeName, string text, int x, int y, int width, int height)
         {
             return ShapeFactory.CreateShape(shapeName, text, NewId(), x, y, width, height);
