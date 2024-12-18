@@ -36,7 +36,7 @@ namespace HW2
 
         public void DrawLine(int x1, int y1, int x2, int y2)
         {
-            _graphics.DrawLine(_pen, x1, y1, x2, (float)y2);
+            _graphics.DrawLine(_pen, x1, y1, x2, y2);
         }
 
         public void DrawPolygon(int x, int y, int w, int h)

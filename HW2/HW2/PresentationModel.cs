@@ -13,6 +13,8 @@ public class PresentationModel : INotifyPropertyChanged
     private bool isProcessChecked = false;
     private bool isDecisionChecked = false;
     private bool isSelectedChecked = true;
+    private bool isLineChecked = false;
+
     private readonly Model _model;
 
     private Cursor _cursor;
@@ -52,12 +54,15 @@ public class PresentationModel : INotifyPropertyChanged
     public bool IsProcessChecked() => isProcessChecked;
     public bool IsDecisionChecked() => isDecisionChecked;
     public bool IsSelectedChecked() => isSelectedChecked;
+    public bool ISLineChecked() => isLineChecked;
 
     public void StartPressed() => _model.SetDrawingMode("Start");
     public void TerminatorPressed() => _model.SetDrawingMode("Terminator");
     public void ProcessPressed() => _model.SetDrawingMode("Process");
     public void DecisionPressed() => _model.SetDrawingMode("Decision");
     public void SelectPressed() => _model.SetSelectMode();
+
+    public void LinePressed() => _model.SetLineMode("Line");
 
     public void XChanged(string x)
     {
@@ -173,6 +178,8 @@ public class PresentationModel : INotifyPropertyChanged
         isProcessChecked = mode == "Process";
         isDecisionChecked = mode == "Decision";
         isSelectedChecked = mode == "";
+        isLineChecked = mode == "Line";
+
 
     }
 

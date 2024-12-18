@@ -41,6 +41,7 @@ namespace HW2
             buttonSelect.Click += ButtonSelect_Click;
             buttonUndo.Click += ButtonUndo_Click;
             buttonRedo.Click += ButtonRedo_Click;
+            buttonLine.Click += ButtonLine_Click;
 
 
             this._model = model; // Assign the model parameter to the _model field
@@ -156,6 +157,12 @@ namespace HW2
             RefreshControls();
         }
 
+        private void ButtonLine_Click(object sender, EventArgs e)
+        {
+            _pModel.LinePressed();
+            RefreshControls();
+        }
+
         private void ButtonUndo_Click(object sender, EventArgs e)
         {
             _pModel.Undo();
@@ -175,6 +182,7 @@ namespace HW2
             buttonProcess.Checked = _pModel.IsProcessChecked();
             buttonDecision.Checked = _pModel.IsDecisionChecked();
             buttonSelect.Checked = _pModel.IsSelectedChecked();
+            buttonLine.Checked = _pModel.ISLineChecked();
 
             buttonUndo.Enabled = _pModel.IsUndoClickable();
             buttonRedo.Enabled = _pModel.IsRedoClickable();

@@ -2,6 +2,7 @@
 using HW2;
 using System.Collections.Generic;
 using System.Linq;
+using HW2.State;
 
 public class Model
 {
@@ -12,6 +13,7 @@ public class Model
 
     private readonly IState _pointState;
     private readonly IState _drawState;
+    private readonly IState _lineState;
     public IState _currentState;
 
     private readonly CommandManager _commandManager;
@@ -20,6 +22,7 @@ public class Model
     {
         _pointState = new PointState();
         _drawState = new DrawState();
+        _lineState = new DrawLineState();
         _currentState = _pointState;
         _commandManager = new CommandManager();
     }
@@ -67,6 +70,13 @@ public class Model
         NotifyObserver();
     }
 
+    public void SetLineMode(string shape)
+    {
+        _mode = shape;
+        SetLineState();
+        NotifyObserver();
+    }
+
     public void SetSelectMode()
     {
         _mode = "";
@@ -99,6 +109,12 @@ public class Model
     {
         _drawState.Initialize(this);
         _currentState = _drawState;
+    }
+
+    public void SetLineState()
+    {
+        _lineState.Initialize(this);
+        _currentState = _lineState;
     }
 
     public void MoveShape(Shape shape, int initX, int initY)

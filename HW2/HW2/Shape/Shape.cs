@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing.Drawing2D;
 using System.Drawing;
+using System.Collections.Generic;
 
 
 namespace HW2
@@ -8,6 +9,7 @@ namespace HW2
     // Shape class to store the properties of a shape
     public abstract class Shape
     {
+        public List<Line> ConnectedLines { get; } = new List<Line>();
 
         public string ShapeName { get; set; }
         public string Text { get; set; }
@@ -22,7 +24,8 @@ namespace HW2
         public int BiasY { get; set; }
 
         // Constructor
-        protected Shape(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0, int biasY = 0)
+        protected Shape(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0,
+            int biasY = 0)
         {
             ShapeName = shapeName;
             Text = text;
@@ -34,6 +37,7 @@ namespace HW2
             BiasX = biasX;
             BiasY = biasY;
         }
+
         // abstract method
         // not virtual method
         public abstract void Draw(IGraphic graphic);
@@ -59,6 +63,7 @@ namespace HW2
                 H *= -1;
                 Y -= H;
             }
+
             if (W < 0)
             {
                 W *= -1;
@@ -66,12 +71,7 @@ namespace HW2
             }
         }
 
-        public int IsClickConnectPoint(int x, int y)
-        {
-            //GraphicsPath path = new GraphicsPath();
-            //path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX, Y + (H / 2) + BiasY, 5, 5));
-            //return path.IsVisible(new Point(x, y));
-            return 0;
-        }
+        public abstract int IsClickConnectionPoint(int x, int y);
+        public abstract (int, int) GetConnectionPoint(int index);
     }
 }

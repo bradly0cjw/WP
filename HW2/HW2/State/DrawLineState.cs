@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,43 +10,95 @@ namespace HW2.State
     public class DrawLineState : IState
     {
         private Model _model;
-        private int _initX;
-        private int _initY;
+        private int _init;
+        private Shape _hoverShape;
+        private Shape _selectShape;
+        private Shape _hint;
 
         public void Initialize(Model model)
         {
-            _model = model;
+            this._model = model;
         }
 
         public void MouseDown(int x, int y)
         {
-            foreach (Shape shape in Enumerable.Reverse(_model.GetShapes()))
+            int tempX, tempY;
+            _init = _hoverShape.IsClickConnectionPoint(x, y);
+            if (_init != -1)
             {
-                if (shape.IsClickConnectPoint(x, y)!=null)
-                {
-                    
-                }
+                Console.WriteLine("Trigger");
+                _selectShape = _hoverShape;
+                (tempX, tempY) = _selectShape.GetConnectionPoint(_init);
+                Console.WriteLine("X: " + tempX + " Y:" + tempY);
+                _hint = _model.Shapes.NewShape(_model.GetMode(), "", tempX, tempY, 0, 0);
             }
         }
 
         public void MouseMove(int x, int y)
         {
-            throw new NotImplementedException();
+            if (_selectShape != null)
+            {
+                Console.WriteLine("Trigger2");
+                _hint.W = x;
+                _hint.H = y;
+                _model.NotifyObserver();
+            }
+            foreach (Shape shape in Enumerable.Reverse(_model.GetShapes()))
+            {
+                if (shape.IsClickInShape(x, y))
+                {
+                    _hoverShape = shape;
+                    _model.NotifyObserver();
+                    return;
+                }
+
+            }
         }
 
         public void MouseUp(int x, int y)
         {
-            throw new NotImplementedException();
+            if (_selectShape != null)
+            {
+                if (_selectShape != _hoverShape)
+                {
+                    int tempX, tempY;
+                    int end = _hoverShape.IsClickConnectionPoint(x, y);
+                    if (end != -1)
+                    {
+                        (tempX, tempY) = _hoverShape.GetConnectionPoint(end);
+                        Console.WriteLine(tempY + "@@@" + tempY);
+                        _model.AddShape("Line", "", _hint.X, _hint.Y, tempX, tempY);
+                    }
+                }
+                _selectShape = null;
+                _hint = null;
+                _model.SetSelectMode();
+                _model.NotifyObserver();
+                
+            }
         }
 
         public void Draw(IGraphic graphic)
         {
-            throw new NotImplementedException();
+            graphic.ClearAll();
+            foreach (var shape in _model.GetShapes())
+            {
+                shape.Draw(graphic);
+            }
+
+            if (_hoverShape != null)
+            {
+                _hoverShape.DrawConnectionPoint(graphic);
+            }
+            if (_hint != null)
+            {
+                _hint.Draw(graphic);
+            }
         }
 
         public void MouseDoubleClick(int x, int y)
         {
-            throw new NotImplementedException();
+
         }
 
     }
