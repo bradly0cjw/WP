@@ -15,6 +15,8 @@ namespace HW2Tests
         public int mouseUpY;
         public int mouseMoveX;
         public int mouseMoveY;
+        public int mouseDoubleClickX;
+        public int mouseDoubleClickY;
 
 
         public bool isDrawCalled;
@@ -38,6 +40,13 @@ namespace HW2Tests
             mouseUpX = x;
             mouseUpY = y;
         }
+
+        public void MouseDoubleClick(int x, int y)
+        {
+            mouseDoubleClickX = x;
+            mouseDoubleClickY = y;
+        }
+
         public void Draw(IGraphic graphic)
         {
             isDrawCalled = true;

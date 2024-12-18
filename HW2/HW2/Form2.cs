@@ -3,33 +3,28 @@ using System.Windows.Forms;
 
 namespace HW2
 {
-    public partial class 文字編輯方塊 : Form
+    public partial class Form2 : Form
     {
-        public string NewText { get; private set; }
+        private readonly PresentationModel2 _pModel;
 
-        public 文字編輯方塊(string currentText)
+        public Form2(string currentText)
         {
             InitializeComponent();
+            _pModel = new PresentationModel2(currentText);
             textBoxNewText.Text = currentText;
-            buttonOK.Enabled = !string.IsNullOrEmpty(currentText);
+            textBoxNewText.TextChanged += textBoxNewText_TextChanged;
+
+            buttonOK.DataBindings.Add("Enabled", _pModel, "IsConfirmEnabled");
         }
 
-        private void textBoxNewText_TextChanged(object sender, EventArgs e)
+        public void textBoxNewText_TextChanged(object sender, EventArgs e)
         {
-            buttonOK.Enabled = !string.IsNullOrEmpty(textBoxNewText.Text);
+            _pModel.TextChanged(textBoxNewText.Text);
         }
 
-        private void buttonOK_Click(object sender, EventArgs e)
+        public string GetText()
         {
-            NewText = textBoxNewText.Text;
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            return textBoxNewText.Text;
         }
     }
 }

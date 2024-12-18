@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace HW2
 {
     public class PointState : IState
@@ -85,15 +86,17 @@ namespace HW2
         }
         public void MouseUp(int x, int y)
         {
-            if (_isTextClicked)
+
+            if (_isTextClicked && SelectedShape.BiasX != _initBiasX && SelectedShape.BiasY != _initBiasY)
             {
-               _model.MoveText(SelectedShape,_initBiasX,_initBiasY);
+                _model.MoveText(SelectedShape, _initBiasX, _initBiasY);
 
             }
-            else if (_isPressed)
+            else if (_isPressed && SelectedShape.X != _initX && SelectedShape.Y != _initY)
             {
-                _model.MoveShape(SelectedShape,_initX,_initY);
+                _model.MoveShape(SelectedShape, _initX, _initY);
             }
+
             _isPressed = false;
             _isTextClicked = false;
         }
@@ -102,13 +105,20 @@ namespace HW2
         {
             if (_isTextClicked && SelectedShape != null)
             {
-                using (var dialog = new 文字編輯方塊(SelectedShape.Text))
+                //using (var dialog = new 文字編輯方塊(SelectedShape.Text))
+                //{
+                //    if (dialog.ShowDialog() == DialogResult.OK)
+                //    {
+                //        _model.ChangeText(SelectedShape,dialog.NewText);
+                //    }
+                //}
+                Form2 form2 = new Form2(SelectedShape.Text);
+                DialogResult r = form2.ShowDialog();
+                if (r == DialogResult.OK)
                 {
-                    if (dialog.ShowDialog() == DialogResult.OK)
-                    {
-                        _model.ChangeText(SelectedShape,dialog.NewText);
-                    }
+                    _model.ChangeText(SelectedShape, form2.GetText());
                 }
+
             }
         }
 

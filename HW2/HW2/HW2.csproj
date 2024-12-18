@@ -63,6 +63,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationModel2.cs" />
     <Compile Include="PresentationModel.cs" />
     <Compile Include="Shape\Line.cs" />
     <Compile Include="State\DrawLineState.cs" />

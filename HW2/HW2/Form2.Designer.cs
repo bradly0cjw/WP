@@ -1,6 +1,6 @@
 ﻿namespace HW2
 {
-    partial class 文字編輯方塊
+    partial class Form2
     {
         /// <summary>
         /// Required designer variable.
@@ -42,6 +42,7 @@
             // 
             // buttonOK
             // 
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOK.Location = new System.Drawing.Point(37, 136);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(78, 28);
@@ -51,6 +52,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(146, 136);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(78, 28);
@@ -58,7 +60,7 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // 文字編輯方塊
+            // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -66,8 +68,8 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textBoxNewText);
-            this.Name = "文字編輯方塊";
-            this.Text = "Form2";
+            this.Name = "Form2";
+            this.Text = "文字編輯方塊";
             this.ResumeLayout(false);
             this.PerformLayout();
 
