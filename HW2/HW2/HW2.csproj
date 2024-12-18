@@ -46,10 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandManager.cs" />
+    <Compile Include="Command\AddComand.cs" />
+    <Compile Include="Command\DeleteCommand.cs" />
+    <Compile Include="Command\DrawCommand.cs" />
+    <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\MoveCommand.cs" />
+    <Compile Include="Command\TextChangedCommand.cs" />
+    <Compile Include="Command\TextMoveCommand.cs" />
     <Compile Include="DoubleBufferPanel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PresentationModel.cs" />
+    <Compile Include="Shape\Line.cs" />
+    <Compile Include="State\DrawLineState.cs" />
     <Compile Include="State\DrawState.cs" />
     <Compile Include="FormGraphicAdaptercs.cs" />
     <Compile Include="Igraphic.cs" />

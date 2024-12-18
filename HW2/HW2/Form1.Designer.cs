@@ -64,6 +64,9 @@
             this.buttonProcess = new System.Windows.Forms.ToolStripButton();
             this.buttonSelect = new System.Windows.Forms.ToolStripButton();
             this.panel = new HW2.DoubleBufferPanel();
+            this.buttonUndo = new System.Windows.Forms.ToolStripButton();
+            this.buttonRedo = new System.Windows.Forms.ToolStripButton();
+            this.buttonLine = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -351,7 +354,10 @@
             this.buttonTerminator,
             this.buttonDecision,
             this.buttonProcess,
-            this.buttonSelect});
+            this.buttonSelect,
+            this.buttonUndo,
+            this.buttonRedo,
+            this.buttonLine});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1118, 25);
@@ -409,6 +415,33 @@
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(574, 429);
             this.panel.TabIndex = 12;
+            // 
+            // buttonUndo
+            // 
+            this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonUndo.Image = ((System.Drawing.Image)(resources.GetObject("buttonUndo.Image")));
+            this.buttonUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Size = new System.Drawing.Size(23, 22);
+            this.buttonUndo.Text = "undo";
+            // 
+            // buttonRedo
+            // 
+            this.buttonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonRedo.Image = ((System.Drawing.Image)(resources.GetObject("buttonRedo.Image")));
+            this.buttonRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonRedo.Name = "buttonRedo";
+            this.buttonRedo.Size = new System.Drawing.Size(23, 22);
+            this.buttonRedo.Text = "redo";
+            // 
+            // buttonLine
+            // 
+            this.buttonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.buttonLine.Image = ((System.Drawing.Image)(resources.GetObject("buttonLine.Image")));
+            this.buttonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.buttonLine.Name = "buttonLine";
+            this.buttonLine.Size = new System.Drawing.Size(23, 22);
+            this.buttonLine.Text = "line";
             // 
             // Form1
             // 
@@ -473,6 +506,9 @@
         private System.Windows.Forms.ToolStripButton buttonProcess;
         private System.Windows.Forms.ToolStripButton buttonSelect;
         private DoubleBufferPanel panel;
+        private System.Windows.Forms.ToolStripButton buttonUndo;
+        private System.Windows.Forms.ToolStripButton buttonRedo;
+        private System.Windows.Forms.ToolStripButton buttonLine;
     }
 }
 

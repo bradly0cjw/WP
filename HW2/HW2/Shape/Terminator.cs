@@ -8,9 +8,11 @@ namespace HW2
     public class Terminator : Shape
     {
         // Constructor
-        public Terminator(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0, int biasY = 0) : base(shapeName, text, id, x, y,
+        public Terminator(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0,
+            int biasY = 0) : base(shapeName, text, id, x, y,
             width, height, biasX, biasY)
-        { }
+        {
+        }
 
         // Draw method
         public override void Draw(IGraphic graphic)
@@ -41,6 +43,14 @@ namespace HW2
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX, Y + (H / 2) + BiasY, 5, 5));
             return path.IsVisible(new Point(x, y));
+        }
+
+        public override void DrawConnectionPoint(IGraphic graphic)
+        {
+            graphic.DrawDot((X + W) / 2, Y, 10, 10);
+            graphic.DrawDot(X, (Y + H) / 2, 10, 10);
+            graphic.DrawDot((X + W) / 2, (Y + H), 10, 10);
+            graphic.DrawDot((X + W), (Y + H) / 2, 10, 10);
         }
     }
 }

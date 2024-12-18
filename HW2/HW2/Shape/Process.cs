@@ -11,6 +11,7 @@ namespace HW2
     // Different shapes that inherit from the Shape class
     public class Process : Shape
     {
+        private const int Radius = 10;
         // Constructor
         public Process(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0, int biasY = 0) : base(shapeName, text, id, x, y,
             width, height, biasX, biasY)
@@ -37,6 +38,14 @@ namespace HW2
             path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX, Y + (H / 2) + BiasY, 5, 5));
             //Console.WriteLine("Path "+(X + (W / 2)+30 + BiasX)+" " +(Y + (H / 2) + BiasY));
             return path.IsVisible(new Point(x, y));
+        }
+
+        public override void DrawConnectionPoint(IGraphic graphic)
+        {
+            graphic.DrawDot((X + W) / 2, Y, Radius, Radius);
+            graphic.DrawDot(X, (Y + H) / 2, Radius, Radius);
+            graphic.DrawDot((X + W) / 2, (Y + H), Radius, Radius);
+            graphic.DrawDot((X + W), (Y + H) / 2, Radius, Radius);
         }
     }
 }

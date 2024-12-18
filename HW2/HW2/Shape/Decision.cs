@@ -46,5 +46,13 @@ namespace HW2
             return path.IsVisible(new Point(x, y));
         }
 
+        public override void DrawConnectionPoint(IGraphic graphic)
+        {
+            graphic.DrawDot((X + W) / 2, Y, 10, 10);
+            graphic.DrawDot(X, (Y + H) / 2, 10, 10);
+            graphic.DrawDot((X + W) / 2, (Y + H), 10, 10);
+            graphic.DrawDot((X + W), (Y + H) / 2, 10, 10);
+        }
+
     }
 }

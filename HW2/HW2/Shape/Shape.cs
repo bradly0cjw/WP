@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 
 
 namespace HW2
@@ -40,6 +42,8 @@ namespace HW2
 
         public abstract bool IsClickOnText(int x, int y);
 
+        public abstract void DrawConnectionPoint(IGraphic graphic);
+
         public void DrawBounding(IGraphic graphic)
         {
             graphic.DrawBounding(X - 1, Y - 1, H + 2, W + 2);
@@ -60,6 +64,14 @@ namespace HW2
                 W *= -1;
                 X -= W;
             }
+        }
+
+        public int IsClickConnectPoint(int x, int y)
+        {
+            //GraphicsPath path = new GraphicsPath();
+            //path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX, Y + (H / 2) + BiasY, 5, 5));
+            //return path.IsVisible(new Point(x, y));
+            return 0;
         }
     }
 }
