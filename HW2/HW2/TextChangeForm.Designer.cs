@@ -1,6 +1,6 @@
 ﻿namespace HW2
 {
-    partial class Form2
+    partial class TextChangeForm
     {
         /// <summary>
         /// Required designer variable.
@@ -60,7 +60,7 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // Form2
+            // TextChangeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -68,7 +68,7 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.textBoxNewText);
-            this.Name = "Form2";
+            this.Name = "TextChangeForm";
             this.Text = "文字編輯方塊";
             this.ResumeLayout(false);
             this.PerformLayout();

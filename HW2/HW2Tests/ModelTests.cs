@@ -139,7 +139,28 @@ namespace HW2.Tests
             Assert.AreEqual(y, state.mouseUpY);
 
         }
-        
+
+        [TestMethod()]
+        public void PointerDoubleClickTest()
+        {
+            // Arrange
+
+            IState mockstate = new MockState();
+            model.CurrentState = mockstate;
+            mockstate.Initialize(model);
+
+            var x = 10;
+            var y = 20;
+
+            // Act
+            model.PointerDoubleClick(x, y);
+            MockState state = (MockState)model.CurrentState;
+
+            Assert.AreEqual(x, state.mouseDoubleClickX);
+            Assert.AreEqual(y, state.mouseDoubleClickY);
+
+        }
+
         [TestMethod()]
         public void RemoveShapeTest()
         {
@@ -148,6 +169,7 @@ namespace HW2.Tests
             model.AddShape("Process", "ccc", 0, 0, 100, 200);
             model.RemoveShape(2);
             model.RemoveShape(3);
+            model.RemoveShape(99);
             var shape = model.GetShapes();
             Assert.AreEqual(2, shape.Count);
         }

@@ -39,10 +39,7 @@ namespace HW2
         public void DeleteShape(int id)
         {
             var shapeToRemove = _shapeList.Find(s => s.ID == id);
-            if (shapeToRemove != null)
-            {
-                _shapeList.Remove(shapeToRemove);
-            }
+            _shapeList.Remove(shapeToRemove);
         }
 
 

@@ -83,7 +83,7 @@ namespace HW2
 
         public void MouseDoubleClick(int x, int y)
         {
-
+            Console.WriteLine();
         }
 
         public void Draw(IGraphic graphic)

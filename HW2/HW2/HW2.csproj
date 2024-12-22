@@ -57,11 +57,11 @@
     <Compile Include="DoubleBufferPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="TextChangeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="TextChangeForm.Designer.cs">
+      <DependentUpon>TextChangeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationModel2.cs" />
     <Compile Include="PresentationModel.cs" />
@@ -88,12 +88,14 @@
     <Compile Include="Shape\Shapes.cs" />
     <Compile Include="Shape\Terminator.cs" />
     <Compile Include="Shape\Start.cs" />
+    <Compile Include="TextChange.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="TextChangeForm.resx">
+      <DependentUpon>TextChangeForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

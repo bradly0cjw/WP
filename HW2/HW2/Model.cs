@@ -2,7 +2,7 @@
 using HW2;
 using System.Collections.Generic;
 using System.Linq;
-using HW2.State;
+
 
 public class Model
 {
@@ -58,6 +58,12 @@ public class Model
     {
         return Shapes.GetShapes().FirstOrDefault(s => s.ID == id);
     }
+
+    public Shape GetNewShape(string shapeName, string text, int x, int y, int width, int height)
+    {
+        return Shapes.NewShape(shapeName, text, x, y, width, height);
+    }
+
 
     public void RemoveShape(Shape shape)
     {
@@ -136,13 +142,6 @@ public class Model
     {
         var textMoveCommand = new TextMoveCommand(this, shape, initBiasX, initBiasY, shape.BiasX, shape.BiasY);
         _commandManager.ExecuteCommand(textMoveCommand);
-        NotifyObserver();
-    }
-
-    public void ChangeText(Shape shape, string text)
-    {
-        var textChangeCommand = new TextChangedCommand(this, shape, shape.Text, text);
-        _commandManager.ExecuteCommand(textChangeCommand);
         NotifyObserver();
     }
 

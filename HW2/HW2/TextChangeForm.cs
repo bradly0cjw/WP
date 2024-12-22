@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace HW2
 {
-    public partial class Form2 : Form
+    public partial class TextChangeForm : Form
     {
         private readonly PresentationModel2 _pModel;
 
-        public Form2(string currentText)
+        public TextChangeForm(string currentText)
         {
             InitializeComponent();
             _pModel = new PresentationModel2(currentText);

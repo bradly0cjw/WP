@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HW2.State
+namespace HW2
 {
     public class DrawLineState : IState
     {
@@ -23,12 +23,19 @@ namespace HW2.State
         public void MouseDown(int x, int y)
         {
             int tempX, tempY;
-            _init = _hoverShape.IsClickConnectionPoint(x, y);
+            if (_hoverShape!=null)
+            {
+                _init = _hoverShape.IsClickConnectionPoint(x, y);
+            }
+            else
+            {
+                _init = -1;
+            }
             if (_init != -1)
             {
                 _selectShape = _hoverShape;
                 (tempX, tempY) = _selectShape.GetConnectionPoint(_init);
-                Console.WriteLine("X: " + tempX + " Y:" + tempY);
+                //Console.WriteLine("X: " + tempX + " Y:" + tempY);
                 _hint = _model.Shapes.NewShape(_model.GetMode(), "", tempX, tempY, 0, 0);
                 
             }
@@ -110,7 +117,7 @@ namespace HW2.State
 
         public void MouseDoubleClick(int x, int y)
         {
-
+            Console.WriteLine("Not implement");
         }
 
     }

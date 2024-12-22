@@ -39,10 +39,7 @@ public class PresentationModel : INotifyPropertyChanged
             }
         }
     }
-
-    public bool CanUndo => _model.CanUndo();
-    public bool CanRedo => _model.CanRedo();
-
+    
     public PresentationModel(Model model)
     {
         this._model = model;
@@ -54,7 +51,7 @@ public class PresentationModel : INotifyPropertyChanged
     public bool IsProcessChecked() => isProcessChecked;
     public bool IsDecisionChecked() => isDecisionChecked;
     public bool IsSelectedChecked() => isSelectedChecked;
-    public bool ISLineChecked() => isLineChecked;
+    public bool IsLineChecked() => isLineChecked;
 
     public void StartPressed() => _model.SetDrawingMode("Start");
     public void TerminatorPressed() => _model.SetDrawingMode("Terminator");
@@ -157,7 +154,11 @@ public class PresentationModel : INotifyPropertyChanged
 
     private void Notify(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-    private void UpdateIsAddEnabled() => IsAddEnabled = IsXValid() && IsYValid() && IsWidthValid() && IsHeightValid() && IsShapeValid() && IsTextValid();
+    private void UpdateIsAddEnabled()
+    {
+        IsAddEnabled = IsXValid() && IsYValid() && IsWidthValid() && IsHeightValid() && IsShapeValid() && IsTextValid();
+        Notify("IsAddEnabled");
+    }
 
     public Color XLabelColor() => IsXValid() ? Color.Black : Color.Red;
     public Color YLabelColor() => IsYValid() ? Color.Black : Color.Red;

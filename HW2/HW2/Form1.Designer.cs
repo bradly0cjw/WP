@@ -63,10 +63,10 @@
             this.buttonDecision = new System.Windows.Forms.ToolStripButton();
             this.buttonProcess = new System.Windows.Forms.ToolStripButton();
             this.buttonSelect = new System.Windows.Forms.ToolStripButton();
-            this.panel = new HW2.DoubleBufferPanel();
             this.buttonUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonLine = new System.Windows.Forms.ToolStripButton();
+            this.panel = new HW2.DoubleBufferPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -409,13 +409,6 @@
             this.buttonSelect.Size = new System.Drawing.Size(23, 22);
             this.buttonSelect.Text = "Select";
             // 
-            // panel
-            // 
-            this.panel.Location = new System.Drawing.Point(134, 46);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(574, 429);
-            this.panel.TabIndex = 12;
-            // 
             // buttonUndo
             // 
             this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -442,6 +435,13 @@
             this.buttonLine.Name = "buttonLine";
             this.buttonLine.Size = new System.Drawing.Size(23, 22);
             this.buttonLine.Text = "line";
+            // 
+            // panel
+            // 
+            this.panel.Location = new System.Drawing.Point(134, 52);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(574, 423);
+            this.panel.TabIndex = 12;
             // 
             // Form1
             // 

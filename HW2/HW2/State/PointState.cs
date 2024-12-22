@@ -24,14 +24,17 @@ namespace HW2
         private bool _isTextClicked = false;
 
         public Shape SelectedShape;
+        public TextChange TextChange;
         public PointState()
         {
         }
 
         public void Initialize(Model model)
         {
+            
             this._model = model;
             SelectedShape = null;
+            TextChange = new TextChange(model);
         }
 
 
@@ -114,12 +117,7 @@ namespace HW2
                 //        _model.ChangeText(SelectedShape,dialog.NewText);
                 //    }
                 //}
-                Form2 form2 = new Form2(SelectedShape.Text);
-                DialogResult r = form2.ShowDialog();
-                if (r == DialogResult.OK)
-                {
-                    _model.ChangeText(SelectedShape, form2.GetText());
-                }
+                TextChange.ShowTextChangeForm(SelectedShape);
 
             }
         }

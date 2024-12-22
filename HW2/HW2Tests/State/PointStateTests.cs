@@ -23,6 +23,7 @@ namespace HW2.Tests
             _model = new Model();
             _pointState = new PointState();
             _pointState.Initialize(_model);
+            _pointState.TextChange = new MockTextChange(_model);
             _pObj = new PrivateObject(_pointState);
         }
 
@@ -72,6 +73,13 @@ namespace HW2.Tests
             Assert.AreEqual(_pObj.GetFieldOrProperty("_isPressed"), true);
             _pointState.MouseUp(100, 200);
             Assert.AreEqual(_pObj.GetFieldOrProperty("_isPressed"), false);
+
+            _model.AddShape("Start", "test", 200, 200, 100, 200);
+            _pointState.MouseDown(280, 300);
+            _pointState.MouseMove(300,400);
+            _pointState.MouseUp(300, 400);
+
+            _pointState.MouseUp(2800, 3000);
         }
 
         [TestMethod()]
@@ -85,6 +93,18 @@ namespace HW2.Tests
             _pointState.MouseDown(200, 300);
             _pointState.Draw(mockGraphic);
 
+        }
+
+        [TestMethod()]
+        public void MouseDoubleClickTest()
+        {
+            _model.AddShape("Start", "test", 0, 0, 100, 200);
+            _pointState.MouseDoubleClick(300,300);
+            _pointState.MouseDown(80, 100);
+            _pointState.MouseDoubleClick(50, 100);
+            _pointState.MouseDoubleClick(80,100);
+            //Assert.AreEqual(_pObj.GetFieldOrProperty("_isPressed"), false);
+            //Assert.IsNull(_pointState.SelectedShape);
         }
     }
 }

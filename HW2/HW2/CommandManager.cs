@@ -20,9 +20,9 @@ namespace HW2
             _undoStack.Push(command);
             _redoStack.Clear();
             // log command execute
-            Console.WriteLine("Execute: " + command);
-            Console.WriteLine("Undo stack count: " + _undoStack.Count);
-            Console.WriteLine("Redo stack count: " + _redoStack.Count);
+            //Console.WriteLine("Execute: " + command);
+            //Console.WriteLine("Undo stack count: " + _undoStack.Count);
+            //Console.WriteLine("Redo stack count: " + _redoStack.Count);
         }
 
         public void Undo()
@@ -33,9 +33,9 @@ namespace HW2
                 command.Unexecute();
                 _redoStack.Push(command);
                 // log command execute
-                Console.WriteLine("Undo: " + command);
-                Console.WriteLine("Undo stack count: " + _undoStack.Count);
-                Console.WriteLine("Redo stack count: " + _redoStack.Count);
+                //Console.WriteLine("Undo: " + command);
+                //Console.WriteLine("Undo stack count: " + _undoStack.Count);
+                //Console.WriteLine("Redo stack count: " + _redoStack.Count);
             }
         }
 
@@ -47,9 +47,9 @@ namespace HW2
                 command.Execute();
                 _undoStack.Push(command);
                 // log command execute
-                Console.WriteLine("Redo: " + command);
-                Console.WriteLine("Undo stack count: " + _undoStack.Count);
-                Console.WriteLine("Redo stack count: " + _redoStack.Count);
+                //Console.WriteLine("Redo: " + command);
+                //Console.WriteLine("Undo stack count: " + _undoStack.Count);
+                //Console.WriteLine("Redo stack count: " + _redoStack.Count);
             }
         }
     }

@@ -55,6 +55,13 @@ namespace HW2.Tests
             pm.DecisionPressed();
             Assert.IsTrue(pm.IsDecisionChecked());
         }
+        [TestMethod()]
+        public void LinePressedTest()
+        {
+            pm.LinePressed();
+            Assert.IsTrue(pm.IsLineChecked());
+        }
+
 
         [TestMethod()]
         public void SelectPressedTest()
@@ -203,5 +210,32 @@ namespace HW2.Tests
             Assert.IsNotNull(po.GetFieldOrProperty("PropertyChanged"));
             Assert.IsTrue(propertyChanged);
         }
+
+        [TestMethod()]
+        public void UndoTest()
+        {
+            Assert.IsFalse(pm.IsUndoClickable());
+            model.AddShape("Start", "test", 100, 100, 100, 100);
+            Assert.IsTrue(pm.IsUndoClickable());
+            Assert.AreEqual(1,model.GetShapes().Count);
+            pm.Undo();
+            Assert.AreEqual(0, model.GetShapes().Count);
+            Assert.IsFalse(pm.IsUndoClickable());
+        }
+        [TestMethod()]
+        public void RedoTest()
+        {
+            Assert.IsFalse(pm.IsRedoClickable());
+            model.AddShape("Start", "test", 100, 100, 100, 100);
+            Assert.AreEqual(1, model.GetShapes().Count);
+            Assert.IsFalse(pm.IsRedoClickable());
+            pm.Undo();
+            Assert.AreEqual(0, model.GetShapes().Count);
+            Assert.IsTrue(pm.IsRedoClickable());
+            pm.Redo();
+            Assert.AreEqual(1, model.GetShapes().Count);
+            Assert.IsFalse(pm.IsRedoClickable());
+        }
+        
     }
 }

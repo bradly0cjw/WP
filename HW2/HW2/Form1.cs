@@ -182,7 +182,7 @@ namespace HW2
             buttonProcess.Checked = _pModel.IsProcessChecked();
             buttonDecision.Checked = _pModel.IsDecisionChecked();
             buttonSelect.Checked = _pModel.IsSelectedChecked();
-            buttonLine.Checked = _pModel.ISLineChecked();
+            buttonLine.Checked = _pModel.IsLineChecked();
 
             buttonUndo.Enabled = _pModel.IsUndoClickable();
             buttonRedo.Enabled = _pModel.IsRedoClickable();

@@ -39,5 +39,28 @@ namespace HW2.Tests
 
 
         }
+
+        [TestMethod()]
+
+        public void GetConnectionPointTest()
+        {
+            Shape shape = new Start("Start", "test", 0, 0, 0, 400, 200);
+            Assert.AreEqual((-1,-1), shape.GetConnectionPoint(0));
+            Assert.AreEqual((200, 0), shape.GetConnectionPoint(1));
+            Assert.AreEqual((200, 200), shape.GetConnectionPoint(2));
+            Assert.AreEqual((400, 100), shape.GetConnectionPoint(3));
+            Assert.AreEqual((0, 100), shape.GetConnectionPoint(4));
+        }
+
+        [TestMethod()]
+        public void IsClickConnectionPointTest()
+        {
+            Shape shape = new Start("Start", "test", 0, 0, 0, 400, 200);
+            Assert.AreEqual(-1, shape.IsClickConnectionPoint(0, 0));
+            Assert.AreEqual(1, shape.IsClickConnectionPoint(200, 0));
+            Assert.AreEqual(2, shape.IsClickConnectionPoint(200, 200));
+            Assert.AreEqual(3, shape.IsClickConnectionPoint(400, 100));
+            Assert.AreEqual(4, shape.IsClickConnectionPoint(0, 100));
+        }
     }
 }

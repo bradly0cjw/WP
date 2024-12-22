@@ -142,5 +142,11 @@ namespace HW2.Tests
             Assert.AreEqual(5, text.Length);
             Assert.IsTrue(text.All(c => DrawState.chars.Contains(c)));
         }
+
+        [TestMethod()]
+        public void MouseDoubleClickTest()
+        {
+            _drawState.MouseDoubleClick(0, 0);
+        }
     }
 }

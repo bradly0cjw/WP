@@ -30,7 +30,7 @@ namespace HW2Tests
 
         public void DrawBounding(int x1, int y1, int x2, int y2) { }
 
-        public void DrawDot(int x1, int y1, int x2, int y2) { }
+        public void DrawDot(int x1, int y1) { }
 
 
     }
