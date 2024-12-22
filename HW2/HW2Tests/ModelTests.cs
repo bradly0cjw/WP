@@ -55,12 +55,12 @@ namespace HW2.Tests
         {
             IState mockstate = new MockState();
             mockstate.Initialize(model);
-            model._currentState = mockstate;
+            model.CurrentState = mockstate;
             IGraphic mockGraphic = new MockGraphic();
 
             model.Draw(mockGraphic);
             
-            MockState state = (MockState)model._currentState;
+            MockState state = (MockState)model.CurrentState;
 
             Assert.IsTrue(state.isDrawCalled);
 
@@ -87,14 +87,14 @@ namespace HW2.Tests
         {
             // Arrange
             IState mockstate = new MockState();
-            model._currentState = mockstate;
+            model.CurrentState = mockstate;
             mockstate.Initialize(model);
             var x = 10;
             var y = 20;
 
             // Act
             model.PointerDown(x, y);
-            MockState state = (MockState)model._currentState;
+            MockState state = (MockState)model.CurrentState;
 
             Assert.AreEqual(x, state.mouseDownX);
             Assert.AreEqual(y, state.mouseDownY);
@@ -106,14 +106,14 @@ namespace HW2.Tests
         {
             // Arrange
             IState mockstate = new MockState();
-            model._currentState = mockstate;
+            model.CurrentState = mockstate;
             mockstate.Initialize(model);
             var x = 10;
             var y = 20;
 
             // Act
             model.PointerMove(x, y);
-            MockState state = (MockState)model._currentState;
+            MockState state = (MockState)model.CurrentState;
 
             Assert.AreEqual(x, state.mouseMoveX);
             Assert.AreEqual(y, state.mouseMoveY);
@@ -125,7 +125,7 @@ namespace HW2.Tests
             // Arrange
 
             IState mockstate = new MockState();
-            model._currentState = mockstate;
+            model.CurrentState = mockstate;
             mockstate.Initialize(model);
 
             var x = 10;
@@ -133,7 +133,7 @@ namespace HW2.Tests
 
             // Act
             model.PointerUp(x, y);
-            MockState state = (MockState)model._currentState;
+            MockState state = (MockState)model.CurrentState;
 
             Assert.AreEqual(x, state.mouseUpX);
             Assert.AreEqual(y, state.mouseUpY);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.SqlServer.Server;
 
 
 namespace HW2
@@ -63,6 +64,7 @@ namespace HW2
         }
         public void MouseMove(int x, int y)
         {
+            // flags2
             if (_isTextClicked)
             {
                 int dx = x - _preX;
@@ -133,6 +135,7 @@ namespace HW2
 
             if (SelectedShape != null)
             {
+                //Console.WriteLine("Trigger");
                 SelectedShape.DrawBounding(graphic);
             }
 

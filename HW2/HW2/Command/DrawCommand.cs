@@ -15,12 +15,12 @@ namespace HW2
 
         public void Execute()
         {
-            _model.AddShape(_shape);
+            _model.AddShapeObj(_shape);
         }
 
         public void Unexecute()
         {
-            _model.RemoveShape(_shape.ID);
+            _model.RemoveShape(_shape);
         }
     }
 }

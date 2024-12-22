@@ -28,6 +28,6 @@ namespace HW2
 
         void DrawBounding(int x1, int y1, int x2, int y2);
 
-        void DrawDot(int x1, int y1, int x2, int y2);
+        void DrawDot(int x, int y);
     }
 }

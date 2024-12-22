@@ -20,7 +20,7 @@ namespace HW2
 
         public void Unexecute()
         {
-            _model.AddShape(_shape);
+            _model.AddShapeObj(_shape);
         }
     }
 }

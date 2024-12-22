@@ -64,11 +64,10 @@ namespace HW2
             _graphics.DrawRectangle(new Pen(Color.Red), x1, y1, y2, (float)x2);
         }
 
-        public void DrawDot(int x1, int y1, int x2, int y2)
+        public void DrawDot(int x, int y)
         {
-            var x = x1 + (x2 / 2);
-            var y = y1;
-            _graphics.FillRectangle(new SolidBrush(Color.Red), x, y, 5, 5);
+            
+            _graphics.FillRectangle(new SolidBrush(Color.Red), (float)(x-3), (float)(y-3), 6, 6);
             //Console.WriteLine("Rec "+ x+" "+y );
         }
     }

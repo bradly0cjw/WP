@@ -65,13 +65,20 @@ namespace HW2.State
                     if (end != -1)
                     {
                         (tempX, tempY) = _hoverShape.GetConnectionPoint(end);
-                        var line = new Line("Line", "", _hint.X, _hint.Y, tempX, tempY, 0, 0);
+
+                        //var line = _model.AddLine(_hint.X, _hint.Y, _hint.W, _hint.H);
+
+                        var line = new Line("Line", "",_model.GetNewId() , _hint.X, _hint.Y, tempX, tempY);
+
+                        //flags 1
                         line.SetConnection1(_selectShape, _init);
                         line.SetConnection2(_hoverShape, end);
+
+
                         //line.SetConnection1(_model.GetShapes(initID), _init);
                         //line.SetConnection2(_model.GetShapes(endID), end);
                         Console.WriteLine(line);
-                        _model.AddShapeObj(line);
+                        _model.AddLine(line);
                     }
                     Console.WriteLine("@@@");
                 }

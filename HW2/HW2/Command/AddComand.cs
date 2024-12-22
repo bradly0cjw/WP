@@ -19,7 +19,7 @@ namespace HW2
 
         public void Execute()
         {
-            _model.AddShape(_shape);
+            _model.AddShapeObj(_shape);
         }
 
         public void Unexecute()

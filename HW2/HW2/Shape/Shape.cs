@@ -42,15 +42,18 @@ namespace HW2
 
         public abstract bool IsClickInShape(int x, int y);
 
-        public abstract bool IsClickOnText(int x, int y);
-
-        public abstract void DrawConnectionPoint(IGraphic graphic);
+        public bool IsClickOnText(int x, int y)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX-3, Y + (H / 2) + BiasY-3, 6, 6));
+            return path.IsVisible(new Point(x, y));
+        }
 
         public void DrawBounding(IGraphic graphic)
         {
             graphic.DrawBounding(X - 1, Y - 1, H + 2, W + 2);
             graphic.DrawBounding(X + (W / 2) + BiasX, Y + (H / 2) + BiasY, 20, 60);
-            graphic.DrawDot(X + (W / 2) + BiasX, Y + (H / 2) + BiasY, 60, 20);
+            graphic.DrawDot(X + (W / 2) + BiasX + 30, Y + (H / 2) + BiasY);
 
         }
 
@@ -69,7 +72,55 @@ namespace HW2
             }
         }
 
-        public abstract int IsClickConnectionPoint(int x, int y);
-        public abstract (int, int) GetConnectionPoint(int index);
+        public void DrawConnectionPoint(IGraphic graphic)
+        {
+            graphic.DrawDot(X + (W / 2), Y);
+            graphic.DrawDot(X + (W / 2), (Y + H));
+            graphic.DrawDot((X + W), Y + (H / 2));
+            graphic.DrawDot(X, Y + (H / 2));
+        }
+
+        public int IsClickConnectionPoint(int x, int y)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(X + (W / 2)-3, Y-3, 6, 6));
+            if (path.IsVisible(x, y))
+            {
+                return 1;
+            }
+            path.AddRectangle(new Rectangle(X + (W / 2) - 3, (Y + H) - 3, 6, 6));
+            if (path.IsVisible(x, y))
+            {
+                return 2;
+            }
+            path.AddRectangle(new Rectangle((X + W)-3, Y + (H / 2)-3, 6, 6));
+            if (path.IsVisible(x, y))
+            {
+                return 3;
+            }
+            path.AddRectangle(new Rectangle(X-3, Y + (H / 2)-3, 6, 6));
+            if (path.IsVisible(x, y))
+            {
+                return 4;
+            }
+            return -1;
+
+        }
+        public (int, int) GetConnectionPoint(int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    return (X + (W / 2), Y);
+                case 2:
+                    return (X + (W / 2), (Y + H));
+                case 3:
+                    return ((X + W), Y + (H / 2));
+                case 4:
+                    return (X, Y + (H / 2));
+                default:
+                    return (-1, -1);
+            }
+        }
     }
 }

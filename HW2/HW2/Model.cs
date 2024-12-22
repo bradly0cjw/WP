@@ -14,7 +14,7 @@ public class Model
     private readonly IState _pointState;
     private readonly IState _drawState;
     private readonly IState _lineState;
-    public IState _currentState;
+    public IState CurrentState;
 
     private readonly CommandManager _commandManager;
 
@@ -23,17 +23,9 @@ public class Model
         _pointState = new PointState();
         _drawState = new DrawState();
         _lineState = new DrawLineState();
-        _currentState = _pointState;
+        CurrentState = _pointState;
         _commandManager = new CommandManager();
     }
-
-    // Add shape to list
-    public void AddShape(Shape shape)
-    {
-        Shapes.AddShape(shape.ShapeName, shape.Text, shape.X, shape.Y, shape.W, shape.H);
-        NotifyObserver();
-    }
-
     public void AddShapeObj(Shape shape)
     {
         Shapes.AddShape(shape);
@@ -47,26 +39,36 @@ public class Model
         //AddShape(shape);
     }
 
+    public void AddLine(Shape shape)
+    {
+        _commandManager.ExecuteCommand(new DrawCommand(this, shape));
+        //_commandManager.ExecuteCommand(new AddCommand(this, shape));
+        //AddShape(shape);
+    }
     // Remove shape from list
     public void RemoveShape(int id)
     {
-        var shape = Shapes.GetShapes().FirstOrDefault(s => s.ID == id);
-        if (shape != null)
-        {
-            var deleteCommand = new DeleteCommand(this, shape);
-            _commandManager.ExecuteCommand(deleteCommand);
-        }
+        var shape = GetShape(id);
+        if (shape == null) return;
+        var deleteCommand = new DeleteCommand(this, shape);
+        _commandManager.ExecuteCommand(deleteCommand);
+    }
+
+    public Shape GetShape(int id)
+    {
+        return Shapes.GetShapes().FirstOrDefault(s => s.ID == id);
     }
 
     public void RemoveShape(Shape shape)
     {
         Shapes.DeleteShape(shape.ID);
+        SetPointState();
         NotifyObserver();
     }
 
     public void Draw(IGraphic graphic)
     {
-        _currentState.Draw(graphic);
+        CurrentState.Draw(graphic);
     }
 
     public void SetDrawingMode(string shape)
@@ -92,42 +94,40 @@ public class Model
 
     public void PointerDown(int x, int y)
     {
-        _currentState.MouseDown(x, y);
+        CurrentState.MouseDown(x, y);
     }
 
     public void PointerMove(int x, int y)
     {
-        _currentState.MouseMove(x, y);
+        CurrentState.MouseMove(x, y);
     }
 
     public void PointerUp(int x, int y)
     {
-        _currentState.MouseUp(x, y);
+        CurrentState.MouseUp(x, y);
     }
 
     public void SetPointState()
     {
         _pointState.Initialize(this);
-        _currentState = _pointState;
+        CurrentState = _pointState;
     }
 
     public void SetDrawState()
     {
         _drawState.Initialize(this);
-        _currentState = _drawState;
+        CurrentState = _drawState;
     }
 
     public void SetLineState()
     {
         _lineState.Initialize(this);
-        _currentState = _lineState;
+        CurrentState = _lineState;
     }
 
     public void MoveShape(Shape shape, int initX, int initY)
     {
         var moveCommand = new MoveCommand(this, shape, initX, initY, shape.X, shape.Y);
-        Console.WriteLine("Old Pos: " + initX + " " + initY);
-        Console.WriteLine("New Pos: " + shape.X + " " + shape.Y);
         _commandManager.ExecuteCommand(moveCommand);
         NotifyObserver();
     }
@@ -135,8 +135,6 @@ public class Model
     public void MoveText(Shape shape, int initBiasX, int initBiasY)
     {
         var textMoveCommand = new TextMoveCommand(this, shape, initBiasX, initBiasY, shape.BiasX, shape.BiasY);
-        Console.WriteLine("Old Pos: " + initBiasX + " " + initBiasY);
-        Console.WriteLine("New Pos: " + shape.BiasX + " " + shape.BiasY);
         _commandManager.ExecuteCommand(textMoveCommand);
         NotifyObserver();
     }
@@ -150,7 +148,7 @@ public class Model
 
     public void PointerDoubleClick(int x, int y)
     {
-        _currentState.MouseDoubleClick(x, y);
+        CurrentState.MouseDoubleClick(x, y);
     }
 
 
@@ -168,6 +166,11 @@ public class Model
     public string GetMode()
     {
         return _mode;
+    }
+
+    public int GetNewId()
+    {
+        return Shapes.NewId();
     }
 
     public void Undo()

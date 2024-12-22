@@ -18,16 +18,10 @@ namespace HW2
 
         }
 
-        //Add shape to list
-        public void AddShape(string shapeName, string text, int x, int y, int width, int height)
-        {
-            // Create shape using ShapeFactory
-            _shapeList.Add(NewShape(shapeName, text, x, y, width, height));
-        }
-
         public void AddShape(Shape shape)
         {
             _shapeList.Add(shape);
+            SortShapes();
         }
 
         public Shape NewShape(string shapeName, string text, int x, int y, int width, int height)
@@ -49,6 +43,13 @@ namespace HW2
             {
                 _shapeList.Remove(shapeToRemove);
             }
+        }
+
+
+        // Sort shapes by ID
+        public void SortShapes()
+        {
+            _shapeList.Sort((x, y) => x.ID.CompareTo(y.ID));
         }
 
         // Generate new id for shape
