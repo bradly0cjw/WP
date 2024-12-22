@@ -4,39 +4,37 @@ using System.Drawing;
 using System.Windows.Forms;
 using System;
 
-public class PresentationModel2 : INotifyPropertyChanged
+namespace HW2
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    Model _model;
-    public bool IsConfirmEnabled { get; set; }
-
-    string _text;
-    public PresentationModel2(string text)
+    public class PresentationModel2 : INotifyPropertyChanged
     {
-        _text = text;
-        IsConfirmEnabled = false;
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-    public void TextChanged(string text)
-    {
-        if (text.Length > 0 && text != _text)
+        public bool IsConfirmEnabled { get; set; }
+
+        private readonly string _text;
+        public PresentationModel2(string text)
         {
-            IsConfirmEnabled = true;
-        }
-        else
-        {
+            _text = text;
             IsConfirmEnabled = false;
         }
-        Notify("IsConfirmEnabled");
+
+        public void TextChanged(string text)
+        {
+            if (text.Length > 0 && text != _text)
+            {
+                IsConfirmEnabled = true;
+            }
+            else
+            {
+                IsConfirmEnabled = false;
+            }
+            Notify("IsConfirmEnabled");
+        }
+
+        private void Notify(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
-
-
-    private void Notify(string propertyName)
-    {
-        if (PropertyChanged != null)
-            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    }
-
 }
-

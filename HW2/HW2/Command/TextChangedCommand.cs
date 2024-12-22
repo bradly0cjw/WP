@@ -8,14 +8,12 @@ namespace HW2
 {
     public class TextChangedCommand : ICommand
     {
-        private Shape _shape;
-        private Model _model;
-        private string _oldText;
-        private string _newText;
+        private readonly Shape _shape;
+        private readonly string _oldText;
+        private readonly string _newText;
 
-        public TextChangedCommand(Model model,Shape shape, string oldText, string newText)
+        public TextChangedCommand(Shape shape, string oldText, string newText)
         {
-            _model = model;
             _shape = shape;
             _oldText = oldText;
             _newText = newText;

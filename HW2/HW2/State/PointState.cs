@@ -31,7 +31,7 @@ namespace HW2
 
         public void Initialize(Model model)
         {
-            
+
             this._model = model;
             SelectedShape = null;
             TextChange = new TextChange(model);
@@ -110,13 +110,6 @@ namespace HW2
         {
             if (_isTextClicked && SelectedShape != null)
             {
-                //using (var dialog = new 文字編輯方塊(SelectedShape.Text))
-                //{
-                //    if (dialog.ShowDialog() == DialogResult.OK)
-                //    {
-                //        _model.ChangeText(SelectedShape,dialog.NewText);
-                //    }
-                //}
                 TextChange.ShowTextChangeForm(SelectedShape);
 
             }
@@ -131,11 +124,7 @@ namespace HW2
                 shape.Draw(graphic);
             }
 
-            if (SelectedShape != null)
-            {
-                //Console.WriteLine("Trigger");
-                SelectedShape.DrawBounding(graphic);
-            }
+            SelectedShape?.DrawBounding(graphic);
 
         }
 

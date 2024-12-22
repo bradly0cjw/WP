@@ -9,8 +9,6 @@ namespace HW2
     // Shape class to store the properties of a shape
     public abstract class Shape
     {
-        public List<Line> ConnectedLines { get; } = new List<Line>();
-
         public string ShapeName { get; set; }
         public string Text { get; set; }
         public int ID { get; set; }
@@ -45,7 +43,7 @@ namespace HW2
         public bool IsClickOnText(int x, int y)
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX-3, Y + (H / 2) + BiasY-3, 6, 6));
+            path.AddRectangle(new Rectangle(X + (W / 2) + 30 + BiasX - 3, Y + (H / 2) + BiasY - 3, 6, 6));
             return path.IsVisible(new Point(x, y));
         }
 
@@ -83,7 +81,7 @@ namespace HW2
         public int IsClickConnectionPoint(int x, int y)
         {
             GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(X + (W / 2)-3, Y-3, 6, 6));
+            path.AddRectangle(new Rectangle(X + (W / 2) - 3, Y - 3, 6, 6));
             if (path.IsVisible(x, y))
             {
                 return 1;
@@ -93,12 +91,12 @@ namespace HW2
             {
                 return 2;
             }
-            path.AddRectangle(new Rectangle((X + W)-3, Y + (H / 2)-3, 6, 6));
+            path.AddRectangle(new Rectangle((X + W) - 3, Y + (H / 2) - 3, 6, 6));
             if (path.IsVisible(x, y))
             {
                 return 3;
             }
-            path.AddRectangle(new Rectangle(X-3, Y + (H / 2)-3, 6, 6));
+            path.AddRectangle(new Rectangle(X - 3, Y + (H / 2) - 3, 6, 6));
             if (path.IsVisible(x, y))
             {
                 return 4;

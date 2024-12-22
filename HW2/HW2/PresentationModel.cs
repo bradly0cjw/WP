@@ -39,7 +39,7 @@ public class PresentationModel : INotifyPropertyChanged
             }
         }
     }
-    
+
     public PresentationModel(Model model)
     {
         this._model = model;

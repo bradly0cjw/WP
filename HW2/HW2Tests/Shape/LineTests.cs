@@ -28,7 +28,6 @@ namespace HW2.Tests
         [TestMethod()]
         public void DrawTest()
         {
-
             Shape shape1 = new Start("Start", "test", 0, 100, 200, 300, 400);
             Shape shape2 = new Start("Start", "test", 0, 100, 200, 300, 400);
             Line line = new Line("Line", "test", 0, 100, 200, 300, 400);
@@ -37,42 +36,34 @@ namespace HW2.Tests
             line.Draw(mockGraphic);
             line.SetConnection2(shape2, 0);
             line.Draw(mockGraphic);
-            //Assert.AreEqual(1, mockGraphic.GetCalled());
         }
 
         [TestMethod()]
         public void IsClickInShapeTest()
         {
             Shape shape = new Line("Line", "test", 0, 100, 200, 300, 400);
-            Assert.IsFalse(shape.IsClickInShape(0,0));
+            Assert.IsFalse(shape.IsClickInShape(0, 0));
         }
         [TestMethod()]
-        public void SetConnection2Test(){
+        public void SetConnection2Test()
+        {
 
             Shape shape1 = new Start("Start", "test", 0, 100, 200, 300, 400);
-            Shape shape2 = new Start("Start", "test", 0, 100, 200, 300, 400);
             Line line = new Line("Line", "test", 0, 100, 200, 300, 400);
             line.SetConnection1(shape1, 0);
-            //line.SetConnection2(shape2, 0);
-            Assert.AreEqual(shape1, line.shape1);
-            //Assert.AreEqual(shape2, line.shape2);
-            Assert.AreEqual(0, line.connection1);
-            //Assert.AreEqual(0, line.connection2);
+            Assert.AreEqual(shape1, line.Shape1);
+            Assert.AreEqual(0, line.Connection1);
 
         }
 
         [TestMethod()]
         public void SetConnection1Test()
         {
-            Shape shape1 = new Start("Start", "test", 0, 100, 200, 300, 400);
             Shape shape2 = new Start("Start", "test", 0, 100, 200, 300, 400);
             Line line = new Line("Line", "test", 0, 100, 200, 300, 400);
-            //line.SetConnection1(shape1, 0);
             line.SetConnection2(shape2, 0);
-            //Assert.AreEqual(shape1, line.shape1);
-            Assert.AreEqual(shape2, line.shape2);
-            //Assert.AreEqual(0, line.connection1);
-            Assert.AreEqual(0, line.connection2);
+            Assert.AreEqual(shape2, line.Shape2);
+            Assert.AreEqual(0, line.Connection2);
         }
 
     }

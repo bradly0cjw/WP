@@ -14,16 +14,16 @@ namespace HW2.Tests
     {
         public Model _model;
         public DrawCommand _drawCommand;
-        public Shape _shape1,_shape2,_shape3;
+        public Shape _shape1, _shape2, _shape3;
 
         [TestInitialize]
         public void Initialize()
         {
             _model = new Model();
-            _shape1=_model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
+            _shape1 = _model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
             _shape2 = _model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
             _shape3 = _model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
-            
+
 
             _drawCommand = new DrawCommand(_model, _shape1);
         }

@@ -13,26 +13,21 @@ namespace HW2.Tests
     [TestClass()]
     public class ModelTests
     {
-        public Model model= new Model();
+        public Model model = new Model();
 
-        //[TestMethod()]
-        //public void ModelTest()
-        //{
-        //    Assert.Fail();
-        //}
 
         [TestMethod()]
         public void AddShapeTest()
         {
-            
 
-            model.AddShape("start","aaa",0,0,100,200);
+
+            model.AddShape("start", "aaa", 0, 0, 100, 200);
 
             var shape = model.GetShapes();
             Assert.AreEqual(1, shape.Count);
-            Assert.AreEqual("",model.GetMode());
+            Assert.AreEqual("", model.GetMode());
 
-            model.AddShape("Terminator","bbb",0,0,100,200);
+            model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
 
             shape = model.GetShapes();
             Assert.AreEqual(2, shape.Count);
@@ -59,7 +54,7 @@ namespace HW2.Tests
             IGraphic mockGraphic = new MockGraphic();
 
             model.Draw(mockGraphic);
-            
+
             MockState state = (MockState)model.CurrentState;
 
             Assert.IsTrue(state.isDrawCalled);
@@ -98,7 +93,7 @@ namespace HW2.Tests
 
             Assert.AreEqual(x, state.mouseDownX);
             Assert.AreEqual(y, state.mouseDownY);
-            
+
         }
 
         [TestMethod()]
@@ -177,7 +172,7 @@ namespace HW2.Tests
         [TestMethod()]
         public void GetShapesTest()
         {
-            
+
             model.AddShape("start", "aaa", 0, 0, 100, 200);
             model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
             model.AddShape("Process", "ccc", 0, 0, 100, 200);
@@ -202,7 +197,7 @@ namespace HW2.Tests
         [TestMethod()]
         public void GetModeTest()
         {
-            
+
             model.SetDrawingMode("Start");
             Assert.AreEqual("Start", model.GetMode());
 
@@ -217,7 +212,7 @@ namespace HW2.Tests
             model.AddShape("Terminator", "bbb", 0, 0, 100, 200);
             model.AddShape("Process", "ccc", 0, 0, 100, 200);
             model.AddShape("Decision", "ddd", 0, 0, 100, 200);
-            Assert.AreEqual(4,model.GetShapes().Count);
+            Assert.AreEqual(4, model.GetShapes().Count);
         }
 
     }

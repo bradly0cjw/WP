@@ -12,43 +12,43 @@ namespace HW2.Tests
     [TestClass()]
     public class AddCommandTest
     {
-        public Model _model;
-        public AddCommand _addCommand;
-        public Shape _shape1,_shape2,_shape3;
+        public Model Model;
+        public AddCommand AddCommand;
+        public Shape Shape1, Shape2, Shape3;
 
         [TestInitialize]
         public void Initialize()
         {
-            _model = new Model();
-            _shape1=_model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
-            _shape2 = _model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
-            _shape3 = _model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
-            
+            Model = new Model();
+            Shape1 = Model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
+            Shape2 = Model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
+            Shape3 = Model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
 
-            _addCommand = new AddCommand(_model, _shape1);
+
+            AddCommand = new AddCommand(Model, Shape1);
         }
 
 
         [TestMethod()]
         public void ExecuteTest()
         {
-            _addCommand.Execute();
-            Assert.AreEqual(1, _model.GetShapes().Count);
-            _addCommand = new AddCommand(_model, _shape2);
-            _addCommand.Execute();
-            Assert.AreEqual(2, _model.GetShapes().Count);
-            _addCommand = new AddCommand(_model, _shape3);
-            _addCommand.Execute();
-            Assert.AreEqual(3, _model.GetShapes().Count);
+            AddCommand.Execute();
+            Assert.AreEqual(1, Model.GetShapes().Count);
+            AddCommand = new AddCommand(Model, Shape2);
+            AddCommand.Execute();
+            Assert.AreEqual(2, Model.GetShapes().Count);
+            AddCommand = new AddCommand(Model, Shape3);
+            AddCommand.Execute();
+            Assert.AreEqual(3, Model.GetShapes().Count);
         }
 
         [TestMethod()]
         public void UnExecuteTest()
         {
-            _addCommand.Execute();
-            Assert.AreEqual(1, _model.GetShapes().Count);
-            _addCommand.Unexecute();
-            Assert.AreEqual(0, _model.GetShapes().Count);
+            AddCommand.Execute();
+            Assert.AreEqual(1, Model.GetShapes().Count);
+            AddCommand.Unexecute();
+            Assert.AreEqual(0, Model.GetShapes().Count);
         }
     }
 }

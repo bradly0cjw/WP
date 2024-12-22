@@ -12,21 +12,21 @@ namespace HW2.Tests
     [TestClass()]
     public class TextChangedCommandTest
     {
-        public Model _model;
-        public TextChangedCommand _TextChangedCommand;
-        public AddCommand _addCommand;
-        public Shape _shape1,_shape2,_shape3;
+        public Model Model;
+        public TextChangedCommand TextChangedCommand;
+        public AddCommand AddCommand;
+        public Shape Shape1, Shape2, Shape3;
 
         [TestInitialize]
         public void Initialize()
         {
-            _model = new Model();
-            _shape1=_model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
-            _shape2 = _model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
-            _shape3 = _model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
+            Model = new Model();
+            Shape1 = Model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
+            Shape2 = Model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
+            Shape3 = Model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
 
-            _addCommand = new AddCommand(_model, _shape1);
-            _addCommand.Execute();
+            AddCommand = new AddCommand(Model, Shape1);
+            AddCommand.Execute();
 
         }
 
@@ -34,19 +34,19 @@ namespace HW2.Tests
         [TestMethod()]
         public void ExecuteTest()
         {
-            _TextChangedCommand = new TextChangedCommand(_model, _shape1,"old","new");
-            _TextChangedCommand.Execute();
-            Assert.AreEqual(1, _model.GetShapes().Count);
+            TextChangedCommand = new TextChangedCommand(Shape1, "old", "new");
+            TextChangedCommand.Execute();
+            Assert.AreEqual(1, Model.GetShapes().Count);
         }
 
         [TestMethod()]
         public void UnExecuteTest()
         {
-            _TextChangedCommand = new TextChangedCommand(_model, _shape1, "old", "new");
-            _TextChangedCommand.Execute();
-            Assert.AreEqual(1, _model.GetShapes().Count);
-            _TextChangedCommand.Unexecute();
-            Assert.AreEqual(1, _model.GetShapes().Count);
+            TextChangedCommand = new TextChangedCommand(Shape1, "old", "new");
+            TextChangedCommand.Execute();
+            Assert.AreEqual(1, Model.GetShapes().Count);
+            TextChangedCommand.Unexecute();
+            Assert.AreEqual(1, Model.GetShapes().Count);
         }
     }
 }

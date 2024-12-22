@@ -7,7 +7,6 @@ namespace HW2
     // Different shapes that inherit from the Shape class
     public class Terminator : Shape
     {
-        private const int Radius = 10;
         // Constructor
         public Terminator(string shapeName, string text, int id, int x, int y, int width, int height, int biasX = 0,
             int biasY = 0) : base(shapeName, text, id, x, y,

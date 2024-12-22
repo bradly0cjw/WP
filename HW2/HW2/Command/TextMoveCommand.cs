@@ -4,16 +4,14 @@ namespace HW2
 {
     public class TextMoveCommand : ICommand
     {
-        private Model _model;
-        private Shape _shape;
-        private int _oldBiasX;
-        private int _oldBiasY;
-        private int _newBiasX;
-        private int _newBiasY;
+        private readonly Shape _shape;
+        private readonly int _oldBiasX;
+        private readonly int _oldBiasY;
+        private readonly int _newBiasX;
+        private readonly int _newBiasY;
 
-        public TextMoveCommand(Model model, Shape shape, int oldBiasX, int oldBiasY, int newBiasX, int newBiasY)
+        public TextMoveCommand(Shape shape, int oldBiasX, int oldBiasY, int newBiasX, int newBiasY)
         {
-            _model = model;
             _shape = shape;
             _oldBiasX = oldBiasX;
             _oldBiasY = oldBiasY;

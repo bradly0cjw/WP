@@ -4,8 +4,8 @@ namespace HW2
 {
     public class FormGraphicAdapter : IGraphic
     {
-        private Graphics _graphics;
-        private Pen _pen;
+        private readonly Graphics _graphics;
+        private readonly Pen _pen;
 
         public FormGraphicAdapter(Graphics graphics)
         {
@@ -66,8 +66,8 @@ namespace HW2
 
         public void DrawDot(int x, int y)
         {
-            
-            _graphics.FillRectangle(new SolidBrush(Color.Red), (float)(x-3), (float)(y-3), 6, 6);
+
+            _graphics.FillRectangle(new SolidBrush(Color.Red), (float)(x - 3), (float)(y - 3), 6, 6);
             //Console.WriteLine("Rec "+ x+" "+y );
         }
     }

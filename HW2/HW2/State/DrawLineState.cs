@@ -23,7 +23,7 @@ namespace HW2
         public void MouseDown(int x, int y)
         {
             int tempX, tempY;
-            if (_hoverShape!=null)
+            if (_hoverShape != null)
             {
                 _init = _hoverShape.IsClickConnectionPoint(x, y);
             }
@@ -35,9 +35,8 @@ namespace HW2
             {
                 _selectShape = _hoverShape;
                 (tempX, tempY) = _selectShape.GetConnectionPoint(_init);
-                //Console.WriteLine("X: " + tempX + " Y:" + tempY);
                 _hint = _model.Shapes.NewShape(_model.GetMode(), "", tempX, tempY, 0, 0);
-                
+
             }
         }
 
@@ -73,17 +72,13 @@ namespace HW2
                     {
                         (tempX, tempY) = _hoverShape.GetConnectionPoint(end);
 
-                        //var line = _model.AddLine(_hint.X, _hint.Y, _hint.W, _hint.H);
 
-                        var line = new Line("Line", "",_model.GetNewId() , _hint.X, _hint.Y, tempX, tempY);
+                        var line = new Line("Line", "", _model.GetNewId(), _hint.X, _hint.Y, tempX, tempY);
 
                         //flags 1
                         line.SetConnection1(_selectShape, _init);
                         line.SetConnection2(_hoverShape, end);
 
-
-                        //line.SetConnection1(_model.GetShapes(initID), _init);
-                        //line.SetConnection2(_model.GetShapes(endID), end);
                         Console.WriteLine(line);
                         _model.AddLine(line);
                     }
@@ -93,7 +88,7 @@ namespace HW2
                 _hint = null;
                 _model.SetSelectMode();
                 _model.NotifyObserver();
-                
+
             }
         }
 
@@ -105,14 +100,8 @@ namespace HW2
                 shape.Draw(graphic);
             }
 
-            if (_hoverShape != null)
-            {
-                _hoverShape.DrawConnectionPoint(graphic);
-            }
-            if (_hint != null)
-            {
-                _hint.Draw(graphic);
-            }
+            _hoverShape?.DrawConnectionPoint(graphic);
+            _hint?.Draw(graphic);
         }
 
         public void MouseDoubleClick(int x, int y)

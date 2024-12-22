@@ -4,8 +4,8 @@ namespace HW2
 {
     public class DrawCommand : ICommand
     {
-        private Model _model;
-        private Shape _shape;
+        private readonly Model _model;
+        private readonly Shape _shape;
 
         public DrawCommand(Model model, Shape shape)
         {

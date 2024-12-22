@@ -7,9 +7,9 @@ namespace HW2
 
     public class DeleteCommand : ICommand
     {
-        private Model _model;
-        private Shape _shape;
-        private List<Shape> _deletedLines;
+        private readonly Model _model;
+        private readonly Shape _shape;
+        private readonly List<Shape> _deletedLines;
 
         public DeleteCommand(Model model, Shape shape)
         {
@@ -22,7 +22,7 @@ namespace HW2
         {
             // Remove lines connected to the shape
             var connectedLines = _model.Shapes.GetShapes()
-                .Where(s => s is Line line && (line.shape1 == _shape || line.shape2 == _shape))
+                .Where(s => s is Line line && (line.Shape1 == _shape || line.Shape2 == _shape))
                 .ToList();
 
             foreach (var line in connectedLines)

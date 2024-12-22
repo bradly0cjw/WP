@@ -8,8 +8,8 @@ namespace HW2
 {
     public class CommandManager
     {
-        private Stack<ICommand> _undoStack = new Stack<ICommand>();
-        private Stack<ICommand> _redoStack = new Stack<ICommand>();
+        private readonly Stack<ICommand> _undoStack = new Stack<ICommand>();
+        private readonly Stack<ICommand> _redoStack = new Stack<ICommand>();
 
         public bool CanUndo => _undoStack.Count > 0;
         public bool CanRedo => _redoStack.Count > 0;
@@ -19,10 +19,6 @@ namespace HW2
             command.Execute();
             _undoStack.Push(command);
             _redoStack.Clear();
-            // log command execute
-            //Console.WriteLine("Execute: " + command);
-            //Console.WriteLine("Undo stack count: " + _undoStack.Count);
-            //Console.WriteLine("Redo stack count: " + _redoStack.Count);
         }
 
         public void Undo()
@@ -32,10 +28,6 @@ namespace HW2
                 var command = _undoStack.Pop();
                 command.Unexecute();
                 _redoStack.Push(command);
-                // log command execute
-                //Console.WriteLine("Undo: " + command);
-                //Console.WriteLine("Undo stack count: " + _undoStack.Count);
-                //Console.WriteLine("Redo stack count: " + _redoStack.Count);
             }
         }
 
@@ -46,10 +38,6 @@ namespace HW2
                 var command = _redoStack.Pop();
                 command.Execute();
                 _undoStack.Push(command);
-                // log command execute
-                //Console.WriteLine("Redo: " + command);
-                //Console.WriteLine("Undo stack count: " + _undoStack.Count);
-                //Console.WriteLine("Redo stack count: " + _redoStack.Count);
             }
         }
     }

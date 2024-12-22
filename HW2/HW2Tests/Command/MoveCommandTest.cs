@@ -15,21 +15,19 @@ namespace HW2.Tests
         public Model _model;
         public MoveCommand _moveCommand;
         public AddCommand _addCommand;
-        public Shape _shape1,_shape2,_shape3;
+        public Shape _shape1, _shape2, _shape3;
 
         [TestInitialize]
         public void Initialize()
         {
             _model = new Model();
-            _shape1=_model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
+            _shape1 = _model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
             _shape2 = _model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
             _shape3 = _model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
 
-
-            //_moveCommand = new MoveCommand(_model, _shape1);
             _addCommand = new AddCommand(_model, _shape1);
             _addCommand.Execute();
-            
+
 
         }
 
@@ -37,7 +35,7 @@ namespace HW2.Tests
         [TestMethod()]
         public void ExecuteTest()
         {
-            _moveCommand = new MoveCommand(_model, _shape1, 0, 0, 200, 300);
+            _moveCommand = new MoveCommand(_shape1, 0, 0, 200, 300);
             _moveCommand.Execute();
             Assert.AreEqual(1, _model.GetShapes().Count);
         }
@@ -45,7 +43,7 @@ namespace HW2.Tests
         [TestMethod()]
         public void UnExecuteTest()
         {
-            _moveCommand = new MoveCommand(_model, _shape1, 0, 0, 200, 300);
+            _moveCommand = new MoveCommand(_shape1, 0, 0, 200, 300);
             _moveCommand.Execute();
             Assert.AreEqual(1, _model.GetShapes().Count);
             _moveCommand.Unexecute();

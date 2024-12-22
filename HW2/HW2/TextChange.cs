@@ -9,8 +9,8 @@ namespace HW2
 {
     public class TextChange
     {
-        private Model _model;
-        
+        private readonly Model _model;
+
         public TextChange(Model model)
         {
             _model = model;

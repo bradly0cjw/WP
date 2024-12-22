@@ -20,7 +20,7 @@ namespace HW2
                 case "decision":
                     return new Decision(shapeName, text, id, x, y, width, height);
                 case "line":
-                    return new Line(shapeName,"",id,x,y,width, height);
+                    return new Line(shapeName, "", id, x, y, width, height);
                 default:
                     return null;
             }

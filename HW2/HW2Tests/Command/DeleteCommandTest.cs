@@ -9,77 +9,77 @@ namespace HW2.Tests
     [TestClass()]
     public class DeleteCommandTest
     {
-        public Model _model;
-        public DeleteCommand _deleteCommand;
-        public AddCommand _addCommand;
-        public Shape _shape1, _shape2, _shape3, _shape4;
+        public Model Model;
+        public DeleteCommand DeleteCommand;
+        public AddCommand AddCommand;
+        public Shape Shape1, Shape2, Shape3, Shape4;
 
         [TestInitialize]
         public void Initialize()
         {
-            _model = new Model();
-            _shape1 = _model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
-            _shape2 = _model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
-            _shape3 = _model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
-            _shape4 = _model.GetNewShape("Start", "ddd", 0, 0, 100, 200);
+            Model = new Model();
+            Shape1 = Model.GetNewShape("Start", "aaa", 0, 0, 100, 200);
+            Shape2 = Model.GetNewShape("Start", "bbb", 0, 0, 100, 200);
+            Shape3 = Model.GetNewShape("Start", "ccc", 0, 0, 100, 200);
+            Shape4 = Model.GetNewShape("Start", "ddd", 0, 0, 100, 200);
 
-            _addCommand = new AddCommand(_model, _shape1);
-            _addCommand.Execute();
-            _addCommand = new AddCommand(_model, _shape2);
-            _addCommand.Execute();
-            _addCommand = new AddCommand(_model, _shape3);
-            _addCommand.Execute();
-            _addCommand = new AddCommand(_model, _shape4);
-            _addCommand.Execute();
+            AddCommand = new AddCommand(Model, Shape1);
+            AddCommand.Execute();
+            AddCommand = new AddCommand(Model, Shape2);
+            AddCommand.Execute();
+            AddCommand = new AddCommand(Model, Shape3);
+            AddCommand.Execute();
+            AddCommand = new AddCommand(Model, Shape4);
+            AddCommand.Execute();
 
             Line line1 = new Line("Line", "test1", 999, 100, 200, 300, 400);
-            _model.AddShapeObj(line1);
-            line1.SetConnection1(_shape1, 0);
-            line1.SetConnection2(_shape2, 0);
+            Model.AddShapeObj(line1);
+            line1.SetConnection1(Shape1, 0);
+            line1.SetConnection2(Shape2, 0);
 
             Line line2 = new Line("Line", "test2", 1000, 100, 200, 300, 400);
-            _model.AddShapeObj(line2);
-            line2.SetConnection1(_shape2, 0);
-            line2.SetConnection2(_shape3, 0);
+            Model.AddShapeObj(line2);
+            line2.SetConnection1(Shape2, 0);
+            line2.SetConnection2(Shape3, 0);
         }
 
         [TestMethod()]
         public void ExecuteTest_NoConnectedLines()
         {
-            _deleteCommand = new DeleteCommand(_model, _shape4);
-            _deleteCommand.Execute();
-            Assert.AreEqual(5, _model.GetShapes().Count);
+            DeleteCommand = new DeleteCommand(Model, Shape4);
+            DeleteCommand.Execute();
+            Assert.AreEqual(5, Model.GetShapes().Count);
         }
 
         [TestMethod()]
         public void ExecuteTest_OneConnectedLine()
         {
-            _deleteCommand = new DeleteCommand(_model, _shape3);
-            _deleteCommand.Execute();
-            Assert.AreEqual(4, _model.GetShapes().Count);
+            DeleteCommand = new DeleteCommand(Model, Shape3);
+            DeleteCommand.Execute();
+            Assert.AreEqual(4, Model.GetShapes().Count);
         }
 
         [TestMethod()]
         public void ExecuteTest_MultipleConnectedLines()
         {
-            _deleteCommand = new DeleteCommand(_model, _shape2);
-            _deleteCommand.Execute();
-            Assert.AreEqual(3, _model.GetShapes().Count);
+            DeleteCommand = new DeleteCommand(Model, Shape2);
+            DeleteCommand.Execute();
+            Assert.AreEqual(3, Model.GetShapes().Count);
         }
 
         [TestMethod()]
         public void UnExecuteTest()
         {
-            _deleteCommand = new DeleteCommand(_model, _shape3);
-            _deleteCommand.Execute();
-            Assert.AreEqual(4, _model.GetShapes().Count);
-            _deleteCommand.Unexecute();
-            Assert.AreEqual(6, _model.GetShapes().Count);
-            _deleteCommand = new DeleteCommand(_model, _shape2);
-            _deleteCommand.Execute();
-            Assert.AreEqual(3, _model.GetShapes().Count);
-            _deleteCommand.Unexecute();
-            Assert.AreEqual(6, _model.GetShapes().Count);
+            DeleteCommand = new DeleteCommand(Model, Shape3);
+            DeleteCommand.Execute();
+            Assert.AreEqual(4, Model.GetShapes().Count);
+            DeleteCommand.Unexecute();
+            Assert.AreEqual(6, Model.GetShapes().Count);
+            DeleteCommand = new DeleteCommand(Model, Shape2);
+            DeleteCommand.Execute();
+            Assert.AreEqual(3, Model.GetShapes().Count);
+            DeleteCommand.Unexecute();
+            Assert.AreEqual(6, Model.GetShapes().Count);
         }
     }
 }
