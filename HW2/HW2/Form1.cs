@@ -195,7 +195,7 @@ namespace HW2
             if (_model.HasChanges) // Assuming you have a way to check if the model has changes
             {
                 string originalTitle = this.Text;
-                this.Text += " Auto saving...";
+                this.Text += " (Auto saving...)";
 
                 string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "drawing_backup");
                 Directory.CreateDirectory(backupFolder);
