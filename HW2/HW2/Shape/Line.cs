@@ -26,12 +26,12 @@ namespace HW2
             Shape2 = null;
         }
 
-        public void SetConnection1(Shape shape, int point)
+        public override void SetConnection1(Shape shape, int point)
         {
             (Shape1,Connection1) = (shape, point);
         }
 
-        public void SetConnection2(Shape shape, int point)
+        public override void SetConnection2(Shape shape, int point)
         {
             (Shape2,Connection2) = (shape, point);
         }

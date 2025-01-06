@@ -66,21 +66,14 @@ namespace HW2
             {
                 if (_selectShape != _hoverShape && _hoverShape != null)
                 {
-                    int tempX, tempY;
                     int end = _hoverShape.IsClickConnectionPoint(x, y);
                     if (end != -1)
                     {
-                        (tempX, tempY) = _hoverShape.GetConnectionPoint(end);
+                        (_hint.W, _hint.H) = _hoverShape.GetConnectionPoint(end);
+                        _hint.SetConnection1(_selectShape, _init);
+                        _hint.SetConnection2(_hoverShape, end);
 
-
-                        var line = new Line("Line", "", _model.GetNewId(), _hint.X, _hint.Y, tempX, tempY);
-
-                        //flags 1
-                        line.SetConnection1(_selectShape, _init);
-                        line.SetConnection2(_hoverShape, end);
-
-                        Console.WriteLine(line);
-                        _model.AddLine(line);
+                        _model.AddLine(_hint);
                     }
                     Console.WriteLine("@@@");
                 }

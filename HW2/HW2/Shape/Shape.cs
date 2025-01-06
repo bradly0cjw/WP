@@ -120,5 +120,9 @@ namespace HW2
                     return (-1, -1);
             }
         }
+
+        public abstract void SetConnection1(Shape hoverShape, int end);
+
+        public abstract void SetConnection2(Shape hoverShape, int end);
     }
 }

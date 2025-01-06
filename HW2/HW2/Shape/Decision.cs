@@ -38,7 +38,14 @@ namespace HW2
             return path.IsVisible(new Point(x, y));
         }
 
+        public override void SetConnection1(Shape shape, int point)
+        {
+            
+        }
 
+        public override void SetConnection2(Shape shape, int point)
+        {
 
+        }
     }
 }

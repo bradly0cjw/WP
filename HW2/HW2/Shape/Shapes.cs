@@ -29,6 +29,12 @@ namespace HW2
             return ShapeFactory.CreateShape(shapeName, text, NewId(), x, y, width, height);
         }
 
+        // Get shape by ID
+        public Shape GetShape(int id)
+        {
+            return _shapeList.FirstOrDefault(s => s.ID == id);
+        }
+
         // Get shape list for UI
         public List<Shape> GetShapes()
         {
