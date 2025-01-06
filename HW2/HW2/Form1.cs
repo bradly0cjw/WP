@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Button = System.Windows.Forms.Button;
+using Newtonsoft.Json;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace HW2
 {
@@ -42,6 +46,8 @@ namespace HW2
             buttonUndo.Click += ButtonUndo_Click;
             buttonRedo.Click += ButtonRedo_Click;
             buttonLine.Click += ButtonLine_Click;
+            ButtonSave.Click += ButtonSave_Click;
+            ButtonLoad.Click += ButtonLoad_Click;
 
 
             this._model = model; // Assign the model parameter to the _model field
@@ -175,6 +181,50 @@ namespace HW2
             RefreshControls();
         }
 
+        private async void ButtonSave_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "Pony files (*.p0n3)|*.p0n3|All files (*.*)|*.*";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    ButtonSave.Enabled = false;
+                    try
+                    {
+                        await _model.SaveAsync(saveFileDialog.FileName);
+                        MessageBox.Show("Save completed successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to save the file. Error: {ex.Message}", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        ButtonSave.Enabled = true;
+                    }
+                }
+            }
+        }
+
+        private void ButtonLoad_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Pony files (*.p0n3)|*.p0n3|All files (*.*)|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        _model.Load(openFileDialog.FileName);
+                        MessageBox.Show("Load completed successfully.", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to load the file. Error: {ex.Message}", "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
         private void RefreshControls()
         {
             buttonStart.Checked = _pModel.IsStartChecked();

@@ -67,6 +67,8 @@
             this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonLine = new System.Windows.Forms.ToolStripButton();
             this.panel = new HW2.DoubleBufferPanel();
+            this.ButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.ButtonLoad = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -184,7 +186,7 @@
             // 關於ToolStripMenuItem
             // 
             this.關於ToolStripMenuItem.Name = "關於ToolStripMenuItem";
-            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.關於ToolStripMenuItem.Text = "關於";
             // 
             // button_add
@@ -357,7 +359,9 @@
             this.buttonSelect,
             this.buttonUndo,
             this.buttonRedo,
-            this.buttonLine});
+            this.buttonLine,
+            this.ButtonSave,
+            this.ButtonLoad});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1118, 25);
@@ -443,6 +447,26 @@
             this.panel.Size = new System.Drawing.Size(574, 423);
             this.panel.TabIndex = 12;
             // 
+            // ButtonSave
+            // 
+            this.ButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
+            this.ButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(23, 22);
+            this.ButtonSave.Text = "ButtonSave";
+            this.ButtonSave.ToolTipText = "ButtonSave";
+            // 
+            // ButtonLoad
+            // 
+            this.ButtonLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonLoad.Image = ((System.Drawing.Image)(resources.GetObject("ButtonLoad.Image")));
+            this.ButtonLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonLoad.Name = "ButtonLoad";
+            this.ButtonLoad.Size = new System.Drawing.Size(23, 22);
+            this.ButtonLoad.Text = "ButtonLoad";
+            this.ButtonLoad.ToolTipText = "ButtonLoad";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -509,6 +533,8 @@
         private System.Windows.Forms.ToolStripButton buttonUndo;
         private System.Windows.Forms.ToolStripButton buttonRedo;
         private System.Windows.Forms.ToolStripButton buttonLine;
+        private System.Windows.Forms.ToolStripButton ButtonSave;
+        private System.Windows.Forms.ToolStripButton ButtonLoad;
     }
 }
 
