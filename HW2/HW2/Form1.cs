@@ -9,6 +9,7 @@ using Button = System.Windows.Forms.Button;
 using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace HW2
 {
@@ -16,6 +17,7 @@ namespace HW2
     {
         private readonly Model _model;
         private readonly PresentationModel _pModel;
+        private readonly Timer _autoSaveTimer;
 
 
         public Form1(Model model)
@@ -24,6 +26,13 @@ namespace HW2
             InitializeComponent();
             InitializeComboBox();
             InitializeDataGridView();
+
+            // Initialize the auto-save timer
+            _autoSaveTimer = new Timer();
+            _autoSaveTimer.Interval = 30000; // 30 seconds
+            _autoSaveTimer.Tick += AutoSaveTimer_Tick;
+            _autoSaveTimer.Start();
+
 
             panel.MouseMove += MouseMoveHandler;
             panel.MouseDown += MouseDownHandeler;
@@ -180,6 +189,51 @@ namespace HW2
             _pModel.Redo();
             RefreshControls();
         }
+
+        private async void AutoSaveTimer_Tick(object sender, EventArgs e)
+        {
+            if (_model.HasChanges) // Assuming you have a way to check if the model has changes
+            {
+                string originalTitle = this.Text;
+                this.Text += " Auto saving...";
+
+                string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "drawing_backup");
+                Directory.CreateDirectory(backupFolder);
+
+                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
+                string backupFileName = $"{timestamp}_bak.p0n3";
+                string backupFilePath = Path.Combine(backupFolder, backupFileName);
+
+                try
+                {
+                    await _model.SaveAsync(backupFilePath);
+                    ManageBackupFiles(backupFolder);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Auto-save failed. Error: {ex.Message}", "Auto-Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    this.Text = originalTitle;
+                }
+            }
+        }
+
+        private void ManageBackupFiles(string backupFolder)
+        {
+            var backupFiles = new DirectoryInfo(backupFolder).GetFiles()
+                .OrderByDescending(f => f.CreationTime)
+                .Skip(5)
+                .ToList();
+
+            foreach (var file in backupFiles)
+            {
+                file.Delete();
+            }
+        }
+
+
 
         private async void ButtonSave_Click(object sender, EventArgs e)
         {

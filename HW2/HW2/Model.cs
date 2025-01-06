@@ -18,6 +18,9 @@ namespace HW2
         public Shapes Shapes = new Shapes();
         private string _mode = "";
 
+        private bool _hasChanges;
+        public bool HasChanges => _hasChanges;
+
         private readonly IState _pointState;
         private readonly IState _drawState;
         private readonly IState _lineState;
@@ -163,6 +166,7 @@ namespace HW2
 
         public void NotifyObserver()
         {
+            _hasChanges = true;
             ModelChanged?.Invoke();
         }
 
@@ -224,6 +228,7 @@ namespace HW2
                     // Write the formatted string to the file
                     File.WriteAllText(filePath, sb.ToString());
 
+                    _hasChanges = false;
                     // Log success message
                     Console.WriteLine("Save completed successfully.");
                 }
