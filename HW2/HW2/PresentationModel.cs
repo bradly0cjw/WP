@@ -3,6 +3,11 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 
 public class PresentationModel : INotifyPropertyChanged
 {
@@ -205,4 +210,116 @@ public class PresentationModel : INotifyPropertyChanged
     {
         return _model.CanRedo();
     }
+    public async Task SaveAsync(string filePath)
+    {
+        await Task.Run(() =>
+        {
+            try
+            {
+                Thread.Sleep(3000);
+                // Create a StringBuilder to build the custom format string
+                var sb = new StringBuilder();
+
+                // Add shapes to the string
+                sb.AppendLine("Shape ID X Y W H Text");
+                foreach (var shape in _model.GetShapes())
+                {
+                    if (shape.ShapeName != "Line")
+                    {
+                        sb.AppendLine($"{shape.ShapeName} {shape.ID} {shape.X} {shape.Y} {shape.W} {shape.H} {shape.Text}");
+                    }
+                }
+
+                // Add lines to the string (assuming you have a way to get lines and their connections)
+                sb.AppendLine("---------");
+                sb.AppendLine("Line ID Connection_ShapeID1 Connection_Point1 Connection_ShapeID2 Connection_Point2");
+                foreach (var shape in _model.GetShapes().OfType<Line>()) // Assuming LineShape is a subclass of Shape
+                {
+                    var (connShapeId1, connPoint1) = (shape.Shape1.ID, shape.Connection1);
+                    var (connShapeId2, connPoint2) = (shape.Shape2.ID, shape.Connection2);
+                    sb.AppendLine($"Line {shape.ID} {connShapeId1} {connPoint1} {connShapeId2} {connPoint2}");
+                }
+                sb.AppendLine("---------");
+                // Write the formatted string to the file
+                File.WriteAllText(filePath, sb.ToString());
+
+                _model.HasChanges = false;
+                // Log success message
+                Console.WriteLine("Save completed successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log error message
+                Console.WriteLine($"Failed to save the file. Error: {ex.Message}");
+            }
+        });
+    }
+
+    public void Load(string filePath)
+    {
+        try
+        {
+            Thread.Sleep(3000);
+            // Read the file content
+            var lines = File.ReadAllLines(filePath);
+
+            // Clear existing shapes
+            _model.Shapes = new Shapes();
+
+            // Parse shapes
+            int i = 1; // Start after the header line
+            while (i < lines.Length && !lines[i].StartsWith("---------"))
+            {
+                var parts = lines[i].Split(' ');
+                if (parts.Length >= 7)
+                {
+                    string shapeName = parts[0];
+                    int id = int.Parse(parts[1]);
+                    int x = int.Parse(parts[2]);
+                    int y = int.Parse(parts[3]);
+                    int w = int.Parse(parts[4]);
+                    int h = int.Parse(parts[5]);
+                    string text = parts[6];
+
+                    var shape = _model.Shapes.NewShape(shapeName, text, x, y, w, h);
+                    shape.ID = id; // Set the ID explicitly
+                    _model.Shapes.AddShape(shape);
+                }
+                i++;
+            }
+
+            // Parse lines (connections)
+            i += 2; // Skip the "---------" line and the header line for lines
+            while (i < lines.Length && !lines[i].StartsWith("---------"))
+            {
+                var parts = lines[i].Split(' ');
+                if (parts.Length >= 6)
+                {
+                    int id = int.Parse(parts[1]);
+                    int connShapeId1 = int.Parse(parts[2]);
+                    int connPoint1 = int.Parse(parts[3]);
+                    int connShapeId2 = int.Parse(parts[4]);
+                    int connPoint2 = int.Parse(parts[5]);
+
+                    var lineShape = new Line("Line", "", id, 0, 0, 0, 0); // Assuming Line is a subclass of Shape
+                    lineShape.SetConnection1(_model.Shapes.GetShape(connShapeId1), connPoint1);
+                    lineShape.SetConnection2(_model.Shapes.GetShape(connShapeId2), connPoint2);
+                    _model.Shapes.AddShape(lineShape);
+                }
+                i++;
+            }
+
+            // Notify observers
+            _model.NotifyObserver();
+
+            // Log success message
+            Console.WriteLine("Load completed successfully.");
+        }
+        catch (Exception ex)
+        {
+            // Log error message
+            Console.WriteLine($"Failed to load the file. Error: {ex.Message}");
+        }
+    }
 }
+

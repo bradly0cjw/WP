@@ -50,5 +50,18 @@ namespace HW2.Tests
             Assert.IsTrue(shape.IsClickOnText(281, 401));
             Assert.IsFalse(shape.IsClickOnText(200, 300));
         }
+        [TestMethod()]
+        public void SetConnection1Test()
+        {
+            Shape shape = new Process("Process", "test", 0, 100, 200, 300, 400);
+            shape.SetConnection1(shape, 0);
+        }
+
+        [TestMethod()]
+        public void SetConnection2Test()
+        {
+            Shape shape = new Process("Process", "test", 0, 100, 200, 300, 400);
+            shape.SetConnection2(shape, 0);
+        }
     }
 }

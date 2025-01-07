@@ -215,5 +215,22 @@ namespace HW2.Tests
             Assert.AreEqual(4, model.GetShapes().Count);
         }
 
+        [TestMethod()]
+        public void GetNewIdTest()
+        {
+            model.GetNewId();
+        }
+
+        [TestMethod()]
+        public void SaveAsyncTest()
+        {
+            //model.SaveAsync("test");
+        }
+
+        [TestMethod()]
+        public void LoadTest()
+        {
+            //model.Load("test");
+        }
     }
 }
