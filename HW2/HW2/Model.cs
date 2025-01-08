@@ -63,7 +63,7 @@ namespace HW2
 
         public Shape GetShape(int id)
         {
-            return Shapes.GetShapes().FirstOrDefault(s => s.ID == id);
+            return Shapes.GetShape(id);
         }
 
         public Shape GetNewShape(string shapeName, string text, int x, int y, int width, int height)
@@ -149,6 +149,13 @@ namespace HW2
         {
             var textMoveCommand = new TextMoveCommand(shape, initBiasX, initBiasY, shape.BiasX, shape.BiasY);
             _commandManager.ExecuteCommand(textMoveCommand);
+            NotifyObserver();
+        }
+
+        public void ChangeText(Shape shape, string text)
+        {
+            var textChangeCommand = new TextChangedCommand(shape, shape.Text ,text);
+            _commandManager.ExecuteCommand(textChangeCommand);
             NotifyObserver();
         }
 

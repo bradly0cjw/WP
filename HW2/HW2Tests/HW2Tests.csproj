@@ -62,7 +62,6 @@
     <Compile Include="Command\DrawCommandTest.cs" />
     <Compile Include="Command\DeleteCommandTest.cs" />
     <Compile Include="Command\AddCommandTest.cs" />
-    <Compile Include="MockTextChange.cs" />
     <Compile Include="MockCommand.cs" />
     <Compile Include="Shape\LineTests.cs" />
     <Compile Include="PresentationModel2Tests.cs" />

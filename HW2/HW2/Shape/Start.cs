@@ -29,12 +29,12 @@ namespace HW2
 
         public override void SetConnection1(Shape shape, int point)
         {
-
+            
         }
 
         public override void SetConnection2(Shape shape, int point)
         {
-
+            
         }
     }
 }

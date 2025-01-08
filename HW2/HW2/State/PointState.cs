@@ -24,7 +24,6 @@ namespace HW2
         private bool _isTextClicked = false;
 
         public Shape SelectedShape;
-        public TextChange TextChange;
         public PointState()
         {
         }
@@ -34,7 +33,6 @@ namespace HW2
 
             this._model = model;
             SelectedShape = null;
-            TextChange = new TextChange(model);
         }
 
 
@@ -110,8 +108,7 @@ namespace HW2
         {
             if (_isTextClicked && SelectedShape != null)
             {
-                TextChange.ShowTextChangeForm(SelectedShape);
-
+                _model.NotifyTextChangeRequested(SelectedShape);
             }
         }
 

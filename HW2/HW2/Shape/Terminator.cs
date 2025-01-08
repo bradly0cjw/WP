@@ -39,12 +39,14 @@ namespace HW2
         }
         public override void SetConnection1(Shape shape, int point)
         {
-
+            Console.WriteLine("@");
+            return;
         }
 
         public override void SetConnection2(Shape shape, int point)
         {
-
+            Console.WriteLine("@");
+            return;
         }
     }
 }

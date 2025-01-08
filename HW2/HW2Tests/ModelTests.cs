@@ -195,6 +195,17 @@ namespace HW2.Tests
         }
 
         [TestMethod()]
+        public void NotifyTextChangeRequestedTest()
+        {
+            Shape nshape = model.GetNewShape("start", "aaa", 0, 0, 100, 200);
+            bool isNotified = false;
+            model.TextChangeRequested += (shape) => isNotified = true;
+            isNotified = false;
+            model.NotifyTextChangeRequested(nshape);
+            Assert.IsTrue(isNotified);
+        }
+
+        [TestMethod()]
         public void GetModeTest()
         {
 

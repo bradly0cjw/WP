@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace HW2.Tests
 {
@@ -236,6 +237,208 @@ namespace HW2.Tests
             Assert.AreEqual(1, model.GetShapes().Count);
             Assert.IsFalse(pm.IsRedoClickable());
         }
-        
+
+        [TestMethod()]
+        public async Task SaveAsyncTest()
+        {
+            // Arrange
+            string filePath = Path.Combine(Path.GetTempPath(), "test_save.p0n3");
+            pm.TextChanged("test");
+            pm.XChanged("100");
+            pm.YChanged("100");
+            pm.WidthChanged("100");
+            pm.HeightChanged("100");
+            pm.ShapeChanged("Start");
+            pm.AddShape();
+            pm.TextChanged("test");
+            pm.XChanged("100");
+            pm.YChanged("100");
+            pm.WidthChanged("100");
+            pm.HeightChanged("100");
+            pm.ShapeChanged("Start");
+            pm.AddShape();
+            pm.TextChanged("test");
+            pm.XChanged("0");
+            pm.YChanged("1");
+            pm.WidthChanged("1");
+            pm.HeightChanged("1");
+            pm.ShapeChanged("Line");
+            pm.AddShape();
+            Shape shape1 = model.GetShape(0);
+            Shape shape2 = model.GetShape(1);
+            Line line = (Line)model.GetShape(2);
+            line.Shape1 = shape1;
+            line.Shape2 = shape2;
+            line.Connection1 = 0;
+            line.Connection2 = 1;
+
+            // Act
+            pm.SaveAsync(filePath);
+
+            // Assert
+            Assert.IsTrue(File.Exists(filePath));
+            var fileContent = File.ReadAllText(filePath);
+            Assert.IsTrue(fileContent.Contains("Shape ID X Y W H Text"));
+            Assert.IsTrue(fileContent.Contains("Start 0 100 100 100 100 test"));
+
+            // Cleanup
+            File.Delete(filePath);
+        }
+
+        [TestMethod()]
+        public void LoadTest()
+        {
+            // Arrange
+            string filePath = Path.Combine(Path.GetTempPath(), "test_load.p0n3");
+            string fileContent = "Shape ID X Y W H Text\nStart 0 100 100 100 100 test\nStart 1 100 100 100 100 test\n---------\nLine ID Connection_ShapeID1 Connection_Point1 Connection_ShapeID2 Connection_Point2\nLine 2 0 1 1 2\n---------\n";
+            File.WriteAllText(filePath, fileContent);
+
+            // Act
+            pm.Load(filePath);
+
+            // Assert
+            var shapes = model.GetShapes();
+            Assert.AreEqual(3, shapes.Count);
+            var shape = shapes.First();
+            Assert.AreEqual("Start", shape.ShapeName);
+            Assert.AreEqual(100, shape.X);
+            Assert.AreEqual(100, shape.Y);
+            Assert.AreEqual(100, shape.W);
+            Assert.AreEqual(100, shape.H);
+            Assert.AreEqual("test", shape.Text);
+
+
+            fileContent = "@@@@@@@";
+            File.WriteAllText(filePath, fileContent);
+            pm.Load(filePath);
+
+            fileContent = "Shape ID X Y W H Text\nStart 0 100 100 100 100\nStart 1 100 100 100 100 test\n---------\n";
+            File.WriteAllText(filePath, fileContent);
+            pm.Load(filePath);
+
+            fileContent = "Shape ID X Y W H Text\nStart 0 100 100 100 100 test\nStart 1 100 100 100 100 test\n---------\nLine ID Connection_ShapeID1 Connection_Point1 Connection_ShapeID2 Connection_Point2\nLine 0 1 1 2\n---------\n";
+            File.WriteAllText(filePath, fileContent);
+            pm.Load(filePath);  
+
+            fileContent = "Shape ID X Y W H Text\nStart 0 aaa 100 100 test\nStart 1 100 100 100 100 test\n---------\nLine ID Connection_ShapeID1 Connection_Point1 Connection_ShapeID2 Connection_Point2\nLine 0 1 1 2\n---------\n";
+            File.WriteAllText(filePath, fileContent);
+            pm.Load(filePath);
+            // Cleanup
+            File.Delete(filePath);
+
+        }
+
+
+        [TestMethod()]
+        public void AutoSaveAsync_HasChangesFalse_DoesNotSave()
+        {
+            // Arrange
+            model.HasChanges = false;
+
+            // Act
+            pm.AutoSaveAsync("test");
+
+            // Assert
+            // Ensure no backup folder is created
+            string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "drawing_backup");
+            Assert.IsFalse(Directory.Exists(backupFolder));
+        }
+
+        [TestMethod()]
+        public void AutoSaveAsync_HasChangesTrue_SavesBackup()
+        {
+            // Arrange
+            model.HasChanges = true;
+            string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "drawing_backup");
+            if (Directory.Exists(backupFolder))
+            {
+                Directory.Delete(backupFolder, true);
+            }
+
+            pm.TextChanged("test");
+            pm.XChanged("100");
+            pm.YChanged("100");
+            pm.WidthChanged("100");
+            pm.HeightChanged("100");
+            pm.ShapeChanged("Start");
+            pm.AddShape();
+            pm.TextChanged("test");
+            pm.XChanged("100");
+            pm.YChanged("100");
+            pm.WidthChanged("100");
+            pm.HeightChanged("100");
+            pm.ShapeChanged("Start");
+            pm.AddShape();
+            pm.TextChanged("test");
+            pm.XChanged("0");
+            pm.YChanged("1");
+            pm.WidthChanged("1");
+            pm.HeightChanged("1");
+            pm.ShapeChanged("Line");
+            pm.AddShape();
+
+            Shape shape1 = model.GetShape(0);
+            Shape shape2 = model.GetShape(1);
+            Line line = (Line)model.GetShape(2);
+            line.Shape1 = shape1;
+            line.Shape2 = shape2;
+            line.Connection1 = 0;
+            line.Connection2 = 1;
+
+            // Act
+            pm.AutoSaveAsync("test");
+
+            // Assert
+            Assert.IsTrue(Directory.Exists(backupFolder));
+            var backupFiles = Directory.GetFiles(backupFolder);
+            Assert.IsTrue(backupFiles.Length > 0);
+            var latestBackupFile = backupFiles.OrderByDescending(f => new FileInfo(f).CreationTime).First();
+            var fileContent = File.ReadAllText(latestBackupFile);
+            Assert.IsTrue(fileContent.Contains("Shape ID X Y W H Text"));
+            Assert.IsTrue(fileContent.Contains("Start 0 100 100 100 100 test"));
+
+            model.HasChanges = true;
+            // Cleanup
+            Directory.Delete(backupFolder, true);
+        }
+
+
+
+        [TestMethod()]
+        public void TextChangeTest()
+        {
+            model.AddShape("Start","test",100,200,300,400);
+            Shape shape = model.GetShapes().First();
+            pm.TextChange(shape, "newText");
+            Assert.AreEqual("newText", shape.Text);
+        }
+
+        [TestMethod()]
+        public void ManageBackupFilesTest()
+        {
+            // Arrange
+            string backupFolder = Path.Combine(Path.GetTempPath(), "test_backup");
+            Directory.CreateDirectory(backupFolder);
+
+            // Create 10 dummy backup files
+            for (int i = 0; i < 10; i++)
+            {
+                string filePath = Path.Combine(backupFolder, $"backup_{i}.p0n3");
+                File.WriteAllText(filePath, "dummy content");
+                // Set different creation times
+                File.SetCreationTime(filePath, DateTime.Now.AddMinutes(-i));
+            }
+
+            // Act
+            pm.ManageBackupFiles(backupFolder);
+
+            // Assert
+            var remainingFiles = Directory.GetFiles(backupFolder);
+            Assert.AreEqual(5, remainingFiles.Length);
+
+            // Cleanup
+            Directory.Delete(backupFolder, true);
+        }
+
     }
 }

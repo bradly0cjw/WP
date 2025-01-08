@@ -23,7 +23,6 @@ namespace HW2.Tests
             _model = new Model();
             _pointState = new PointState();
             _pointState.Initialize(_model);
-            _pointState.TextChange = new MockTextChange(_model);
             _pObj = new PrivateObject(_pointState);
         }
 

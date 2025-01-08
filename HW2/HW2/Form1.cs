@@ -41,6 +41,7 @@ namespace HW2
 
             model.ModelChanged += UpdateView;
             model.ModelChanged += UpdateGrid;
+            model.TextChangeRequested += ShowTextChangeForm;
 
             panel.Paint += HandelCanvasPaint;
 
@@ -192,49 +193,17 @@ namespace HW2
 
         private async void AutoSaveTimer_Tick(object sender, EventArgs e)
         {
-            if (_model.HasChanges) // Assuming you have a way to check if the model has changes
+            try
             {
-                string originalTitle = this.Text;
-                this.Text += " (Auto saving...)";
+                await Task.Factory.StartNew(() => _pModel.AutoSaveAsync(this.Text));
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"Auto-save failed. Error: {ex.Message}", "Auto-Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                string backupFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "drawing_backup");
-                Directory.CreateDirectory(backupFolder);
-
-                string timestamp = DateTime.Now.ToString("yyyyMMddHHmmss");
-                string backupFileName = $"{timestamp}_bak.p0n3";
-                string backupFilePath = Path.Combine(backupFolder, backupFileName);
-
-                try
-                {
-                    await _model.SaveAsync(backupFilePath);
-                    ManageBackupFiles(backupFolder);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Auto-save failed. Error: {ex.Message}", "Auto-Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                finally
-                {
-                    this.Text = originalTitle;
-                }
             }
         }
-
-        private void ManageBackupFiles(string backupFolder)
-        {
-            var backupFiles = new DirectoryInfo(backupFolder).GetFiles()
-                .OrderByDescending(f => f.CreationTime)
-                .Skip(5)
-                .ToList();
-
-            foreach (var file in backupFiles)
-            {
-                file.Delete();
-            }
-        }
-
-
-
+        
         private async void ButtonSave_Click(object sender, EventArgs e)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
@@ -245,7 +214,7 @@ namespace HW2
                     ButtonSave.Enabled = false;
                     try
                     {
-                        await _model.SaveAsync(saveFileDialog.FileName);
+                        await Task.Factory.StartNew(() =>_pModel.SaveAsync(saveFileDialog.FileName));
                         MessageBox.Show("Save completed successfully.", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -269,7 +238,7 @@ namespace HW2
                 {
                     try
                     {
-                        _model.Load(openFileDialog.FileName);
+                        _pModel.Load(openFileDialog.FileName);
                         MessageBox.Show("Load completed successfully.", "Load", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -347,5 +316,15 @@ namespace HW2
             _pModel.TextChanged(textBox_text.Text);
             RefreshControls();
         }
+        public void ShowTextChangeForm(Shape shape)
+        {
+            TextChangeForm textChangeForm = new TextChangeForm(shape.Text);
+            DialogResult result = textChangeForm.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _pModel.TextChange(shape, textChangeForm.GetText());
+            }
+        }
+
     }
 }

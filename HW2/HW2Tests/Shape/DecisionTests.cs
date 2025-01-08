@@ -52,14 +52,14 @@ namespace HW2.Tests
         [TestMethod()]
         public void SetConnection1Test()
         {
-            Shape shape = new Process("Decision", "test", 0, 100, 200, 300, 400);
+            Shape shape = new Decision("Decision", "test", 0, 100, 200, 300, 400);
             shape.SetConnection1(shape, 0);
         }
 
         [TestMethod()]
         public void SetConnection2Test()
         {
-            Shape shape = new Process("Decision", "test", 0, 100, 200, 300, 400);
+            Shape shape = new Decision("Decision", "test", 0, 100, 200, 300, 400);
             shape.SetConnection2(shape, 0);
         }
     }
