@@ -35,6 +35,7 @@
             // 
             // textBoxNewText
             // 
+            this.textBoxNewText.AccessibleName = "textBoxNewText";
             this.textBoxNewText.Location = new System.Drawing.Point(51, 62);
             this.textBoxNewText.Name = "textBoxNewText";
             this.textBoxNewText.Size = new System.Drawing.Size(156, 20);

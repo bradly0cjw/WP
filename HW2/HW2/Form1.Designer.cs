@@ -66,9 +66,9 @@
             this.buttonUndo = new System.Windows.Forms.ToolStripButton();
             this.buttonRedo = new System.Windows.Forms.ToolStripButton();
             this.buttonLine = new System.Windows.Forms.ToolStripButton();
-            this.panel = new HW2.DoubleBufferPanel();
             this.ButtonSave = new System.Windows.Forms.ToolStripButton();
             this.ButtonLoad = new System.Windows.Forms.ToolStripButton();
+            this.panel = new HW2.DoubleBufferPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_graph)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -78,6 +78,7 @@
             // 
             // dataGridView_graph
             // 
+            this.dataGridView_graph.AccessibleName = "dataGridView_graph";
             this.dataGridView_graph.AllowUserToAddRows = false;
             this.dataGridView_graph.AllowUserToDeleteRows = false;
             this.dataGridView_graph.AllowUserToResizeRows = false;
@@ -157,12 +158,13 @@
             // 
             // comboBox_shapeName
             // 
+            this.comboBox_shapeName.AccessibleName = "comboBox_shapeName";
+            this.comboBox_shapeName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_shapeName.FormattingEnabled = true;
             this.comboBox_shapeName.Location = new System.Drawing.Point(84, 31);
             this.comboBox_shapeName.Name = "comboBox_shapeName";
             this.comboBox_shapeName.Size = new System.Drawing.Size(72, 21);
             this.comboBox_shapeName.TabIndex = 1;
-            this.comboBox_shapeName.Text = "形狀";
             this.comboBox_shapeName.SelectedIndexChanged += new System.EventHandler(this.ComboBox_shapeName_SelectedIndexChanged);
             // 
             // menuStrip1
@@ -186,11 +188,12 @@
             // 關於ToolStripMenuItem
             // 
             this.關於ToolStripMenuItem.Name = "關於ToolStripMenuItem";
-            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.關於ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.關於ToolStripMenuItem.Text = "關於";
             // 
             // button_add
             // 
+            this.button_add.AccessibleName = "button_add";
             this.button_add.Location = new System.Drawing.Point(3, 19);
             this.button_add.Name = "button_add";
             this.button_add.Size = new System.Drawing.Size(75, 33);
@@ -384,7 +387,7 @@
             this.buttonTerminator.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonTerminator.Name = "buttonTerminator";
             this.buttonTerminator.Size = new System.Drawing.Size(23, 22);
-            this.buttonTerminator.Text = "terminator";
+            this.buttonTerminator.Text = "Terminator";
             // 
             // buttonDecision
             // 
@@ -415,6 +418,7 @@
             // 
             // buttonUndo
             // 
+            this.buttonUndo.AccessibleName = "buttonUndo";
             this.buttonUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonUndo.Image = ((System.Drawing.Image)(resources.GetObject("buttonUndo.Image")));
             this.buttonUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -424,6 +428,7 @@
             // 
             // buttonRedo
             // 
+            this.buttonRedo.AccessibleName = "buttonRedo";
             this.buttonRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.buttonRedo.Image = ((System.Drawing.Image)(resources.GetObject("buttonRedo.Image")));
             this.buttonRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -438,34 +443,37 @@
             this.buttonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.buttonLine.Name = "buttonLine";
             this.buttonLine.Size = new System.Drawing.Size(23, 22);
-            this.buttonLine.Text = "line";
-            // 
-            // panel
-            // 
-            this.panel.Location = new System.Drawing.Point(134, 52);
-            this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(574, 423);
-            this.panel.TabIndex = 12;
+            this.buttonLine.Text = "Line";
             // 
             // ButtonSave
             // 
+            this.ButtonSave.AccessibleName = "ButtonSave";
             this.ButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("ButtonSave.Image")));
             this.ButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ButtonSave.Name = "ButtonSave";
             this.ButtonSave.Size = new System.Drawing.Size(23, 22);
-            this.ButtonSave.Text = "ButtonSave";
-            this.ButtonSave.ToolTipText = "ButtonSave";
+            this.ButtonSave.Text = "Save";
+            this.ButtonSave.ToolTipText = "Save";
             // 
             // ButtonLoad
             // 
+            this.ButtonLoad.AccessibleName = "ButtonLoad";
             this.ButtonLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ButtonLoad.Image = ((System.Drawing.Image)(resources.GetObject("ButtonLoad.Image")));
             this.ButtonLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ButtonLoad.Name = "ButtonLoad";
             this.ButtonLoad.Size = new System.Drawing.Size(23, 22);
-            this.ButtonLoad.Text = "ButtonLoad";
-            this.ButtonLoad.ToolTipText = "ButtonLoad";
+            this.ButtonLoad.Text = "Load";
+            this.ButtonLoad.ToolTipText = "Load";
+            // 
+            // panel
+            // 
+            this.panel.AccessibleName = "panel";
+            this.panel.Location = new System.Drawing.Point(134, 52);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(574, 423);
+            this.panel.TabIndex = 12;
             // 
             // Form1
             // 

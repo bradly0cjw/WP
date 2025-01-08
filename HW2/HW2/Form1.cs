@@ -209,6 +209,7 @@ namespace HW2
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.Filter = "Pony files (*.p0n3)|*.p0n3|All files (*.*)|*.*";
+                saveFileDialog.FileName = "default.p0n3";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     ButtonSave.Enabled = false;
@@ -234,6 +235,7 @@ namespace HW2
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Pony files (*.p0n3)|*.p0n3|All files (*.*)|*.*";
+                openFileDialog.FileName = "default.p0n3";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     try
